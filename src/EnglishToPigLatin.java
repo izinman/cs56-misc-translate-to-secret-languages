@@ -91,7 +91,22 @@ public class EnglishToPigLatin{
 	else
 	    return result;
     }
-    
+
+    /**
+     * The method that converts the string from pig latin to english
+     *
+     * The method takes a string input, and checks the first letter in the string
+     * If it is a vowel, then "way" is added to the end, and if it is a consonant
+     * the first consonant is moved to the end of the word, and "ay" is added
+     * TODO: fix it so that instead of just being the first character, the function moves
+     * every consonant until the first vowel
+     *
+     * @param  input the input is the string typed into the box
+     * @return String is returned, and it is reprinted into the text box below the input
+     */
+    public static String toEnglish(String input) {
+	return "STUBB"; //~STUB
+    }
     /**
        This function makes our GUI for toPigLatin work, setup and other processes are handled in windowSetUp
     */

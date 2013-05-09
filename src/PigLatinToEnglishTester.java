@@ -10,101 +10,80 @@ import static org.junit.Assert.assertEquals;
  * @see englishToPigLatin
  */
 
-public class EnglishToPigLatinTester
+public class PigLatinToEnglishTester
 {
     /**
-       test no arg constructor from PolynomialTest
+       test empty string
        @see EnglishToPigLatin#toPigLatin()
      */
    
     @Test public void testNullString()
     {
 	// default conversion should be blank
-        assertEquals("",EnglishToPigLatin.toPigLatin(""));
+        assertEquals("",EnglishToPigLatin.toEnglish(""));
     }
     /** The method that tests one word that starts with a consonant
-     *  @see EnglishToPigLatin#toPigLatin
+     *  @see EnglishToPigLatin#toEnglish
      */
     @Test public void test1WordConsonant()
     {
 	// "this" should come out to be "histay", using the consonant rules
-        assertEquals("isthay",EnglishToPigLatin.toPigLatin("this"));
+        assertEquals("this",EnglishToPigLatin.toEnglish("isthay"));
     }
         /** The method that tests one word that starts with a vowel
-     *  @see EnglishToPigLatin#toPigLatin
+     *  @see EnglishToPigLatin#toEnglish
      */
     @Test public void test1WordVowel()
     {
 	// "this" should come out to be "histay", using the vowel rules
-        assertEquals("endgameway",EnglishToPigLatin.toPigLatin("endgame"));
+        assertEquals("engame",EnglishToPigLatin.toEnglish("endgameway"));
     }
     /** The method that tests two words that start with consonants
-     *  @see EnglishToPigLatin#toPigLatin
+     *  @see EnglishToPigLatin#toEnglish
      */
     @Test public void test2WordsConsonants()
     {
 	//this will test two words being translated over
-	assertEquals("isthay asephray", EnglishToPigLatin.toPigLatin("this phrase"));
+	assertEquals("this phrase", EnglishToPigLatin.toEnglish("isthay asephray"));
     }
         /** The method that tests two words that start with vowels
-     *  @see EnglishToPigLatin#toPigLatin
+     *  @see EnglishToPigLatin#toEnglish
      */
     @Test public void test2WordsVowels()
     {
 	//this will test two words being translated over
-	assertEquals("endersway endgameway", EnglishToPigLatin.toPigLatin("enders endgame"));
+	assertEquals("enders endgame", EnglishToPigLatin.toEnglish("endersway endgameway"));
     }
     /** The method that tests two words that start with a consonant then a vowel
-     *  @see EnglishToPigLatin#toPigLatin
+     *  @see EnglishToPigLatin#toEnglish
      */
     @Test public void test2WordsConsonantVowel()
     {
 	//this will test a consonant word, followed by a vowel word
-	assertEquals("oldcay iceway", EnglishToPigLatin.toPigLatin("cold ice"));
+	assertEquals("cold ice", EnglishToPigLatin.toEnglish("oldcay iceway"));
     }
     /** The method that tests two words that start with a vowel then a consonant
-     *  @see EnglishToPigLatin#toPigLatin
+     *  @see EnglishToPigLatin#toEnglish
      */
     @Test public void test2WordsVowelConsonant()
     {
 	//this will test a consonant word, followed by a vowel word
-	assertEquals("anyway ayway", EnglishToPigLatin.toPigLatin("any way"));
+	assertEquals("any way", EnglishToPigLatin.toEnglish("anyway ayway"));
     }   
     /** The method that tests three words that start with a vowel, then consonant, then vowel
-     *  @see EnglishToPigLatin#toPigLatin
+     *  @see EnglishToPigLatin#toEnglish
      */
     @Test public void testVowelConsonantVowel()
     {
 	//this will test a consonant word, followed by a vowel word
-	assertEquals("iway ebay awesomeway", EnglishToPigLatin.toPigLatin("i be awesome"));
+	assertEquals("i be awesome", EnglishToPigLatin.toEnglish("iway ebay awesomeway"));
     }   
     /** The method that tests three words that start with a consonant, then vowel, then consonant
-     *  @see EnglishToPigLatin#toPigLatin
+     *  @see EnglishToPigLatin#toEnglish
      */
     @Test public void testConsonantVowelConsonant()
     {
 	//this will test a consonant word, followed by a vowel word
-	assertEquals("oldcay asway entuckykay", EnglishToPigLatin.toPigLatin("cold as kentucky"));
+	assertEquals("cold as kentucky", EnglishToPigLatin.toEnglish("oldcay asway entuckykay"));
     }   
-  /** The method that tests a vowel in the third letter of the word
-     *  @see EnglishToPigLatin#posFirstVowel
-     */
-    @Test public void test_posFirstVowelThis()
-    {
-        assertEquals(2,EnglishToPigLatin.posFirstVowel("this"));
-    }
-     /** The method that tests a vowel in the fourth letter of the word
-     *  @see EnglishToPigLatin#posFirstVowel
-     */
-    @Test public void test_posFirstVowelstreet()
-    {
-        assertEquals(3,EnglishToPigLatin.posFirstVowel("street"));
-    }
-     /** The method that tests a vowel in the first letter of the word
-     *  @see EnglishToPigLatin#posFirstVowel
-     */
-    @Test public void test_posFirstVowelaway()
-    {
-        assertEquals(0,EnglishToPigLatin.posFirstVowel("away"));
-    }
 }
