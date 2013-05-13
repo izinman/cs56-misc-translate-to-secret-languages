@@ -22,7 +22,7 @@ import javax.swing.UIManager;
  */
 
 
-public class WindowSetUp extends JApplet implements ActionListener {
+public class WindowSetUp extends JApplet{
     /* Declaration */
     private Container Panel;
     private JTextArea Output;
@@ -31,9 +31,12 @@ public class WindowSetUp extends JApplet implements ActionListener {
     private JTextField welcomePhrase;
     private JTextField resultPhrase;
     public TextField t1 = new TextField(20);
+
+    public JButton engToPig;
+    public JButton pigToEng;
     
     /**
-     * windowSetUp creates the JPanels that we use for the GUI, which include JTextArea, and JTextField
+     * windowSetUp creates the JPanels that we use for the GUI, which include JTextArea, JTextField, and JButton
      */
 
     public WindowSetUp() {
@@ -46,34 +49,67 @@ public class WindowSetUp extends JApplet implements ActionListener {
 	Scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 	Scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 	
-	welcomePhrase = new JTextField ("Please enter a word or phrase and then press enter:", 30);
+	welcomePhrase = new JTextField ("Please enter a word or phrase:", 30);
+	engToPig = new JButton("English To Pig Latin");
+        pigToEng = new JButton("Pig Latin To English");
 	resultPhrase = new JTextField("Result:", 30);
 	/* Location */
 	Panel.setLayout(new BoxLayout(Panel, BoxLayout.Y_AXIS));
 	Panel.add(welcomePhrase);
 	welcomePhrase.setEditable(false);
 	Panel.add(t1);
+	Panel.add(engToPig);
+	Panel.add(pigToEng);
 	Panel.add(resultPhrase);
 	resultPhrase.setEditable(false);
 	Panel.add(Scroller);
 
     
 	/* Configuration */
-	t1.addActionListener(this);
+	//t1.addActionListener(new TextListener);
+	engToPig.addActionListener(new EngToPigListener());
+	pigToEng.addActionListener(new PigToEngListener());
 	//t1.setActionCommand ("text");
 	Output.setEditable (false);
     }
+    /*
 
-    /**
-       actionPerformed is where the translations happen in our code, where the toPigLatin method is invoked
-     */
+    public class TextListener implements ActionListener
+    {
 
-    public void actionPerformed(ActionEvent e) {
-	String Action;
-	EnglishToPigLatin word1= new EnglishToPigLatin();
-	Action = e.getActionCommand ();
- 	Output.setText(word1.toPigLatin(Action));
-	t1.selectAll();
-    }     
+	/**
+	   actionPerformed is where the translations happen in our code, where the toPigLatin method is invoked
+	*/
+    /*
+	public void actionPerformed(ActionEvent e) {
+	    String Action;
+	    EnglishToPigLatin word1= new EnglishToPigLatin();
+	    Action = e.getActionCommand ();
+	    Output.setText(word1.toPigLatin(Action));
+	    t1.selectAll();
+	}     
+	}*/
+    /* NEED TO DO PIG TO ENG */
+     public class PigToEngListener implements ActionListener
+    {
+	public void actionPerformed(ActionEvent e){
+	    /* String Action;
+	    PigLatinToEnglish word1 = new PigLatinToEnglish();
+	    Action = e.getActionCommand();
+	    Output.setText(word1.toEnglish(Action));
+	    t1.selectAll();*/
+	}
+    }
+    public class EngToPigListener implements ActionListener
+    {
+	public void actionPerformed(ActionEvent e){
+	    String Action;
+	    EnglishToPigLatin word1 = new EnglishToPigLatin();
+	    Action = t1.getText();
+	    Output.setText(word1.toPigLatin(Action));
+	    t1.selectAll();
+	}
+	
+    }
 }
 
