@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 /**
  * The test class englishToPigLatinlTester, to test the englishToPigLatin class
  *
- * @author Christian Rivera Cruz, and Adam Kazberuk
- * @version CS56, Spring 2012
+ * @author Alex Molina
+ * @version CS56, Spring 2013
  * @see englishToPigLatin
  */
 
