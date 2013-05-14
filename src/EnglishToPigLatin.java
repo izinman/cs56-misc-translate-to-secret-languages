@@ -106,7 +106,12 @@ public class EnglishToPigLatin{
      */
     public static String toEnglish(String input) {
 	return "STUBB"; //~STUB
+
+	// 1) detect if first letter was vowel or consonant
+	//  a) if vowel, remove the -way or -yay and return
+	//  b) if consonant cluster, remove the -ay and move the consonant cluster to the front, then return
     }
+
     /**
        This function makes our GUI for toPigLatin work, setup and other processes are handled in windowSetUp
     */
