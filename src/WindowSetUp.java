@@ -16,8 +16,8 @@ import javax.swing.UIManager;
 /**
  * The class that sets up our GUI to use the englishToPigLatin class
  *
- * @author Christian Rivera Cruz, and Adam Kazberuk
- * @version CS56, Spring 2012
+ * @author Alex Molina
+ * @version CS56, Spring 2013
  * @see englishToPigLatin
  */
 
@@ -31,6 +31,9 @@ public class WindowSetUp extends JApplet implements ActionListener {
     private JTextField welcomePhrase;
     private JTextField resultPhrase;
     public TextField t1 = new TextField(20);
+	String[] types = {"English to Pig Latin", "Pig Latin to English", "English to Gibberish", "Gibberish to English"};
+	public JComboBox pickt = new JComboBox(types);
+	int i = 1;
     
     /**
      * windowSetUp creates the JPanels that we use for the GUI, which include JTextArea, and JTextField
@@ -53,11 +56,15 @@ public class WindowSetUp extends JApplet implements ActionListener {
 	Panel.add(welcomePhrase);
 	welcomePhrase.setEditable(false);
 	Panel.add(t1);
+	Panel.add(pickt);
 	Panel.add(resultPhrase);
 	resultPhrase.setEditable(false);
 	Panel.add(Scroller);
 
-    
+    	pickt.addActionListener(new ActionListener() {
+	public void actionPerformed(ActionEvent e){
+	
+	}});
 	/* Configuration */
 	t1.addActionListener(this);
 	//t1.setActionCommand ("text");
