@@ -33,7 +33,7 @@ public class WindowSetUp extends JApplet implements ActionListener {
     public TextField t1 = new TextField(20);
 	String[] types = {"English to Pig Latin", "Pig Latin to English", "English to Gibberish", "Gibberish to English"};
 	public JComboBox pickt = new JComboBox(types);
-	int i = 1;
+	int ty = 1;
     
     /**
      * windowSetUp creates the JPanels that we use for the GUI, which include JTextArea, and JTextField
@@ -63,7 +63,12 @@ public class WindowSetUp extends JApplet implements ActionListener {
 
     	pickt.addActionListener(new ActionListener() {
 	public void actionPerformed(ActionEvent e){
-	
+	JComboBox cb = (JComboBox)e.getSource();
+        String type = (String)cb.getSelectedItem();
+	if(type.equals("English to Pig Latin"))ty = 1;
+	if(type.equals("Pig Latin to English"))ty = 2;
+	if(type.equals("English to Gibberish"))ty = 3;
+	if(type.equals("Gibberish to English"))ty = 4; 
 	}});
 	/* Configuration */
 	t1.addActionListener(this);
@@ -79,7 +84,14 @@ public class WindowSetUp extends JApplet implements ActionListener {
 	String Action;
 	EnglishToPigLatin word1= new EnglishToPigLatin();
 	Action = e.getActionCommand ();
+	if(ty == 1)
  	Output.setText(word1.toPigLatin(Action));
+	if(ty == 2)
+ 	Output.setText(word1.fromPigLatin(Action));
+	if(ty == 3)
+ 	Output.setText(word1.toGibberish(Action));
+	if(ty == 4)
+ 	Output.setText(word1.fromGibberish(Action));	
 	t1.selectAll();
     }     
 }
