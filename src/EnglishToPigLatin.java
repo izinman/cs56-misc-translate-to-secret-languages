@@ -92,6 +92,19 @@ public class EnglishToPigLatin{
 	    return result;
     }
 
+
+
+    public static String fromPigLatin(String input){
+	return "STUB";}
+    
+    public static String toGibberish(String input){
+	return "STUB";}
+    public static String fromGibberish(String input){
+	return "STUB";}
+
+
+
+
     /**
        This function makes our GUI for toPigLatin work, setup and other processes are handled in windowSetUp
      */

@@ -13,6 +13,61 @@ import static org.junit.Assert.assertEquals;
 public class EnglishToPigLatinTester
 {
     /**
+    test method that translates to English from Pig Latin
+       @see EnglishToPigLatin#fromPigLatin()
+     */
+   
+    @Test public void testFromPigLatin()
+    {
+	// should return stub. This method is from another issue
+        assertEquals("ice",EnglishToPigLatin.fromPigLatin("iceway"));
+    }
+    
+    /**
+    test toGibberish for a word that begins with a consonant
+       @see EnglishToPigLatin#toGibberish()
+     */
+   
+    @Test public void testToGibberishConsonant()
+    {
+	// should return dog with "uvug" inserted after the d
+        assertEquals("duvugog",EnglishToPigLatin.toGibberish("dog"));
+    }
+
+    /**
+    test toGibberish for a word that begins with a vowel
+       @see EnglishToPigLatin#toGibberish()
+     */
+   
+    @Test public void testToGibberishVowel()
+    {
+	// should return dog with "uvug" inserted after the d
+        assertEquals("uvugat",EnglishToPigLatin.toGibberish("at"));
+    }
+
+    /**
+    test toGibberish for a word that begins with a vowel and word that begins with a consonant
+       @see EnglishToPigLatin#toGibberish()
+     */
+   
+    @Test public void testToGibberishVowelConsonant()
+    {
+	// should return dog with "uvug" inserted after the d
+        assertEquals("uvugat duvugog",EnglishToPigLatin.toGibberish("at dog"));
+    }
+    
+    /**
+    test fromGibberish 
+       @see EnglishToPigLatin#fromGibberish()
+     */
+   
+    @Test public void testFromGibberish()
+    {
+	// should return dog with "uvug" inserted after the d
+        assertEquals("dog",EnglishToPigLatin.fromGibberish("duvugog"));
+    }
+    
+    /**
        test no arg constructor from PolynomialTest
        @see EnglishToPigLatin#toPigLatin()
      */
