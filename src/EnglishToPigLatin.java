@@ -5,9 +5,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.BorderLayout;
 
-/** englishToPigLatin function made for Ticket:570
- @author Christian Rivera Cruz and Adam Kazberuk
- @version 05/12/2012 for lab05, cs56, S12
+/** englishToPigLatin
+ @author Alex Molina
+ @version 05/15/2013 for lab05, cs56, S13
 */
 
 
@@ -43,6 +43,48 @@ public class EnglishToPigLatin{
  * @param  input the input is the string typed into the box
  * @return String is returned, and it is reprinted into the text box below the input
  */
+	public static String toGibberish(String input){
+	String result="";
+	String toAdd="";
+	String words="";
+	int i = 0;
+	char chr;
+	if(input.equals("")){
+	return result;}
+	StringTokenizer token = new StringTokenizer(input);
+	while (token.hasMoreTokens()){
+	    words = token.nextToken();	    
+	    words.toLowerCase();
+	    char[] chararray = words.toCharArray();
+	if(isVowel(chararray[0])){
+		result+="uvug" + words + " ";
+	    }
+	else{
+		i=posFirstVowel(words);
+		for(int j=0; j<i; j++){
+		    result+=chararray[j];
+		}
+		result+= "uvug";
+		for(int j=i; j<chararray.length; j++){
+		    result+=chararray[j];
+		}
+		result+= " ";
+	    }
+}
+		result = result.toLowerCase();
+		result = result.trim();
+	if(Character.isUpperCase(input.charAt(0))){
+	    return Character.toUpperCase(result.charAt(0))
+		+ (result.length() > 1 ? result.substring(1) : "");
+	}
+	else
+	    return result;	
+}
+	public static String fromGibberish(String input){
+	String newstr = input.replaceAll("uvug", "");
+	return newstr;}
+	public static String fromPigLatin(String input){
+	return "STUB";}
 
     public static String toPigLatin(String input){
 
@@ -91,19 +133,6 @@ public class EnglishToPigLatin{
 	else
 	    return result;
     }
-
-
-
-    public static String fromPigLatin(String input){
-	return "STUB";}
-    
-    public static String toGibberish(String input){
-	return "STUB";}
-    public static String fromGibberish(String input){
-	return "STUB";}
-
-
-
 
     /**
        This function makes our GUI for toPigLatin work, setup and other processes are handled in windowSetUp
