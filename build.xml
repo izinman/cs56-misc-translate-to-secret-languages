@@ -1,14 +1,14 @@
 <project default="compile">
 
-  <!-- build.xml for choice points project 1, S12, CS56
-       name: Adam Kazberuk & Christian Rivera Cruz -->
+  <!-- build.xml for project 1, S13, CS56
+       name: Alex Molina -->
   <property environment="env"/> <!-- load the environment variables --> 
   <property name="webRoot" value="${env.HOME}/public_html/cs56/S12" />
 
   <property name="course" value="cs56"/>
-  <property name="quarter" value="S12"/>
+  <property name="quarter" value="S13"/>
   <property name = "issues" value = "issues" />
-  <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56/S12" />  
+  <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56/S13" />  
   <property name="issueNum" value="0000773"/>
   <property name="projectName" value="${issues}/${issueNum}" /> 
   <property name="javadocDest" value="${webRoot}/${projectName}/javadoc" /> 
@@ -18,11 +18,11 @@
 
   <target name="compile" > 
     <mkdir dir = "build" />
-    <javac srcdir="src" destdir="build" debug="true" debuglevel="lines, vars, source" includeantruntime="false">
+    <javac srcdir="src" destdir="build" debug="true" debuglevel="lines,vars,source" includeantruntime="false">
       
       <classpath>
-	<pathelement location="."/> 
-	<pathelement location="/cs/faculty/pconrad/public_html/cs56/lib/junit-4.8.2.jar"/>
+	<pathelement location="build"/> 
+	<pathelement location="lib/junit-4.8.2.jar"/>
       </classpath> 
     </javac> 
   </target>
@@ -74,7 +74,7 @@
 
     <junit haltonerror="no" haltonfailure="no">
       <classpath>
-	<pathelement location="/cs/faculty/pconrad/public_html/cs56/lib/junit-4.8.2.jar"/>
+	<pathelement location="lib/junit-4.8.2.jar"/>
 	<pathelement location="build"/>
       </classpath>
 
