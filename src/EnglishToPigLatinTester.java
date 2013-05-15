@@ -1,10 +1,9 @@
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-
 /**
  * The test class englishToPigLatinlTester, to test the englishToPigLatin class
- *
+ * @author Christian Rivera Cruz and Adam Kazberuk
  * @author Alex Molina
  * @version CS56, Spring 2013
  * @see englishToPigLatin
@@ -20,7 +19,7 @@ public class EnglishToPigLatinTester
     @Test public void testFromPigLatin()
     {
 	// should return stub. This method is from another issue
-        assertEquals("ice",EnglishToPigLatin.fromPigLatin("iceway"));
+        assertEquals("STUB Issue #1",EnglishToPigLatin.fromPigLatin("iceway"));
     }
     
     /**
