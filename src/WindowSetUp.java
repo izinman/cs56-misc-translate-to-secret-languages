@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+import java.util.ArrayList;
+
 /**
  * The class that sets up our GUI to use the englishToPigLatin class
  *
@@ -20,7 +22,6 @@ import javax.swing.UIManager;
  * @version CS56, Spring 2012
  * @see englishToPigLatin
  */
-
 
 public class WindowSetUp extends JApplet{
     /* Declaration */
@@ -34,9 +35,11 @@ public class WindowSetUp extends JApplet{
 
     public JButton engToPig;
     public JButton pigToEng;
+    public JPanel boxPanel;
+    public ArrayList<JComboBox<String>> wordBoxes;
     
     /**
-     * windowSetUp creates the JPanels that we use for the GUI, which include JTextArea, JTextField, and JButton
+     * windowSetUp creates the JPanels that we use for the GUI, which include JTextArea, JTextField, JButton, JComboBox
      */
 
     public WindowSetUp() {
@@ -49,10 +52,13 @@ public class WindowSetUp extends JApplet{
 	Scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 	Scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 	
-	welcomePhrase = new JTextField ("Please enter a word or phrase:", 30);
+	welcomePhrase = new JTextField ("Please enter a word or phrase of 8 words or less:", 30);
 	engToPig = new JButton("English To Pig Latin");
         pigToEng = new JButton("Pig Latin To English");
 	resultPhrase = new JTextField("Result:", 30);
+	boxPanel = new JPanel();
+	wordBoxes = new ArrayList<JComboBox<String>>();
+	
 	/* Location */
 	Panel.setLayout(new BoxLayout(Panel, BoxLayout.Y_AXIS));
 	Panel.add(welcomePhrase);
@@ -63,6 +69,16 @@ public class WindowSetUp extends JApplet{
 	Panel.add(resultPhrase);
 	resultPhrase.setEditable(false);
 	Panel.add(Scroller);
+	Panel.add(boxPanel);
+	for(int i = 0; i < 8; i++)
+	    {
+		wordBoxes.add(i, new JComboBox<String>());
+		for(int j = 0; j < 5; j++)
+		    {
+			wordBoxes.get(i).addItem(new String(""));
+		    }
+		boxPanel.add(wordBoxes.get(i));
+	    }
 
     
 	/* Configuration */
