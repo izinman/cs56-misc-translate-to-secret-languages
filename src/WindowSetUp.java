@@ -7,20 +7,18 @@ import java.awt.Component;
 import javax.swing.BoxLayout;
 import javax.swing.WindowConstants;
 
-
 import java.awt.FlowLayout;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
-
 /**
  * The class that sets up our GUI to use the englishToPigLatin class
  *
+ * @author Christian Rivera Cruz and Adam Kazberuk
  * @author Alex Molina
  * @version CS56, Spring 2013
  * @see englishToPigLatin
  */
-
 
 public class WindowSetUp extends JApplet implements ActionListener {
     /* Declaration */
@@ -30,11 +28,15 @@ public class WindowSetUp extends JApplet implements ActionListener {
 
     private JTextField welcomePhrase;
     private JTextField resultPhrase;
-    public TextField t1 = new TextField(20);
-	String[] types = {"English to Pig Latin", "Pig Latin to English", "English to Gibberish", "Gibberish to English"};
-	public JComboBox pickt = new JComboBox(types);
-	int ty = 1;
-    
+    public JTextField t1 = new JTextField(20);
+    String[] types = {"English to Pig Latin", 
+		      "Pig Latin to English", 
+		      "English to Gibberish", 
+		      "Gibberish to English"};
+    public JComboBox pickt = new JComboBox(types);
+    int ty = 1;
+    JPopupMenu popup = new JPopupMenu();
+    JPopupMenu popup2 = new JPopupMenu();
     /**
      * windowSetUp creates the JPanels that we use for the GUI, which include JTextArea, and JTextField
      */
@@ -42,7 +44,6 @@ public class WindowSetUp extends JApplet implements ActionListener {
     public WindowSetUp() {
 	/* Instantiation */
 	Panel = getContentPane ();
-
 	Output = new JTextArea (30, 10);
 	Scroller = new JScrollPane(Output);
 	Output.setLineWrap(true);
@@ -60,7 +61,7 @@ public class WindowSetUp extends JApplet implements ActionListener {
 	Panel.add(resultPhrase);
 	resultPhrase.setEditable(false);
 	Panel.add(Scroller);
-
+	// Adds action listener for combobox for choosing translation
     	pickt.addActionListener(new ActionListener() {
 	public void actionPerformed(ActionEvent e){
 	JComboBox cb = (JComboBox)e.getSource();
@@ -70,10 +71,43 @@ public class WindowSetUp extends JApplet implements ActionListener {
 	if(type.equals("English to Gibberish"))ty = 3;
 	if(type.equals("Gibberish to English"))ty = 4; 
 	}});
+	// Add cut, copy, and paste to Output TextArea
+	JMenuItem cut = new JMenuItem("Cut");
+	JMenuItem copy = new JMenuItem("Copy");
+	JMenuItem paste = new JMenuItem("Paste");
+	popup.add(cut);
+	popup.add(copy);
+	popup.add(paste);
+    	cut.addActionListener(new ActionListener() {
+	public void actionPerformed(ActionEvent e){
+	    Output.cut();}});
+    	copy.addActionListener(new ActionListener() {
+	public void actionPerformed(ActionEvent e){
+	    Output.copy();}});
+    	paste.addActionListener(new ActionListener() {
+	public void actionPerformed(ActionEvent e){
+	    Output.paste();}});
+	Output.setComponentPopupMenu(popup);
+	// Add cut, copy paste to t1 TextField
+	JMenuItem cut2 = new JMenuItem("Cut");
+	JMenuItem copy2 = new JMenuItem("Copy");
+	JMenuItem paste2 = new JMenuItem("Paste");
+	popup2.add(cut2);
+	popup2.add(copy2);
+	popup2.add(paste2);
+    	cut2.addActionListener(new ActionListener() {
+	public void actionPerformed(ActionEvent e){
+	    t1.cut();}});
+    	copy2.addActionListener(new ActionListener() {
+	public void actionPerformed(ActionEvent e){
+	    t1.copy();}});
+    	paste2.addActionListener(new ActionListener() {
+	public void actionPerformed(ActionEvent e){
+	    t1.paste();}});
+	t1.setComponentPopupMenu(popup2);
 	/* Configuration */
 	t1.addActionListener(this);
-	//t1.setActionCommand ("text");
-	Output.setEditable (false);
+	Output.setEditable (true);
     }
 
     /**
