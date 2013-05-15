@@ -33,7 +33,7 @@ public class WindowSetUp extends JApplet implements ActionListener {
 		      "Pig Latin to English", 
 		      "English to Gibberish", 
 		      "Gibberish to English"};
-    public JComboBox pickt = new JComboBox(types);
+    public JComboBox<String> pickt = new JComboBox<String>(types);
     int ty = 1;
     JPopupMenu popup = new JPopupMenu();
     JPopupMenu popup2 = new JPopupMenu();
