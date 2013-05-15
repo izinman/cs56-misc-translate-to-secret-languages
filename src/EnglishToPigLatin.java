@@ -119,15 +119,26 @@ public class EnglishToPigLatin{
 	    }
 	String[] options = new String[numOptions];
 	*/
-	
-	String[] stubOptions = new String[2];
-	stubOptions[0] = "hi";
-	stubOptions[1] = "hello";
-	return stubOptions;
 
 	// 1) detect if first letter was vowel or consonant
 	//  a) if vowel, remove the -way or -yay and return
 	//  b) if consonant cluster, remove the -ay and move the consonant cluster to the front, then return
+	char[] c = input.toCharArray();
+	
+	//Assume the input is already sanitized
+	//Check that it's actually pig latin
+	if (c[-1] != 'y') {
+	    System.out.println("Not pig latin: " + input);
+	    return {input};
+	}
+
+
+	//@STUB	
+	String[] stubOptions = new String[2];
+	stubOptions[0] = "hi";
+	stubOptions[1] = "hello";
+	return stubOptions;
+	
     }
 
     /**
