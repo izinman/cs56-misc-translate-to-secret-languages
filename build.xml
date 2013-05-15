@@ -6,10 +6,8 @@
   <property name="webRoot" value="${env.HOME}/public_html/cs56/S12" />
 
   <property name="course" value="cs56"/>
-  <property name="quarter" value="S13"/>
-  <property name = "issues" value = "issues" />
-  <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56/S13" />  
-  <property name="issueNum" value="0000773"/>
+  <property name="quarter" value="13S"/>
+  <property name="webBaseURL" value="~public_html/${course}/${quarter}/${env.USER}" /> 
   <property name="projectName" value="${issues}/${issueNum}" /> 
   <property name="javadocDest" value="${webRoot}/${projectName}/javadoc" /> 
   <property name="javadocURL" value="${webBaseURL}/${projectName}/javadoc" /> 
