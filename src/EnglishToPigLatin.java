@@ -104,8 +104,26 @@ public class EnglishToPigLatin{
      * @param  input the input is the string typed into the box
      * @return String is returned, and it is reprinted into the text box below the input
      */
-    public static String toEnglish(String input) {
-	return "STUBB"; //~STUB
+    public static String[] toEnglish(String input) {
+	//@@@@STUB OUTPUT, FIX ME
+	/* 
+	   use this when rest of method finished
+	int numOptions;
+	if(input.length() < 5)
+	    {
+		numOptions = input.length();
+	    }
+	else
+	    {
+		numOptions = 5;
+	    }
+	String[] options = new String[numOptions];
+	*/
+	
+	String[] stubOptions = new String[2];
+	stubOptions[0] = "hi";
+	stubOptions[1] = "hello";
+	return stubOptions;
 
 	// 1) detect if first letter was vowel or consonant
 	//  a) if vowel, remove the -way or -yay and return

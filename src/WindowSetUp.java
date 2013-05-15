@@ -73,10 +73,6 @@ public class WindowSetUp extends JApplet{
 	for(int i = 0; i < 8; i++)
 	    {
 		wordBoxes.add(i, new JComboBox<String>());
-		for(int j = 0; j < 5; j++)
-		    {
-			wordBoxes.get(i).addItem(new String(""));
-		    }
 		boxPanel.add(wordBoxes.get(i));
 	    }
 
@@ -88,33 +84,31 @@ public class WindowSetUp extends JApplet{
 	//t1.setActionCommand ("text");
 	Output.setEditable (false);
     }
-    /*
 
-    public class TextListener implements ActionListener
-    {
-
-	/**
-	   actionPerformed is where the translations happen in our code, where the toPigLatin method is invoked
-	*/
-    /*
-	public void actionPerformed(ActionEvent e) {
-	    String Action;
-	    EnglishToPigLatin word1= new EnglishToPigLatin();
-	    Action = e.getActionCommand ();
-	    Output.setText(word1.toPigLatin(Action));
-	    t1.selectAll();
-	}     
-	}*/
-    /* NEED TO DO PIG TO ENG */
-     public class PigToEngListener implements ActionListener
+    public class PigToEngListener implements ActionListener
     {
 	public void actionPerformed(ActionEvent e){
-	    /* String Action;
-	    PigLatinToEnglish word1 = new PigLatinToEnglish();
-	    Action = e.getActionCommand();
-	    Output.setText(word1.toEnglish(Action));
-	    t1.selectAll();*/
+	    EnglishToPigLatin word1 = new EnglishToPigLatin();
+	    String[] words = t1.getText().split(" ");
+	    for(int boxNum = 0; boxNum < 8 && boxNum < words.length; boxNum++)
+		{
+		    String currentWord = words[boxNum];
+		    String[] pigLatinTrans = word1.toEnglish(currentWord);
+		    
+		    for(int optionNum = 0; optionNum < pigLatinTrans.length && optionNum < 5; optionNum++)
+			{
+			    wordBoxes.get(boxNum).addItem(pigLatinTrans[optionNum]);
+			}
+		}
+	    String pigLatinOutput = "";
+	    for(int boxNum = 0; boxNum < 8 || boxNum < words.length; boxNum++)
+		{
+		    pigLatinOutput += wordBoxes.get(boxNum).getItemAt(0) + " ";
+		}
+	    Output.setText(pigLatinOutput);
+	    t1.selectAll();
 	}
+    
     }
     public class EngToPigListener implements ActionListener
     {
