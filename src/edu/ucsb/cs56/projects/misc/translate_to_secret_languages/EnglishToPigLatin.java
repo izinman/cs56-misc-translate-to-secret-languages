@@ -55,8 +55,14 @@ public class EnglishToPigLatin{
 	    char[] chararray = words.toCharArray();
 		for(int j=0; j<chararray.length; j++){
 		    if(isVowel(chararray[j])){
+			if(j+1 < chararray.length && isVowel(chararray[j+1])){
 			    result+= "uvug";
-			    result+= chararray[j];}
+			    result+= chararray[j];
+			    result+= chararray[j+1];
+			    j++;}
+			else{
+			    result+= "uvug";
+			    result+= chararray[j];}}
 		    else{
 			result+= chararray[j];}
 		}
