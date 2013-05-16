@@ -123,24 +123,57 @@ public class EnglishToPigLatin{
 	// 1) detect if first letter was vowel or consonant
 	//  a) if vowel, remove the -way or -yay and return
 	//  b) if consonant cluster, remove the -ay and move the consonant cluster to the front, then return
-	char[] c = input.toCharArray();
-	
-	//Assume the input is already sanitized
-	//Check that it's actually pig latin
-	if (c[-1] != 'y') {
+
+	ArrayList<String> list = new ArrayList<String>();
+	ArrayList<Character> c = new ArrayList<Character>();
+	//create an array list of characters to work with:
+	for (char letter : input.toCharArray()) { c.add(letter); }
+	int l = c.size(); //Usage: c[l-X] refers to the Xth to last char
+	//Assume the input is already sanitized for spaces/newlines
+	//Check that it's actually pig latin:
+	if (c.get(l - 1) != 'y') {
 	    System.out.println("Not pig latin: " + input);
-	    return {input};
+	    list.add(input);
+	    return listToStringArray(list);
 	}
-
-
+	c.remove(l-1);//remove 'y'
+	c.remove(l-2);//remove 'a'
+	l = c.size(); //update size
+	//check if the word could have started with a vowel
+	if (c.get(l-1) == 'w' || c.get(l-1) == 'y')   {
+	    list.add(listToString(c));
+	}
+	while (!isVowel(c.get(l-1))) {
+	    //move consonant to front of string
+	    c.add(0, c.remove(l-1));	 
+	    //add to the list
+	    list.add(listToString(c));
+	}
+	
+	//return the list as an array
+	return listToStringArray(list);
 	//@STUB	
-	String[] stubOptions = new String[2];
-	stubOptions[0] = "hi";
-	stubOptions[1] = "hello";
-	return stubOptions;
+	//String[] stubOptions = new String[2];
+	//stubOptions[0] = "hi";
+	//stubOptions[1] = "hello";
+	//return stubOptions;
 	
     }
 
+private static String listToString(ArrayList<Character> list)
+{
+    String result = "";
+    //char[list.size()] result;
+    for (int i = 0; i < list.size(); i++) {
+	result += list.get(i);
+    }
+    return result;
+}
+
+private static String[] listToStringArray(ArrayList<String> list)
+{
+    return Arrays.copyOf(list.toArray(), list.size(), String[].class);
+}
     /**
        This function makes our GUI for toPigLatin work, setup and other processes are handled in windowSetUp
     */
