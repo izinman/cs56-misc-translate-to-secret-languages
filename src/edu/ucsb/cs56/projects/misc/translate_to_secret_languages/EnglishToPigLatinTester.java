@@ -1,4 +1,4 @@
-package edu.ucsb.cs56.S13.projects.misc.translate_to_secret_languages;
+package edu.ucsb.cs56.projects.misc.translate_to_secret_languages;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
