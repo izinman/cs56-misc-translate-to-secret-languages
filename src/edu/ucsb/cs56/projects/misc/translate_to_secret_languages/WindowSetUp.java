@@ -29,15 +29,13 @@ public class WindowSetUp extends JApplet implements ActionListener {
 
     private JTextField welcomePhrase;
     private JTextField resultPhrase;
-    public JTextField t1 = new JTextField(20);
+    public TextField t1 = new TextField(20);
     String[] types = {"English to Pig Latin", 
 		      "Pig Latin to English", 
 		      "English to Gibberish", 
 		      "Gibberish to English"};
     public JComboBox<String> pickt = new JComboBox<String>(types);
     int ty = 1;
-    JPopupMenu popup = new JPopupMenu();
-    JPopupMenu popup2 = new JPopupMenu();
     /**
      * windowSetUp creates the JPanels that we use for the GUI, which include JTextArea, and JTextField
      */
@@ -72,43 +70,10 @@ public class WindowSetUp extends JApplet implements ActionListener {
 	if(type.equals("English to Gibberish"))ty = 3;
 	if(type.equals("Gibberish to English"))ty = 4; 
 	}});
-	// Add cut, copy, and paste to Output TextArea
-	JMenuItem cut = new JMenuItem("Cut");
-	JMenuItem copy = new JMenuItem("Copy");
-	JMenuItem paste = new JMenuItem("Paste");
-	popup.add(cut);
-	popup.add(copy);
-	popup.add(paste);
-    	cut.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent e){
-	    Output.cut();}});
-    	copy.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent e){
-	    Output.copy();}});
-    	paste.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent e){
-	    Output.paste();}});
-	Output.setComponentPopupMenu(popup);
-	// Add cut, copy paste to t1 TextField
-	JMenuItem cut2 = new JMenuItem("Cut");
-	JMenuItem copy2 = new JMenuItem("Copy");
-	JMenuItem paste2 = new JMenuItem("Paste");
-	popup2.add(cut2);
-	popup2.add(copy2);
-	popup2.add(paste2);
-    	cut2.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent e){
-	    t1.cut();}});
-    	copy2.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent e){
-	    t1.copy();}});
-    	paste2.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent e){
-	    t1.paste();}});
-	t1.setComponentPopupMenu(popup2);
+
 	/* Configuration */
 	t1.addActionListener(this);
-	Output.setEditable (true);
+	Output.setEditable (false);
     }
 
     /**
