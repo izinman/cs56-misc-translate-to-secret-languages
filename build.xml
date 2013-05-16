@@ -4,7 +4,7 @@
        name: Alex Molina -->
   <property environment="env"/> <!-- load the environment variables --> 
   <property name="webRoot" value="${env.HOME}/public_html/cs56/13S/${env.USER}" />
-<property name="fullPkg" value="edu.ucsb.cs56.S13.projects.translate_to_secret_languages" />
+<property name="fullPkg" value="edu.ucsb.cs56.S13.projects.misc.translate_to_secret_languages" />
   <property name="course" value="cs56"/>
   <property name="quarter" value="13S"/>
   <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/${course}/${quarter}/${env.USER}" /> 
