@@ -5,8 +5,6 @@
   <property environment="env"/> <!-- load the environment variables --> 
   <property name="webRoot" value="${env.HOME}/public_html/cs56/13S/${env.USER}" />
 <property name="fullPkg" value="edu.ucsb.cs56.projects.misc.translate_to_secret_languages" />
-  <property name="course" value="cs56"/>
-  <property name="quarter" value="13S"/>
   <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/${course}/${quarter}/${env.USER}" /> 
   <property name="projectName" value="cs56_translator_to_secret_languages" /> 
   <property name="javadocDest" value="${webRoot}/${projectName}/javadoc" /> 
@@ -87,123 +85,6 @@
       
     </junit>
   </target>
-
-  <target name="jar" depends="compile">
-    <mkdir dir="download" />
-    <jar destfile="download/${projectName}.jar" basedir="build" >
-      <manifest>
-	<attribute name="Main-Class" value="EnglishToPigLatin"/>
-      </manifest>
-    </jar>  
-  </target>
-
-
-  <target name="publish" depends="jar,javadoc,jws, linenumbers">
-    <mkdir dir="${webRoot}/${projectName}" />
-
-    <delete dir="${webRoot}/${projectName}/browse" />
-    <mkdir dir="${webRoot}/${projectName}/browse" />
-
-    <delete dir="${webRoot}/${projectName}/download" />
-    <mkdir dir="${webRoot}/${projectName}/download" />
-
-    <copy file="html/index.html" todir="${webRoot}/${projectName}"/>
-
-    <copy todir="${webRoot}/${projectName}/download" >
-      <fileset dir="download/issues"/>
-    </copy>
-
-    <copy file="build.xml" todir="${webRoot}/${projectName}/browse"/>
-
-    <copy todir="${webRoot}/${projectName}/browse/src" >
-      <fileset dir="src"/>
-    </copy>
-
-    <chmod dir="${webRoot}/${projectName}"
-	   perm="755" type="both" includes="**/*"/>
-
-    <copy file="numberedsource.txt" todir="${webRoot}/${projectName}/browse"/>
-
-    <echo>Project published to ${webBaseURL}/${projectName}</echo>
-  </target>  
-
-  <target name="linenumbers" description="Creates a file containing all source files with line numbers">
-    <exec executable="bash">
-      <arg value="-c"/>
-      <arg value='tree -ifQ src | grep \.java\"$ | xargs pr -n > numberedsource.txt'/>
-    </exec>
-  </target> 
-
-  <target name="jws" depends="compile,jar">
-
-    <mkdir dir ="jws" />
-
-    <delete dir="${webRoot}/${projectName}/jws" />
-    <mkdir dir="${webRoot}/${projectName}/jws" />
-
-    <copy todir="${jwsDest}" file="download/${projectName}.jar" />
-    <copy todir="${jwsDest}" >
-      <fileset dir="jws" includes="*.html"/>
-      <fileset dir="jws" includes="*.jnlp"/>
-      <fileset dir="jws" includes="*.png"/>
-      <fileset dir="jws" includes=".htaccess"/>
-    </copy>
-    <echo>Java web start at ${jwsURL}</echo>
-  </target>
-
-<target name="dist" depends="">                                          
-
-  <!-- delete everything under the "temp" and "download" subdirectories 
-          In Ant, **/* means "all files under any number of directory levels" -->
-                                                                                  
-  <delete quiet="true">                                                           
-     <fileset dir="temp" includes="**/*" />                                       
-     <fileset dir="download" includes="**/*" />                                    
-  </delete>                                                                       
-                                                               
-  <!-- create the directories we'll need to stage the zip file and tarballs -->
-                   
-  <mkdir dir="S12/download" />                                                         
-  <mkdir dir="temp" />                                                            
-  <mkdir dir="temp/${projectName}" />                                             
-                                                                                  
-  <!-- copy everything from the current directory that we want to put in the zip file/tarball into the
-          temp subdirectory.   Exclude things we do NOT want to include in the tarball/zip file -->
-
-  <copy todir="temp/${projectName}">                                              
-    <fileset dir="."                                                              
-     excludes="build/**, javadoc/**, **/*~, temp/**, dist/**, download/**"/>       
-  </copy>                                                                         
-                                                                                  
-  <!-- create the tar file from the temp directory -->
-
-  <tar destfile="temp/${projectName}.tar"                                         
-       basedir="temp"                                                             
-       includes="${projectName}/**"                                               
-   />                                                                             
-  
- <!-- compress the tar file into a tarball (using "gzip") -->
-                                                                                
-  <gzip zipfile="download/${projectName}.tgz"                                      
-        src="temp/${projectName}.tar" />                                          
- 
- <!-- create a zip file -->
-                                                 
- <zip destfile="download/${projectName}.zip"                                      
-       basedir="temp"                                                             
-       includes="${projectName}/**"                                               
-  />                           
-
-  <!-- Now we have the tarball and zip file in the download 
-          subdirectory, so we are finished with the temp directory -->                                                   
-                                                                                  
-  <delete quiet="true">                                                           
-     <fileset dir="temp" includes="**/*"/>                                        
-  </delete>                                                                       
-                                                                                  
- </target>     
-
-
 
 
 </project>
