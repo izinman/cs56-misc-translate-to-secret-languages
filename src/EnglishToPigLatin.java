@@ -105,7 +105,9 @@ public class EnglishToPigLatin{
      * @return String is returned, and it is reprinted into the text box below the input
      */
     public static String[] toEnglish(String input) {
-
+	if(input == "")
+	    return new String[]{""};
+	
 	// 1) detect if first letter was vowel or consonant
 	//  a) if vowel, remove the -way or -yay and return
 	//  b) if consonant cluster, remove the -ay and move the consonant cluster to the front, then return

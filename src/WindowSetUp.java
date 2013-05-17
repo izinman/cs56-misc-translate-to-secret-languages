@@ -78,7 +78,7 @@ public class WindowSetUp extends JApplet{
 	    {
 		wordBoxes.add(i, new JComboBox<String>());
 		boxPanel.add(wordBoxes.get(i));
-		//		wordBoxes.get(i).addActionListener(new BoxListener());
+		wordBoxes.get(i).addActionListener(new BoxListener());
 	    }
 
     
@@ -110,12 +110,14 @@ public class WindowSetUp extends JApplet{
 				    wordBoxes.get(boxNum).addItem(pigLatinTrans[optionNum]);
 				}
 			}
-		    String pigLatinOutput = "";
-		    for(int boxNum = 0; boxNum < 8 && boxNum < words.length; boxNum++)
-			{
-			    pigLatinOutput += wordBoxes.get(boxNum).getSelectedItem() + " ";
-			}
-		    Output.setText(pigLatinOutput);
+		    updateOutput();
+		    /*   String pigLatinOutput = "";
+			 for(int boxNum = 0; boxNum < 8 && boxNum < words.length; boxNum++)
+			 {
+			 pigLatinOutput += wordBoxes.get(boxNum).getSelectedItem() + " ";
+			 }
+			 Output.setText(pigLatinOutput);
+		    */
 		    t1.selectAll();
 		}
 	    else
@@ -148,16 +150,37 @@ public class WindowSetUp extends JApplet{
 	}
 	
     }
-    /*
+    
     public class BoxListener implements ActionListener
     {
 	public void actionPerformed(ActionEvent e)
 	{
+	    updateOutput();
+	    /*
 	    String pigLatinOutput = "";
 	    for(int boxNum = 0; boxNum < 8; boxNum++)
 			pigLatinOutput += wordBoxes.get(boxNum).getSelectedItem() + " ";
 	    Output.setText(pigLatinOutput);
 	    t1.selectAll();
+	    */
 	}
-	}*/
+    }
+
+    /**
+       Updates the output box
+     */
+    private void updateOutput() {
+	String pigLatinOutput = "";
+	for(int boxNum = 0; boxNum < 8; boxNum++)
+	    {
+		String t = (String)wordBoxes.get(boxNum).getSelectedItem();
+		if (t != null) 
+		    pigLatinOutput += t + " ";
+	    }
+	Output.setText(pigLatinOutput);
+	//t1.selectAll();
+	//return pigLatinOutput;
+    }
+
 }
+
