@@ -127,8 +127,10 @@ public class EnglishToPigLatin{
 	l = c.size(); //update size
 	//check if the word could have started with a vowel
 	if (c.get(l-1) == 'w' || c.get(l-1) == 'y')   {
-	    c.remove(l-1);
+	    char temp = c.remove(l-1);
+	    //l = c.size();
 	    list.add(listToString(c));
+	    c.add(temp);
 	}
 	while (!isVowel(c.get(l-1))) {
 	    //move consonant to front of string
