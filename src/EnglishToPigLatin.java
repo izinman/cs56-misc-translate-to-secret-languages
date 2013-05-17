@@ -127,6 +127,7 @@ public class EnglishToPigLatin{
 	l = c.size(); //update size
 	//check if the word could have started with a vowel
 	if (c.get(l-1) == 'w' || c.get(l-1) == 'y')   {
+	    c.remove(l-1);
 	    list.add(listToString(c));
 	}
 	while (!isVowel(c.get(l-1))) {
