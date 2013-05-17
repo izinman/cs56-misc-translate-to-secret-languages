@@ -105,20 +105,6 @@ public class EnglishToPigLatin{
      * @return String is returned, and it is reprinted into the text box below the input
      */
     public static String[] toEnglish(String input) {
-	//@@@@STUB OUTPUT, FIX ME
-	/* 
-	   use this when rest of method finished
-	int numOptions;
-	if(input.length() < 5)
-	    {
-		numOptions = input.length();
-	    }
-	else
-	    {
-		numOptions = 5;
-	    }
-	String[] options = new String[numOptions];
-	*/
 
 	// 1) detect if first letter was vowel or consonant
 	//  a) if vowel, remove the -way or -yay and return
@@ -152,18 +138,12 @@ public class EnglishToPigLatin{
 	
 	//return the list as an array
 	return listToStringArray(list);
-	//@STUB	
-	//String[] stubOptions = new String[2];
-	//stubOptions[0] = "hi";
-	//stubOptions[1] = "hello";
-	//return stubOptions;
 	
     }
 
 private static String listToString(ArrayList<Character> list)
 {
     String result = "";
-    //char[list.size()] result;
     for (int i = 0; i < list.size(); i++) {
 	result += list.get(i);
     }
@@ -180,7 +160,7 @@ private static String[] listToStringArray(ArrayList<String> list)
     
     public static void go(){
 	JFrame f = new JFrame("English to Pig Latin Translator");
-	f.setSize(400, 200);
+	f.setSize(600,400);
 	Container content = f.getContentPane();
 	content.setBackground(Color.white);
 	content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS)); 

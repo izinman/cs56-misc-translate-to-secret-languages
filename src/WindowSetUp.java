@@ -16,27 +16,28 @@ import javax.swing.UIManager;
 import java.util.ArrayList;
 
 /**
- * The class that sets up our GUI to use the englishToPigLatin class
+ * The class that sets up the GUI to use the EnglishToPigLatin class
  *
- * @author Christian Rivera Cruz, and Adam Kazberuk
- * @version CS56, Spring 2012
- * @see englishToPigLatin
+ * @author Christian Rivera Cruz, Adam Kazberuk, Evan Moelter, Ian Vernon
+ * @version CS56, Spring 2013
+ * @see EnglishToPigLatin
  */
 
 public class WindowSetUp extends JApplet{
     /* Declaration */
     private Container Panel;
     private JTextArea Output;
+    private JPanel boxPanel;
     private JScrollPane Scroller;
 
     private JTextField welcomePhrase;
     private JTextField resultPhrase;
-    public TextField t1 = new TextField(20);
+    private TextField t1 = new TextField(20);
+    private JTextField wordBoxesPhrase;
 
-    public JButton engToPig;
-    public JButton pigToEng;
-    public JPanel boxPanel;
-    public ArrayList<JComboBox<String>> wordBoxes;
+    private  JButton engToPig;
+    private  JButton pigToEng;
+    private ArrayList<JComboBox<String>> wordBoxes;
     
     /**
      * windowSetUp creates the JPanels that we use for the GUI, which include JTextArea, JTextField, JButton, JComboBox
@@ -56,6 +57,7 @@ public class WindowSetUp extends JApplet{
 	engToPig = new JButton("English To Pig Latin");
         pigToEng = new JButton("Pig Latin To English");
 	resultPhrase = new JTextField("Result:", 30);
+	wordBoxesPhrase = new JTextField("Select the correct English translation from each box when using Pig Latin To English;", 30);
 	boxPanel = new JPanel();
 	wordBoxes = new ArrayList<JComboBox<String>>();
 	
@@ -69,57 +71,93 @@ public class WindowSetUp extends JApplet{
 	Panel.add(resultPhrase);
 	resultPhrase.setEditable(false);
 	Panel.add(Scroller);
+	Panel.add(wordBoxesPhrase);
+	wordBoxesPhrase.setEditable(false);
 	Panel.add(boxPanel);
 	for(int i = 0; i < 8; i++)
 	    {
 		wordBoxes.add(i, new JComboBox<String>());
 		boxPanel.add(wordBoxes.get(i));
+		//		wordBoxes.get(i).addActionListener(new BoxListener());
 	    }
 
     
 	/* Configuration */
-	//t1.addActionListener(new TextListener);
 	engToPig.addActionListener(new EngToPigListener());
 	pigToEng.addActionListener(new PigToEngListener());
-	//t1.setActionCommand ("text");
 	Output.setEditable (false);
     }
+
+    /**
+       inner class for when Pig Latin to English button is selected
+    */
 
     public class PigToEngListener implements ActionListener
     {
 	public void actionPerformed(ActionEvent e){
 	    EnglishToPigLatin word1 = new EnglishToPigLatin();
 	    String[] words = t1.getText().split(" ");
-	    for(int boxNum = 0; boxNum < 8 && boxNum < words.length; boxNum++)
+	    if(words.length <= 8)
 		{
-		    String currentWord = words[boxNum];
-		    String[] pigLatinTrans = word1.toEnglish(currentWord);
-		    
-		    for(int optionNum = 0; optionNum < pigLatinTrans.length && optionNum < 5; optionNum++)
+		    resultPhrase.setText("Result In English:");
+		    for(int boxNum = 0; boxNum < 8 && boxNum < words.length; boxNum++)
 			{
-			    wordBoxes.get(boxNum).addItem(pigLatinTrans[optionNum]);
+			    String currentWord = words[boxNum];
+			    String[] pigLatinTrans = word1.toEnglish(currentWord);
+			    wordBoxes.get(boxNum).removeAllItems();
+			    for(int optionNum = 0; optionNum < pigLatinTrans.length && optionNum < 5; optionNum++)
+				{
+				    wordBoxes.get(boxNum).addItem(pigLatinTrans[optionNum]);
+				}
 			}
+		    String pigLatinOutput = "";
+		    for(int boxNum = 0; boxNum < 8 && boxNum < words.length; boxNum++)
+			{
+			    pigLatinOutput += wordBoxes.get(boxNum).getSelectedItem() + " ";
+			}
+		    Output.setText(pigLatinOutput);
+		    t1.selectAll();
 		}
-	    String pigLatinOutput = "";
-	    for(int boxNum = 0; boxNum < 8 || boxNum < words.length; boxNum++)
+	    else
 		{
-		    pigLatinOutput += wordBoxes.get(boxNum).getItemAt(0) + " ";
+		    JOptionPane.showMessageDialog(null, "Amount of words greater than 8. Please try again.", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
-	    Output.setText(pigLatinOutput);
-	    t1.selectAll();
 	}
     
     }
+
+    /** 
+	inner class for when English to Pig Latin is selected
+    */
     public class EngToPigListener implements ActionListener
     {
 	public void actionPerformed(ActionEvent e){
 	    String Action;
 	    EnglishToPigLatin word1 = new EnglishToPigLatin();
 	    Action = t1.getText();
-	    Output.setText(word1.toPigLatin(Action));
-	    t1.selectAll();
+	    if(Action.split(" ").length <= 8)
+		{
+		    resultPhrase.setText("Result In Pig Latin:");
+		    Output.setText(word1.toPigLatin(Action));
+		    t1.selectAll();
+		}
+	    else
+		{
+		    JOptionPane.showMessageDialog(null, "Amount of words greater than 8. Please try again.", "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
     }
+    /*
+    public class BoxListener implements ActionListener
+    {
+	public void actionPerformed(ActionEvent e)
+	{
+	    String pigLatinOutput = "";
+	    for(int boxNum = 0; boxNum < 8; boxNum++)
+			pigLatinOutput += wordBoxes.get(boxNum).getSelectedItem() + " ";
+	    Output.setText(pigLatinOutput);
+	    t1.selectAll();
+	}
+	}*/
 }
-
