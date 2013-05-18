@@ -5,9 +5,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.BorderLayout;
 
-/** englishToPigLatin function made for Ticket:570
- @author Christian Rivera Cruz and Adam Kazberuk
- @version 05/12/2012 for lab05, cs56, S12
+/**
+   this is a class that helps translate a phrase to / from English to /from  PigLatin
+ @author Christian Rivera Cruz
+ @author Adam Kazberuk
+ @author Ian Vernon
+ @author Evan Moelter
+ @version 05/17/2013 for lab05, cs56, S13
 */
 
 

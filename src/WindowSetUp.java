@@ -17,10 +17,11 @@ import java.util.ArrayList;
 
 /**
  * The class that sets up the GUI to use the EnglishToPigLatin class
- *
- * @author Christian Rivera Cruz, Adam Kazberuk, Evan Moelter, Ian Vernon
- * @version CS56, Spring 2013
- * @see EnglishToPigLatin
+ @author Christian Rivera Cruz                                                                                                                               
+ @author Adam Kazberuk                                                                                                                                       
+ @author Ian Vernon                                                                                                                                          
+ @author Evan Moelter                                                                                                                                        
+ @version 05/17/2013 for lab05, cs56, S13         
  */
 
 public class WindowSetUp extends JApplet{
@@ -96,30 +97,31 @@ public class WindowSetUp extends JApplet{
     {
 	public void actionPerformed(ActionEvent e){
 	    EnglishToPigLatin word1 = new EnglishToPigLatin();
+	    //split wonrds inputted by user into array of strings so each word can be analzyed / translated
 	    String[] words = t1.getText().split(" ");
+	    //check to see if phrase length is less than or equal to number of boxes to fill with word options
 	    if(words.length <= 8)
 		{
 		    resultPhrase.setText("Result In English:");
+		    //iterate through each JComboBox
 		    for(int boxNum = 0; boxNum < 8 && boxNum < words.length; boxNum++)
 			{
 			    String currentWord = words[boxNum];
+			    /*convert each word to English and give options in a String array. done so since
+			      impossible to tell when  English word starts and ends after translated into Pig Latin*/
 			    String[] pigLatinTrans = word1.toEnglish(currentWord);
+			    /*refresh each JComboBox with 5 options / selectable words  for word in English */
 			    wordBoxes.get(boxNum).removeAllItems();
 			    for(int optionNum = 0; optionNum < pigLatinTrans.length && optionNum < 5; optionNum++)
 				{
 				    wordBoxes.get(boxNum).addItem(pigLatinTrans[optionNum]);
 				}
 			}
+		    // updates each JComboBox
 		    updateOutput();
-		    /*   String pigLatinOutput = "";
-			 for(int boxNum = 0; boxNum < 8 && boxNum < words.length; boxNum++)
-			 {
-			 pigLatinOutput += wordBoxes.get(boxNum).getSelectedItem() + " ";
-			 }
-			 Output.setText(pigLatinOutput);
-		    */
 		    t1.selectAll();
 		}
+	    // if number of words is greater than 8
 	    else
 		{
 		    JOptionPane.showMessageDialog(null, "Amount of words greater than 8. Please try again.", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -134,15 +136,17 @@ public class WindowSetUp extends JApplet{
     public class EngToPigListener implements ActionListener
     {
 	public void actionPerformed(ActionEvent e){
-	    String Action;
+	    String phrase;
 	    EnglishToPigLatin word1 = new EnglishToPigLatin();
-	    Action = t1.getText();
-	    if(Action.split(" ").length <= 8)
+	    phrase = t1.getText();
+	    if(phrase.split(" ").length <= 8)
 		{
 		    resultPhrase.setText("Result In Pig Latin:");
-		    Output.setText(word1.toPigLatin(Action));
+		    //converts to Pig latin
+		    Output.setText(word1.toPigLatin(phrase));
 		    t1.selectAll();
 		}
+	    // output error if more than 8 words inputted
 	    else
 		{
 		    JOptionPane.showMessageDialog(null, "Amount of words greater than 8. Please try again.", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -151,23 +155,20 @@ public class WindowSetUp extends JApplet{
 	
     }
     
+    /**
+       inner class for when JComboBox is updated
+    */
+    
     public class BoxListener implements ActionListener
     {
 	public void actionPerformed(ActionEvent e)
 	{
 	    updateOutput();
-	    /*
-	    String pigLatinOutput = "";
-	    for(int boxNum = 0; boxNum < 8; boxNum++)
-			pigLatinOutput += wordBoxes.get(boxNum).getSelectedItem() + " ";
-	    Output.setText(pigLatinOutput);
-	    t1.selectAll();
-	    */
 	}
     }
 
     /**
-       Updates the output box
+       Updates the output box with phrase in each text box
      */
     private void updateOutput() {
 	String pigLatinOutput = "";
@@ -178,8 +179,6 @@ public class WindowSetUp extends JApplet{
 		    pigLatinOutput += t + " ";
 	    }
 	Output.setText(pigLatinOutput);
-	//t1.selectAll();
-	//return pigLatinOutput;
     }
 
 }

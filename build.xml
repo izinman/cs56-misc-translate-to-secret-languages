@@ -1,7 +1,7 @@
 <project default="compile">
 
-  <!-- build.xml for choice points project 1, S12, CS56
-       name: Adam Kazberuk & Christian Rivera Cruz -->
+  <!-- build.xml for project01, S13, CS56
+       name Ian Vernon & Evan Moelter -->
   <property environment="env"/> <!-- load the environment variables --> 
   <property name="webRoot" value="${env.HOME}/public_html/cs56/S12" />
 
@@ -19,7 +19,7 @@
   <target name="compile" > 
     <mkdir dir = "build" />
     <javac srcdir="src" destdir="build" debug="true" debuglevel="lines,vars,source" includeantruntime="false">
-      
+      <compilerarg value="-Xlint:deprecation"/>
       <classpath>
 	<pathelement location="."/> 
 	<pathelement location="/cs/faculty/pconrad/public_html/cs56/lib/junit-4.8.2.jar"/>

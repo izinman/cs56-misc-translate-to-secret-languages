@@ -3,18 +3,19 @@ import static org.junit.Assert.assertEquals;
 
 
 /**
- * The test class englishToPigLatinlTester, to test the englishToPigLatin class
- *
- * @author Christian Rivera Cruz, and Adam Kazberuk
- * @version CS56, Spring 2012
- * @see englishToPigLatin
+   The test class EnglishToPigLatinlTester, to test the EnglishToPigLatin class
+   @author Christian Rivera Cruz                                                                                                                             
+   @author Adam Kazberuk                                                                                                                                    
+   @author Ian Vernon                                                                                                                                        
+   @author Evan Moelter                                                                                                                                      
+   @version 05/17/2013 for lab05, cs56, S13         
+   @see EnglishToPigLatin
  */
 
 public class EnglishToPigLatinTester
 {
     /**
-       test no arg constructor from PolynomialTest
-       @see EnglishToPigLatin#toPigLatin()
+       @see EnglishToPigLatin
      */
    
     @Test public void testNullString()
