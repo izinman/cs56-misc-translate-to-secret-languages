@@ -1,3 +1,4 @@
+package edu.ucsb.cs56.projects.misc.translate_to_secret_languages;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
@@ -5,12 +6,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.BorderLayout;
 
-/** englishToPigLatin function made for Ticket:570
+/** englishToPigLatin
  @author Christian Rivera Cruz and Adam Kazberuk
- @version 05/12/2012 for lab05, cs56, S12
+ @author Alex Molina
+ @version 05/15/2013 for lab05, cs56, S13
 */
-
-
 
 public class EnglishToPigLatin{
     /** The method that checks to see if the first character passed
@@ -32,6 +32,82 @@ public class EnglishToPigLatin{
     }
     
 /**
+ * The method that converts the string from English to Gibberish
+ *
+ * The method takes a string input, and checks the first letter in the string
+ * If it is a vowel, then "uvug" is added in front of it
+ *
+ * @param  input the input is the string typed into the box
+ * @return String is returned, and it is reprinted into the text box below the input
+ */
+	public static String toGibberish(String input){
+	String result="";
+	String toAdd="";
+	String words="";
+	int i = 0;
+	char chr;
+	if(input.equals("")){
+	return result;}
+	StringTokenizer token = new StringTokenizer(input);
+	while (token.hasMoreTokens()){
+	    words = token.nextToken();	    
+	    words.toLowerCase();
+	    char[] chararray = words.toCharArray();
+		for(int j=0; j<chararray.length; j++){
+		    if(isVowel(chararray[j])){
+			if(j+1 < chararray.length && isVowel(chararray[j+1])){
+			    result+= "uvug";
+			    result+= chararray[j];
+			    result+= chararray[j+1];
+			    j++;}
+			else{
+			    result+= "uvug";
+			    result+= chararray[j];}}
+		    else{
+			result+= chararray[j];}
+		}
+		result+= " ";
+       	}
+		    
+		result = result.toLowerCase();
+		result = result.trim();
+	if(Character.isUpperCase(input.charAt(0))){
+	    return Character.toUpperCase(result.charAt(0))
+		+ (result.length() > 1 ? result.substring(1) : "");
+	}
+	else
+	    return result;	
+	}
+/**
+ * The method that converts the string from Gibberish to English
+ *
+ * The method takes a string input, and removes all occurences of "uvug" and "Uvug"
+ *
+ * @param  input the input is the string typed into the box
+ * @return String is returned, and it is reprinted into the text box below the input
+ */
+    public static String fromGibberish(String input){
+	String newstr = input.replaceAll("uvug", "");
+	String newerstr;
+	char oldletter, newletter;
+	if(newstr.charAt(0) == 'U')
+	    newerstr = newstr.replaceAll("Uvug", "");
+	else
+	    return newstr;
+	newstr = newerstr.substring(0, 1).toUpperCase() + newerstr.substring(1);
+	return newstr;
+    }
+/**
+ * The method that converts the string from pig latin to english
+ *
+ * @param  input the input is the string typed into the box
+ * @return String is returned, and it is reprinted into the text box below the input
+ */     
+    public static String fromPigLatin(String input){
+	return "STUB Issue #1";}
+
+
+/**
  * The method that converts the string from english to pig latin
  *
  * The method takes a string input, and checks the first letter in the string
@@ -45,19 +121,15 @@ public class EnglishToPigLatin{
  */
 
     public static String toPigLatin(String input){
-
-
 	String result="";
 	String toAdd="";
 	String words="";
 	int i=0;
 	char chr;
-	
 
 	if(input.equals("")){
 	    return result;
 	}
-	
 	StringTokenizer token = new StringTokenizer(input);
 	while (token.hasMoreTokens()){
 	    words = token.nextToken();	    
@@ -81,7 +153,6 @@ public class EnglishToPigLatin{
 	}
 	result = result.toLowerCase();
 	result = result.trim();
-
 	//The following was adapted from code found online at 
 	//http://stackoverflow.com/questions/3100526/changing-charsequence-first-letter-to-upper-case-in-android
 	if(Character.isUpperCase(input.charAt(0))){
@@ -91,11 +162,9 @@ public class EnglishToPigLatin{
 	else
 	    return result;
     }
-
     /**
        This function makes our GUI for toPigLatin work, setup and other processes are handled in windowSetUp
      */
-
     public static void go(){
 	JFrame f = new JFrame("English to Pig Latin Translator");
 	f.setSize(400, 200);
@@ -104,9 +173,7 @@ public class EnglishToPigLatin{
 	content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS)); 
 	content.add(new WindowSetUp());
 	f.setBackground(new Color(0,255,0));
-	
 	f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 	f.setVisible(true);
     }
 
@@ -127,9 +194,9 @@ public class EnglishToPigLatin{
 	       || chr == 'o' || chr == 'u')
 		break;
 	}
+	
 	return i;
     }
-    
     public static void main(String [] args){
 	go();
     }

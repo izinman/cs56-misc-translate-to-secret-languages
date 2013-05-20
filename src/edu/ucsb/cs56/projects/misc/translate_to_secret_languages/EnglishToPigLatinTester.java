@@ -1,17 +1,72 @@
+package edu.ucsb.cs56.projects.misc.translate_to_secret_languages;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-
 /**
  * The test class englishToPigLatinlTester, to test the englishToPigLatin class
- *
- * @author Christian Rivera Cruz, and Adam Kazberuk
- * @version CS56, Spring 2012
+ * @author Christian Rivera Cruz and Adam Kazberuk
+ * @author Alex Molina
+ * @version CS56, Spring 2013
  * @see englishToPigLatin
  */
 
 public class EnglishToPigLatinTester
 {
+    /**
+    test method that translates to English from Pig Latin
+       @see EnglishToPigLatin#fromPigLatin()
+     */
+   
+    @Test public void testFromPigLatin()
+    {
+	// should return stub. This method is from another issue
+        assertEquals("STUB Issue #1",EnglishToPigLatin.fromPigLatin("iceway"));
+    }
+    
+    /**
+    test toGibberish for a word that begins with a consonant
+       @see EnglishToPigLatin#toGibberish()
+     */
+   
+    @Test public void testToGibberishConsonant()
+    {
+	// should return dog with "uvug" inserted after the d
+        assertEquals("duvugog",EnglishToPigLatin.toGibberish("dog"));
+    }
+
+    /**
+    test toGibberish for a word that begins with a vowel
+       @see EnglishToPigLatin#toGibberish()
+     */
+   
+    @Test public void testToGibberishVowel()
+    {
+	// should return dog with "uvug" inserted after the d
+        assertEquals("uvugat",EnglishToPigLatin.toGibberish("at"));
+    }
+
+    /**
+    test toGibberish for a word that begins with a vowel and word that begins with a consonant
+       @see EnglishToPigLatin#toGibberish()
+     */
+   
+    @Test public void testToGibberishVowelConsonant()
+    {
+	// should return dog with "uvug" inserted after the d
+        assertEquals("uvugat duvugog",EnglishToPigLatin.toGibberish("at dog"));
+    }
+    
+    /**
+    test fromGibberish 
+       @see EnglishToPigLatin#fromGibberish()
+     */
+   
+    @Test public void testFromGibberish()
+    {
+	// should return dog with "uvug" inserted after the d
+        assertEquals("dog",EnglishToPigLatin.fromGibberish("duvugog"));
+    }
+    
     /**
        test no arg constructor from PolynomialTest
        @see EnglishToPigLatin#toPigLatin()
