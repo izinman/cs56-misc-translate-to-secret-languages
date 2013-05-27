@@ -1,4 +1,4 @@
-package edu.ucsb.cs56.projects.misc.translate_to_secret_languages.gibberish;
+package edu.ucsb.cs56.projects.misc.translate_to_secret_languages.gibberish_translator;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
