@@ -1,3 +1,4 @@
+package edu.ucsb.cs56.projects.misc.translate_to_secret_languages.pig_latin_translator;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 

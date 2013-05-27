@@ -1,3 +1,4 @@
+package edu.ucsb.cs56.projects.misc.translate_to_secret_languages.pig_latin_translator;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
