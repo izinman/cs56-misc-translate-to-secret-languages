@@ -16,3 +16,4 @@ In some variants, though, just add an "ay" at the end.
 Yet another acceptable variant is to add the ending "yay" to words that begin with a vowel sound.
     "egg" → "eggyay"
 
+JavaDoc: http://www.cs.ucsb.edu/~ianvernon/cs56/S12/issues/0000773/javadoc
