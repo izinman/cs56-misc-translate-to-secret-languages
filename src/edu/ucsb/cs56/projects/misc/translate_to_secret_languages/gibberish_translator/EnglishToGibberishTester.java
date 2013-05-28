@@ -7,8 +7,7 @@ import static org.junit.Assert.assertEquals;
  * @author Christian Rivera Cruz and Adam Kazberuk
  * @author Alex Molina
  * @version CS56, Spring 2013
- * @see englishToPigLatin
- */
+ * @see EnglishToGibberish */
 
 public class EnglishToGibberishTester
 {

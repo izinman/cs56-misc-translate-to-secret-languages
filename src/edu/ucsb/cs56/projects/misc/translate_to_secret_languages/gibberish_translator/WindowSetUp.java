@@ -18,7 +18,7 @@ import javax.swing.UIManager;
  * @author Christian Rivera Cruz and Adam Kazberuk
  * @author Alex Molina
  * @version CS56, Spring 2013
- * @see englishToGibberish
+ * @see EnglishToGibberish
  */
 
 public class WindowSetUp extends JApplet implements ActionListener {
