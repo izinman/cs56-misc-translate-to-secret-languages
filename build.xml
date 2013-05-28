@@ -29,7 +29,7 @@
     <java classname="${fullPkg}.gibberish_translator.EnglishToGibberish" classpath="build" fork="true"/>
   </target>
 <target name="PigLatin" depends="compile" description="run the English to PigLatin Translator program"> 
-    <java classname="${fullPkg}.pig_latin_translator.EnglishToGibberish" classpath="build" fork="true"/>
+    <java classname="${fullPkg}.pig_latin_translator.EnglishToPigLatin" classpath="build" fork="true"/>
   </target>
 
   <target name="clean" description="delete unnecessary files and directories">
