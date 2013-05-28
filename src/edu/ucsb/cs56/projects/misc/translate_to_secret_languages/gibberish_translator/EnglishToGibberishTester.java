@@ -20,7 +20,7 @@ public class EnglishToGibberishTester
     @Test public void testFromGibberish()
     {
 	// should return stub. This method is from another issue
-        assertEquals("STUB Issue #1",EnglishToGibberish.fromGibberish("iceway"));
+        assertEquals("dog",EnglishToGibberish.fromGibberish("duvugog"));
     }
     
     /**
