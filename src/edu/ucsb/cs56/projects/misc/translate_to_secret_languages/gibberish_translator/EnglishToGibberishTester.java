@@ -13,7 +13,7 @@ public class EnglishToGibberishTester
 {
     /**
     test method that translates to English from Pig Latin
-       @see EnglishToGibberish#fromGibberish()
+       @see EnglishToGibberish
      */
    
     @Test public void testFromGibberish()
@@ -24,7 +24,7 @@ public class EnglishToGibberishTester
     
     /**
     test toGibberish for a word that begins with a consonant
-       @see EnglishToGibberish#toGibberish()
+       @see EnglishToGibberish
      */
    
     @Test public void testToGibberishConsonant()
@@ -35,7 +35,7 @@ public class EnglishToGibberishTester
 
     /**
     test toGibberish for a word that begins with a vowel
-       @see EnglishToGibberish#toGibberish()
+       @see EnglishToGibberish
      */
    
     @Test public void testToGibberishVowel()
@@ -46,7 +46,7 @@ public class EnglishToGibberishTester
 
     /**
     test toGibberish for a word that begins with a vowel and word that begins with a consonant
-       @see EnglishToGibberish#toGibberish()
+       @see EnglishToGibberish
      */
    
     @Test public void testToGibberishVowelConsonant()
