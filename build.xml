@@ -1,7 +1,7 @@
 <project default="compile">
 
   <!-- build.xml for project 1, S13, CS56
-       name: Alex Molina -->
+       name: Alex Molina, Ian Vernon, Evan Moelter -->
   <property environment="env"/> <!-- load the environment variables --> 
   <property name="webRoot" value="${env.HOME}/public_html/cs56/13S/${env.USER}" />
 <property name="fullPkg" value="edu.ucsb.cs56.projects.misc.translate_to_secret_languages" />
