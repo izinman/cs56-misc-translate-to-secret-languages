@@ -1,10 +1,12 @@
 <project default="compile">
 
   <!-- build.xml for project 1, S13, CS56
-       name: Alex Molina -->
+       name: Alex Molina, Ian Vernon, Evan Moelter -->
   <property environment="env"/> <!-- load the environment variables --> 
   <property name="webRoot" value="${env.HOME}/public_html/cs56/13S/${env.USER}" />
 <property name="fullPkg" value="edu.ucsb.cs56.projects.misc.translate_to_secret_languages" />
+<property name="course" value="cs56"/>
+<property name="quarter" value="13S"/>
   <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/${course}/${quarter}/${env.USER}" /> 
   <property name="projectName" value="cs56_translator_to_secret_languages" /> 
   <property name="javadocDest" value="${webRoot}/${projectName}/javadoc" /> 
@@ -23,10 +25,12 @@
     </javac> 
   </target>
 
-  <target name="run" depends="compile" description="run the English to Pig Latin Translator program"> 
-    <java classname="${fullPkg}.EnglishToPigLatin" classpath="build" fork="true"/>
+  <target name="Gibberish" depends="compile" description="run the English to Gibberish Translator program"> 
+    <java classname="${fullPkg}.gibberish_translator.EnglishToGibberish" classpath="build" fork="true"/>
   </target>
-
+<target name="PigLatin" depends="compile" description="run the English to PigLatin Translator program"> 
+    <java classname="${fullPkg}.pig_latin_translator.EnglishToPigLatin" classpath="build" fork="true"/>
+  </target>
 
   <target name="clean" description="delete unnecessary files and directories">
     <delete dir="build" quiet="true" />    
