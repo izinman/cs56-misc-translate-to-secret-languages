@@ -1,7 +1,7 @@
 project history
 ===============
 ```
- N/A
+ NO | mastergberry | Make a program that takes an English word or small sentence and translate it into Pig Latin and Gibberish 
 ```
 
 A simple GUI program to translate to/from pig latin from/to english
