@@ -31,7 +31,9 @@ public class WindowSetUp extends JApplet implements ActionListener {
     private JTextField resultPhrase;
     public TextField t1 = new TextField(20);
     String[] types = {"English to Gibberish", 
-		      "Gibberish to English"};
+		      "Gibberish to English",
+                      "English to PigLatin",
+                      "PigLatin to English"};
     public JComboBox<String> pickt = new JComboBox<String>(types);
     int ty = 1;
     /**
