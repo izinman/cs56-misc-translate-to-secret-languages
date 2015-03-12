@@ -31,9 +31,7 @@ public class WindowSetUp extends JApplet implements ActionListener {
     private JTextField resultPhrase;
     public TextField t1 = new TextField(20);
     String[] types = {"English to Gibberish", 
-		      "Gibberish to English",
-                      "English to PigLatin",
-                      "PigLatin to English"};
+		      "Gibberish to English"};
     public JComboBox<String> pickt = new JComboBox<String>(types);
     int ty = 1;
     /**
@@ -67,8 +65,6 @@ public class WindowSetUp extends JApplet implements ActionListener {
         String type = (String)cb.getSelectedItem();
 	if(type.equals("English to Gibberish"))ty = 1;
 	if(type.equals("Gibberish to English"))ty = 2; 
-	if(type.equals("English to PigLatin"))ty = 3;
-	if(type.equals("PigLatin to English"))ty = 4;
 	}});
 
 	/* Configuration */
@@ -88,10 +84,6 @@ public class WindowSetUp extends JApplet implements ActionListener {
  	Output.setText(word1.toGibberish(Action));
 	if(ty == 2)
  	Output.setText(word1.fromGibberish(Action));
-	//if(ty == 3)                                      Need to implement the method 
-	//Output.setText(word1.fromPigLatin(Action));
-	//if(ty == 4)
-	//Output.setText(word1.toPigLatin(Action));
  	t1.selectAll();
     }     
 }

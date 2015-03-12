@@ -1,4 +1,4 @@
-package edu.ucsb.cs56.projects.misc.translate_to_secret_languages.pig_latin_translator;
+package edu.ucsb.cs56.projects.misc.translate_to_secret_languages.combined_translator;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -39,11 +39,11 @@ public class WindowSetUp extends JApplet{
 
     private JTextArea helpText;
 
+    private JButton helpButton;
     private  JButton engToPig;
     private  JButton pigToEng;
     private  JButton engToGib;
     private  JButton gibToEng;
-    private JButton helpButton;
     private ArrayList<JComboBox<String>> wordBoxes;
     private int ty=1;
 
@@ -60,14 +60,14 @@ public class WindowSetUp extends JApplet{
     public WindowSetUp() {
 	/* Instantiation */
 	Panel = getContentPane ();
-	
+
 	Output = new JTextArea (30, 10);
 	Scroller = new JScrollPane(Output);
 	Output.setLineWrap(true);
 	Scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 	Scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 	
-	helpButton = new JButton("Help/Instructions");
+	helpButton = new JButton("Help");
 	welcomePhrase = new JTextField ("Please enter a word or phrase of 8 words or less:", 30);
 	engToPig = new JButton("English To Pig Latin");
         pigToEng = new JButton("Pig Latin To English");
@@ -122,7 +122,7 @@ public class WindowSetUp extends JApplet{
 	Output.setEditable (false);
     }
 
-    /**
+ /**
        inner class for when Help button is selected
     */
     
@@ -144,7 +144,6 @@ public class WindowSetUp extends JApplet{
 	}
     }
 	    
-      
 
     /**
        inner class for when Pig Latin to English button is selected
