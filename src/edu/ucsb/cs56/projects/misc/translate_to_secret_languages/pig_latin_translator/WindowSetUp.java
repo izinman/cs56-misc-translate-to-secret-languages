@@ -41,17 +41,9 @@ public class WindowSetUp extends JApplet{
 
     private  JButton engToPig;
     private  JButton pigToEng;
-    private  JButton engToGib;
-    private  JButton gibToEng;
-    private JButton helpButton;
+      private JButton helpButton;
     private ArrayList<JComboBox<String>> wordBoxes;
-    private int ty=1;
 
-    String[] types = {"English to Pig Latin", 
-		      "Pig Latin to English",
-                      "English to Gibberish",
-                      "Gibberish to English"};
-    public JComboBox<String> pickt = new JComboBox<String>(types);
     
     /**
      * windowSetUp creates the JPanels that we use for the GUI, which include JTextArea, JTextField, JButton, JComboBox
@@ -71,8 +63,6 @@ public class WindowSetUp extends JApplet{
 	welcomePhrase = new JTextField ("Please enter a word or phrase of 8 words or less:", 30);
 	engToPig = new JButton("English To Pig Latin");
         pigToEng = new JButton("Pig Latin To English");
-	engToGib = new JButton("English to Gibberish");
-	gibToEng = new JButton("Gibberish to English");
 	resultPhrase = new JTextField("Result:", 30);
 	wordBoxesPhrase = new JTextField("Select the correct English translation from each box when using Pig Latin To English;", 30);
 	boxPanel = new JPanel();
@@ -87,8 +77,6 @@ public class WindowSetUp extends JApplet{
 	//Panel.add(pickt);       Implement this so the translation options are in a box, not just buttons      
 	Panel.add(engToPig);
 	Panel.add(pigToEng);
-	Panel.add(engToGib);
-	Panel.add(gibToEng);
 	Panel.add(resultPhrase);
 	resultPhrase.setEditable(false);
 	Panel.add(Scroller);
@@ -101,24 +89,11 @@ public class WindowSetUp extends JApplet{
 		boxPanel.add(wordBoxes.get(i));
 		wordBoxes.get(i).addActionListener(new BoxListener());
 	    }
-
-    	pickt.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent e){
-	JComboBox cb = (JComboBox)e.getSource();
-        String type = (String)cb.getSelectedItem();
-	if(type.equals("English to Pig Latin"))ty = 1;
-	if(type.equals("Pig Latin to English"))ty = 2; 
-	if(type.equals("English to Gibberish"))ty = 3;
-	if(type.equals("Gibberish to English"))ty = 4;
-	}});
     
 	/* Configuration */
 	engToPig.addActionListener(new EngToPigListener());
 	pigToEng.addActionListener(new PigToEngListener());
-	engToGib.addActionListener(new EngToGibListener());
-	gibToEng.addActionListener(new GibToEngListener());
 	helpButton.addActionListener(new HelpListener());
-	//	t1.addActionListner(this);
 	Output.setEditable (false);
     }
 
@@ -212,46 +187,7 @@ public class WindowSetUp extends JApplet{
 	
     }
     
-    /**
-       inner class for when Gibberish to English is selected 
-    */
-    
-    public class GibToEngListener implements ActionListener
-    {
-	public void actionPerformed(ActionEvent e){
-	    String phrase;
-	    EnglishToGibberish word1 = new EnglishToGibberish();
-	    phrase = t1.getText();
-	    if(phrase.split(" ").length <= 8)
-		{
-		    resultPhrase.setText("Result in English");
-		    //converts to English
-		    Output.setText(word1.fromGibberish(phrase));
-		    t1.selectAll();
-		}
-	}
-    }
-    
-
-    /** 
-	inner class for when English to Gibberish is selected
-    */
-    
-     public class EngToGibListener implements ActionListener
-    {
-	public void actionPerformed(ActionEvent e){
-	    String phrase;
-	    EnglishToGibberish word1 = new EnglishToGibberish();
-	    phrase = t1.getText();
-	    if(phrase.split(" ").length <= 8)
-		{
-		    resultPhrase.setText("Result in Gibberish");
-		    //converts to Gibberish
-		    Output.setText(word1.toGibberish(phrase));
-		    t1.selectAll();
-		}
-	}
-    }
+  
     
     /**
        inner class for when JComboBox is updated
