@@ -32,6 +32,10 @@
     <java classname="${fullPkg}.pig_latin_translator.EnglishToPigLatin" classpath="build" fork="true"/>
   </target>
 
+<target name="Run" depends="compile" description="run the combined PigLatin/Gibberish Translator program">
+  <java classname="${fullPkg}.combined_translator.EnglishToPigLatin" classpath="build" fork="true"/>
+</target>
+
   <target name="clean" description="delete unnecessary files and directories">
     <delete dir="build" quiet="true" />    
     <delete dir="javadoc" quiet="true" />
