@@ -44,4 +44,4 @@ The rules of our gibberish program:
     "hello" -> "huvugelluvugo"
     "hi my name is conrad" -> "huvugi my nuvugamuvuge uvugis cuvugonruvugad"
  
- JavaDoc: http://www.cs.ucsb.edu/~ianvernon/cs56/S12/issues/0000773/javadoc
+ Some extra instructions: The combined translator contains both the Gibberish and PigLatin translators. It contains a help function detailing the procedure and rules of the languages. There are also new buttons for changing the font. To change the font, simply press the button you wish and select a font or color. 

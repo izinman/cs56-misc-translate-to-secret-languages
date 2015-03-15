@@ -148,7 +148,7 @@ public class EnglishToPigLatin{
 	
 	//return the list as an array
 	return listToStringArray(list);
-	
+
     }
 
 private static String listToString(ArrayList<Character> list)
