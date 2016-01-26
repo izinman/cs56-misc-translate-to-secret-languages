@@ -1,4 +1,4 @@
-package edu.ucsb.cs56.projects.misc.translate_to_secret_languages.pig_latin_translator;
+package edu.ucsb.cs56.projects.misc.translate_to_secret_languages.combined_translator;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -39,11 +39,14 @@ public class WindowSetUp extends JApplet{
 
     private JTextArea helpText;
 
+    private JButton helpButton;
+    private JButton fontButton;
+    private JButton fColorButton;
     private  JButton engToPig;
     private  JButton pigToEng;
-      private JButton helpButton;
+    private  JButton engToGib;
+    private  JButton gibToEng;
     private ArrayList<JComboBox<String>> wordBoxes;
-
     
     /**
      * windowSetUp creates the JPanels that we use for the GUI, which include JTextArea, JTextField, JButton, JComboBox
@@ -52,17 +55,21 @@ public class WindowSetUp extends JApplet{
     public WindowSetUp() {
 	/* Instantiation */
 	Panel = getContentPane ();
-	
+
 	Output = new JTextArea (30, 10);
 	Scroller = new JScrollPane(Output);
 	Output.setLineWrap(true);
 	Scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 	Scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 	
-	helpButton = new JButton("Help/Instructions");
+	helpButton = new JButton("Help");
+	fontButton = new JButton("Font Style");
+	fColorButton = new JButton("Font Color");
 	welcomePhrase = new JTextField ("Please enter a word or phrase of 8 words or less:", 30);
 	engToPig = new JButton("English To Pig Latin");
         pigToEng = new JButton("Pig Latin To English");
+	engToGib = new JButton("English to Gibberish");
+	gibToEng = new JButton("Gibberish to English");
 	resultPhrase = new JTextField("Result:", 30);
 	wordBoxesPhrase = new JTextField("Select the correct English translation from each box when using Pig Latin To English;", 30);
 	boxPanel = new JPanel();
@@ -71,12 +78,15 @@ public class WindowSetUp extends JApplet{
 	/* Location */
 	Panel.setLayout(new BoxLayout(Panel, BoxLayout.Y_AXIS));
 	Panel.add(helpButton);
+	Panel.add(fontButton);
+	Panel.add(fColorButton);
 	Panel.add(welcomePhrase);
 	welcomePhrase.setEditable(false);
-	Panel.add(t1);
-	//Panel.add(pickt);       Implement this so the translation options are in a box, not just buttons      
+	Panel.add(t1);  
 	Panel.add(engToPig);
 	Panel.add(pigToEng);
+	Panel.add(engToGib);
+	Panel.add(gibToEng);
 	Panel.add(resultPhrase);
 	resultPhrase.setEditable(false);
 	Panel.add(Scroller);
@@ -93,11 +103,20 @@ public class WindowSetUp extends JApplet{
 	/* Configuration */
 	engToPig.addActionListener(new EngToPigListener());
 	pigToEng.addActionListener(new PigToEngListener());
+	engToGib.addActionListener(new EngToGibListener());
+	gibToEng.addActionListener(new GibToEngListener());
 	helpButton.addActionListener(new HelpListener());
+	fontButton.addActionListener(new FontListener());
+	fColorButton.addActionListener(new fColorListener());
+
+	Font DefFont = new Font("Times New Roman",Font.PLAIN,15);
+	t1.setFont(DefFont);
+	Output.setFont(DefFont);
+
 	Output.setEditable (false);
     }
 
-    /**
+ /**
        inner class for when Help button is selected
     */
     
@@ -118,8 +137,69 @@ public class WindowSetUp extends JApplet{
 	    f2.setVisible(true);
 	}
     }
+    
+    /**
+       inner class for when Font button is selected
+    */
+    
+    public class FontListener implements ActionListener
+    {
+	public void actionPerformed(ActionEvent e){
+	    JFrame f3 = new JFrame("Change Font Style");
+	    f3.setSize(200,200);
+	    Container Panel3 = f3.getContentPane();
+	    Panel3.setLayout(new BoxLayout(Panel3, BoxLayout.Y_AXIS));
+
+	    JButton Default = new JButton("Default");
+	    JButton Bold = new JButton("Bold");
+	    JButton Italics = new JButton("Italics");
+	    JButton Courier = new JButton("Courier");
+	    JButton Serif = new JButton("Serif");
+	    Panel3.add(Default);
+	    Panel3.add(Bold);
+	    Panel3.add(Italics);
+	    Panel3.add(Courier);
+	    Panel3.add(Serif);
+	    Default.addActionListener(new DefListener());
+	    Bold.addActionListener(new BoldListener());
+	    Italics.addActionListener(new ItalListener());
+	    Courier.addActionListener(new CourListener());
+	    Serif.addActionListener(new SerifListener());
 	    
-      
+	    f3.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	    f3.setVisible(true);
+	}
+    }
+
+    /**
+       inner class for when fColor button is selected
+    */
+
+  public class fColorListener implements ActionListener
+    {
+	public void actionPerformed(ActionEvent e){
+	    JFrame f4 = new JFrame("Change Font Color");
+	    f4.setSize(200,200);
+	    Container Panel4 = f4.getContentPane();
+	    Panel4.setLayout(new BoxLayout(Panel4, BoxLayout.Y_AXIS));
+
+	    JButton Red = new JButton("Red");
+	    JButton Green = new JButton("Green");
+	    JButton Blue = new JButton("Blue");
+	    JButton Black = new JButton("Black");
+	    Panel4.add(Red);
+	    Panel4.add(Green);
+	    Panel4.add(Blue);
+	    Panel4.add(Black);
+	    Red.addActionListener(new RedListener());
+	    Green.addActionListener(new GreenListener());
+	    Blue.addActionListener(new BlueListener());
+	    Black.addActionListener(new BlackListener());
+
+	    f4.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	    f4.setVisible(true);
+	}
+    }
 
     /**
        inner class for when Pig Latin to English button is selected
@@ -129,7 +209,7 @@ public class WindowSetUp extends JApplet{
     {
 	public void actionPerformed(ActionEvent e){
 	    EnglishToPigLatin word1 = new EnglishToPigLatin();
-	    //split wonrds inputted by user into array of strings so each word can be analzyed / translated
+	    //split words inputted by user into array of strings so each word can be analzyed / translated
 	    String[] words = t1.getText().split(" ");
 	    //check to see if phrase length is less than or equal to number of boxes to fill with word options
 	    if(words.length <= 8)
@@ -187,7 +267,46 @@ public class WindowSetUp extends JApplet{
 	
     }
     
-  
+    /**
+       inner class for when Gibberish to English is selected 
+    */
+    
+    public class GibToEngListener implements ActionListener
+    {
+	public void actionPerformed(ActionEvent e){
+	    String phrase;
+	    EnglishToGibberish word1 = new EnglishToGibberish();
+	    phrase = t1.getText();
+	    if(phrase.split(" ").length <= 8)
+		{
+		    resultPhrase.setText("Result in English");
+		    //converts to English
+		    Output.setText(word1.fromGibberish(phrase));
+		    t1.selectAll();
+		}
+	}
+    }
+    
+
+    /** 
+	inner class for when English to Gibberish is selected
+    */
+    
+     public class EngToGibListener implements ActionListener
+    {
+	public void actionPerformed(ActionEvent e){
+	    String phrase;
+	    EnglishToGibberish word1 = new EnglishToGibberish();
+	    phrase = t1.getText();
+	    if(phrase.split(" ").length <= 8)
+		{
+		    resultPhrase.setText("Result in Gibberish");
+		    //converts to Gibberish
+		    Output.setText(word1.toGibberish(phrase));
+		    t1.selectAll();
+		}
+	}
+    }
     
     /**
        inner class for when JComboBox is updated
@@ -215,5 +334,93 @@ public class WindowSetUp extends JApplet{
 	Output.setText(pigLatinOutput);
     }       
     
+
+    public class DefListener implements ActionListener
+    {
+	public void actionPerformed(ActionEvent e){
+	    Font DefFont = new Font("Times New Roman",Font.PLAIN,15);
+	    t1.setFont(DefFont);
+	    Output.setFont(DefFont);
+	}
+    }
+
+    public class BoldListener implements ActionListener
+    {
+	public void actionPerformed(ActionEvent e){
+	    if(t1.getFont().isBold() == false){
+		t1.setFont(t1.getFont().deriveFont(Font.BOLD));
+		Output.setFont(Output.getFont().deriveFont(Font.BOLD));
+	    }
+	    else{
+		t1.setFont(t1.getFont().deriveFont(Font.PLAIN));
+		Output.setFont(Output.getFont().deriveFont(Font.PLAIN));
+		
+	    }
+	}
+	
+    }
+ public class ItalListener implements ActionListener
+    {
+	public void actionPerformed(ActionEvent e){
+	    if(t1.getFont().isItalic() == false){
+		t1.setFont(t1.getFont().deriveFont(Font.ITALIC));
+		Output.setFont(Output.getFont().deriveFont(Font.ITALIC));
+	    }
+	    else{
+		t1.setFont(t1.getFont().deriveFont(Font.PLAIN));
+		Output.setFont(Output.getFont().deriveFont(Font.PLAIN));
+	    }
+	}
+    }
+	    
+    public class CourListener implements ActionListener
+    {
+	public void actionPerformed(ActionEvent e){
+	    // t1.setFont(t1.getFont().deriveFont("Courier");         //attempt to change font style, but keep bold/italic/size
+	    Font courierFont = new Font("Courier",Font.PLAIN,15);
+	    t1.setFont(courierFont);
+	    Output.setFont(courierFont);
+	}
+    }
     
+    public class SerifListener implements ActionListener
+    {
+	public void actionPerformed(ActionEvent e){
+	    Font SerifFont = new Font("Serif",Font.PLAIN,15);
+	    t1.setFont(SerifFont);
+	    Output.setFont(SerifFont);
+	}
+    }
+
+    public class RedListener implements ActionListener
+    {
+	public void actionPerformed(ActionEvent e){
+	    t1.setForeground(Color.RED);
+	    Output.setForeground(Color.RED);
+	}
+    }
+    
+    public class GreenListener implements ActionListener
+    {
+	public void actionPerformed(ActionEvent e){
+	    t1.setForeground(Color.GREEN);
+	    Output.setForeground(Color.GREEN);
+	}
+    }
+
+    public class BlueListener implements ActionListener
+    {
+	public void actionPerformed(ActionEvent e){
+	    t1.setForeground(Color.BLUE);
+	    Output.setForeground(Color.BLUE);
+	}
+    }
+
+    public class BlackListener implements ActionListener
+    {
+	public void actionPerformed(ActionEvent e){
+	    t1.setForeground(Color.BLACK);
+	    Output.setForeground(Color.BLACK);
+	}
+    }
 }
