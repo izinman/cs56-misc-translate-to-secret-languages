@@ -46,10 +46,3 @@ The rules of our gibberish program:
  
  Some extra instructions: The combined translator contains both the Gibberish and PigLatin translators. It contains a help function detailing the procedure and rules of the languages. There are also new buttons for changing the font. To change the font, simply press the button you wish and select a font or color.
 
-To run the code:
-
-ant PigLatin: to only translate between Pig Latin and English
-
-ant Gibberish: to only translate between Gibberish and English
-
-ant Run: to run both translations in one menu
