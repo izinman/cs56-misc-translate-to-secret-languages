@@ -21,11 +21,15 @@ import java.util.ArrayList;
  @author Christian Rivera Cruz                                                                                                                               
  @author Adam Kazberuk                                                                                                                                       
  @author Ian Vernon                                                                                                                                          
- @author Evan Moelter                                                                                                                                        
- @version 05/17/2013 for lab05, cs56, S13         
+ @author Evan Moelter
+
+ @author Nicholas Frey
+
+ @author John Mangel                                                                                                                                        
+ @version 02/XX/2016 for lab07, cs56, W16         
  */
 
-public class WindowSetUp extends JApplet{
+public class WindowSetUp extends JApplet implements ActionListener{
     /* Declaration */
     private Container Panel;
     private JTextArea Output;
@@ -39,8 +43,12 @@ public class WindowSetUp extends JApplet{
 
     private JTextArea helpText;
 
-    private  JButton engToPig;
-    private  JButton pigToEng;
+    //private  JButton engToPig;
+    //private  JButton pigToEng;
+    String[] types = {"English to Pig Latin", "Pig Latin to English"};
+    public JComboBox<String> choose = new JComboBox<String>(types);
+    int direction = 1;
+
       private JButton helpButton;
     private ArrayList<JComboBox<String>> wordBoxes;
 
@@ -61,8 +69,8 @@ public class WindowSetUp extends JApplet{
 	
 	helpButton = new JButton("Help/Instructions");
 	welcomePhrase = new JTextField ("Please enter a word or phrase of 8 words or less:", 30);
-	engToPig = new JButton("English To Pig Latin");
-        pigToEng = new JButton("Pig Latin To English");
+	//engToPig = new JButton("English To Pig Latin");
+  //pigToEng = new JButton("Pig Latin To English");
 	resultPhrase = new JTextField("Result:", 30);
 	wordBoxesPhrase = new JTextField("Select the correct English translation from each box when using Pig Latin To English;", 30);
 	boxPanel = new JPanel();
@@ -74,9 +82,18 @@ public class WindowSetUp extends JApplet{
 	Panel.add(welcomePhrase);
 	welcomePhrase.setEditable(false);
 	Panel.add(t1);
+  Panel.add(choose);
 	//Panel.add(pickt);       Implement this so the translation options are in a box, not just buttons      
-	Panel.add(engToPig);
-	Panel.add(pigToEng);
+	//Panel.add(engToPig);
+	//Panel.add(pigToEng);
+
+  choose.addActionListener(new ActionListener() {
+    public void ActionPerformed(ActionEvent e) {
+      String type = (String)choose.getSelectedItem();
+      if(type.equals("English to Pig Latin")) direction = 1;
+      if(type.equals("Pig Latin to English")) direction = 2;
+    }});
+
 	Panel.add(resultPhrase);
 	resultPhrase.setEditable(false);
 	Panel.add(Scroller);
@@ -89,13 +106,30 @@ public class WindowSetUp extends JApplet{
 		boxPanel.add(wordBoxes.get(i));
 		wordBoxes.get(i).addActionListener(new BoxListener());
 	    }
+
     
+  
 	/* Configuration */
-	engToPig.addActionListener(new EngToPigListener());
-	pigToEng.addActionListener(new PigToEngListener());
+	//engToPig.addActionListener(new EngToPigListener());
+	//pigToEng.addActionListener(new PigToEngListener());
+	
+  t1.addActionListener(this);
+
 	helpButton.addActionListener(new HelpListener());
 	Output.setEditable (false);
     }
+
+    /** actionPerformed is where the translation happens in our code, where the toPigLatin method is invoked
+    */
+
+  public void actionPerformed(ActionEvent e) {
+    String action;
+    EnglishToPigLatin word1 = new EnglishToPigLatin();
+    action = e.getActionCommand ();
+    if (direction ==1) Output.setText(word1.toPigLatin(action));
+    if (direction ==2) Output.setText(word1.toEnglish(action));
+    t1.selectAll();
+  }
 
     /**
        inner class for when Help button is selected
