@@ -83,16 +83,8 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	welcomePhrase.setEditable(false);
 	Panel.add(t1);
   Panel.add(choose);
-	//Panel.add(pickt);       Implement this so the translation options are in a box, not just buttons      
-	//Panel.add(engToPig);
-	//Panel.add(pigToEng);
 
-  choose.addActionListener(new ActionListener() {
-    public void ActionPerformed(ActionEvent e) {
-      String type = (String)choose.getSelectedItem();
-      if(type.equals("English to Pig Latin")) direction = 1;
-      if(type.equals("Pig Latin to English")) direction = 2;
-    }});
+  choose.addActionListener(new ChooseListener());
 
 	Panel.add(resultPhrase);
 	resultPhrase.setEditable(false);
@@ -110,8 +102,6 @@ public class WindowSetUp extends JApplet implements ActionListener{
     
   
 	/* Configuration */
-	//engToPig.addActionListener(new EngToPigListener());
-	//pigToEng.addActionListener(new PigToEngListener());
 	
   t1.addActionListener(this);
 
@@ -123,13 +113,28 @@ public class WindowSetUp extends JApplet implements ActionListener{
     */
 
   public void actionPerformed(ActionEvent e) {
-    String action;
-    EnglishToPigLatin word1 = new EnglishToPigLatin();
-    action = e.getActionCommand ();
-    if (direction ==1) Output.setText(word1.toPigLatin(action));
-    if (direction ==2) Output.setText(word1.toEnglish(action));
+    //String action;
+    //EnglishToPigLatin word1 = new EnglishToPigLatin();
+    //action = e.getActionCommand ();
+    if (direction ==1) translateEngToPig();//Output.setText(word1.toPigLatin(action));
+    if (direction ==2) translatePigToEng();
+
+
+ //Output.setText(word1.arrayToString(word1.toEnglish(action)));
     t1.selectAll();
   }
+
+		/**
+ 				inner class for when choose box is changed
+		*/
+
+		public class ChooseListener implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+				String type = (String)choose.getSelectedItem();
+				if(type.equals("English to Pig Latin")) direction =1;
+				if (type.equals("Pig Latin to English")) direction =2;
+			}
+		}
 
     /**
        inner class for when Help button is selected
@@ -156,14 +161,12 @@ public class WindowSetUp extends JApplet implements ActionListener{
       
 
     /**
-       inner class for when Pig Latin to English button is selected
+    	method to translate piglatin to english 
     */
 
-    public class PigToEngListener implements ActionListener
-    {
-	public void actionPerformed(ActionEvent e){
+		public void translatePigToEng(){
 	    EnglishToPigLatin word1 = new EnglishToPigLatin();
-	    //split wonrds inputted by user into array of strings so each word can be analzyed / translated
+	    //split words inputted by user into array of strings so each word can be analzyed / translated
 	    String[] words = t1.getText().split(" ");
 	    //check to see if phrase length is less than or equal to number of boxes to fill with word options
 	    if(words.length <= 8)
@@ -194,14 +197,12 @@ public class WindowSetUp extends JApplet implements ActionListener{
 		}
 	}
 	
-    }
 
     /** 
-	inner class for when English to Pig Latin is selected
+			method to translate english to piglatin
     */
-    public class EngToPigListener implements ActionListener
-    {
-	public void actionPerformed(ActionEvent e){
+		
+		public void translateEngToPig(){
 	    String phrase;
 	    EnglishToPigLatin word1 = new EnglishToPigLatin();
 	    phrase = t1.getText();
@@ -219,7 +220,6 @@ public class WindowSetUp extends JApplet implements ActionListener{
 		}
 	}
 	
-    }
     
   
     
