@@ -25,7 +25,7 @@ import java.util.ArrayList;
  @version 05/17/2013 for lab05, cs56, S13         
  */
 
-public class WindowSetUp extends JApplet{
+public class WindowSetUp extends JApplet implements ActionListener{
     /* Declaration */
     private Container Panel;
     private JTextArea Output;
@@ -42,12 +42,15 @@ public class WindowSetUp extends JApplet{
     private JButton helpButton;
     private JButton fontButton;
     private JButton fColorButton;
-    private  JButton engToPig;
-    private  JButton pigToEng;
-    private  JButton engToGib;
-    private  JButton gibToEng;
+    //private  JButton engToPig;
+    //private  JButton pigToEng;
+    //private  JButton engToGib;
+    //private  JButton gibToEng;
     private ArrayList<JComboBox<String>> wordBoxes;
-    
+    String[] types = {"English to Pig Latin", "Pig Latin to English", "English to Gibberish", "Gibberish to English"};
+    public JComboBox<String> choose = new JComboBox<String>(types);
+    int direction = 1;
+
     /**
      * windowSetUp creates the JPanels that we use for the GUI, which include JTextArea, JTextField, JButton, JComboBox
      */
@@ -66,10 +69,10 @@ public class WindowSetUp extends JApplet{
 	fontButton = new JButton("Font Style");
 	fColorButton = new JButton("Font Color");
 	welcomePhrase = new JTextField ("Please enter a word or phrase of 8 words or less:", 30);
-	engToPig = new JButton("English To Pig Latin");
-        pigToEng = new JButton("Pig Latin To English");
-	engToGib = new JButton("English to Gibberish");
-	gibToEng = new JButton("Gibberish to English");
+	//engToPig = new JButton("English To Pig Latin");
+  //pigToEng = new JButton("Pig Latin To English");
+	//engToGib = new JButton("English to Gibberish");
+	//gibToEng = new JButton("Gibberish to English");
 	resultPhrase = new JTextField("Result:", 30);
 	wordBoxesPhrase = new JTextField("Select the correct English translation from each box when using Pig Latin To English;", 30);
 	boxPanel = new JPanel();
@@ -77,16 +80,18 @@ public class WindowSetUp extends JApplet{
 	
 	/* Location */
 	Panel.setLayout(new BoxLayout(Panel, BoxLayout.Y_AXIS));
-	Panel.add(helpButton);
+  Panel.add(helpButton);
 	Panel.add(fontButton);
 	Panel.add(fColorButton);
 	Panel.add(welcomePhrase);
 	welcomePhrase.setEditable(false);
 	Panel.add(t1);  
-	Panel.add(engToPig);
-	Panel.add(pigToEng);
-	Panel.add(engToGib);
-	Panel.add(gibToEng);
+  Panel.add(choose);
+  choose.addActionListener(new ChooseListener());
+	//Panel.add(engToPig);
+	//Panel.add(pigToEng);
+	//Panel.add(engToGib);
+	//Panel.add(gibToEng);
 	Panel.add(resultPhrase);
 	resultPhrase.setEditable(false);
 	Panel.add(Scroller);
@@ -101,19 +106,39 @@ public class WindowSetUp extends JApplet{
 	    }
     
 	/* Configuration */
-	engToPig.addActionListener(new EngToPigListener());
-	pigToEng.addActionListener(new PigToEngListener());
-	engToGib.addActionListener(new EngToGibListener());
-	gibToEng.addActionListener(new GibToEngListener());
+	//engToPig.addActionListener(new EngToPigListener());
+	//pigToEng.addActionListener(new PigToEngListener());
+	//engToGib.addActionListener(new EngToGibListener());
+	//gibToEng.addActionListener(new GibToEngListener());
 	helpButton.addActionListener(new HelpListener());
 	fontButton.addActionListener(new FontListener());
 	fColorButton.addActionListener(new fColorListener());
-
+  t1.addActionListener(this);
 	Font DefFont = new Font("Times New Roman",Font.PLAIN,15);
 	t1.setFont(DefFont);
 	Output.setFont(DefFont);
 
 	Output.setEditable (false);
+    }
+
+  public void actionPerformed(ActionEvent e) {
+    if (direction ==1) translateEngToPig();
+    if (direction ==2) translatePigToEng();
+    if (direction ==3) translateEngToGib();
+    if (direction ==4) translateGibToEng();
+    t1.selectAll();
+    }
+
+  /** inner class for when choose is selected */
+
+  public class ChooseListener implements ActionListener{
+      public void actionPerformed(ActionEvent e){
+        String type = (String)choose.getSelectedItem();
+        if(type.equals("English to Pig Latin")) direction =1;
+        if (type.equals("Pig Latin to English")) direction =2;
+        if (type.equals("English to Gibberish")) direction =3;
+        if (type.equals("Gibberish to English")) direction = 4;
+      }
     }
 
  /**
@@ -129,7 +154,7 @@ public class WindowSetUp extends JApplet{
 
 	    helpText = new JTextArea (20, 20);
 	    helpText.setLineWrap(true);
-	    helpText.setText("The usual rules for changing standard English into Pig Latin are as follows: \n  For words that begin with consonant sounds, the initial consonant or consonant cluster is      moved to the end of the word, and 'ay' is added \n      For example: 'glove' → 'oveglay' 'happy'→'appyhay'  \n  For words that begin with vowel sounds or silent letter, 'way' is added at the end of the word.\n      For example: 'egg' → 'eggway' 'inbox' → 'inboxway' \n   In some variants, though, just add an 'ay' at the end. 'egg' → 'eggay'\n   Another variant is to add the ending 'yay'. 'egg' → 'eggyay' \n\n\n\n\n The rules used for changing English into Gibberish in this program:\n   The string 'uvug' is randomly placed into the word to be translated, possibly many times.\n      For example: 'hi i am prof conrad' -> 'huvugi uvugi uvugam pruvugof cuvugonruvugad'\n\n\nType in the words you wish to translate, then click on the correct option\nPlease only enter words or phrases of less than 8 words ");
+	    helpText.setText("The usual rules for changing standard English into Pig Latin are as follows: \nFor words that begin with consonant sounds, the initial consonant or consonant cluster is\nmoved to the end of the word, and 'ay' is added \n    For example: 'glove' → 'oveglay' 'happy'→'appyhay'  \nFor words that begin with vowel sounds or silent letter, 'way' is added at the end of the word.\n    For example: 'egg' → 'eggway' 'inbox' → 'inboxway' \nIn some variants, though, just add an 'ay' at the end. 'egg' → 'eggay'\nAnother variant is to add the ending 'yay'. 'egg' → 'eggyay' \n\nThe rules used for changing English into Gibberish in this program:\nThe string 'uvug' is randomly placed into the word to be translated, possibly many times.\n    For example: 'hi i am prof conrad' -> 'huvugi uvugi uvugam pruvugof cuvugonruvugad'\n\nType in the words you wish to translate, then click on the correct option\nPlease only enter words or phrases of less than 8 words ");
 	    Panel2.add(helpText);
 	    helpText.setEditable(false);
       
@@ -205,9 +230,9 @@ public class WindowSetUp extends JApplet{
        inner class for when Pig Latin to English button is selected
     */
 
-    public class PigToEngListener implements ActionListener
-    {
-	public void actionPerformed(ActionEvent e){
+    //public class PigToEngListener implements ActionListener
+    //{
+	public void translatePigToEng(){
 	    EnglishToPigLatin word1 = new EnglishToPigLatin();
 	    //split words inputted by user into array of strings so each word can be analzyed / translated
 	    String[] words = t1.getText().split(" ");
@@ -240,14 +265,14 @@ public class WindowSetUp extends JApplet{
 		}
 	}
 	
-    }
+    //}
 
     /** 
 	inner class for when English to Pig Latin is selected
     */
-    public class EngToPigListener implements ActionListener
-    {
-	public void actionPerformed(ActionEvent e){
+    //public class EngToPigListener implements ActionListener
+    //{
+	public void translateEngToPig(){
 	    String phrase;
 	    EnglishToPigLatin word1 = new EnglishToPigLatin();
 	    phrase = t1.getText();
@@ -265,15 +290,15 @@ public class WindowSetUp extends JApplet{
 		}
 	}
 	
-    }
+    //}
     
     /**
        inner class for when Gibberish to English is selected 
     */
     
-    public class GibToEngListener implements ActionListener
-    {
-	public void actionPerformed(ActionEvent e){
+    //public class GibToEngListener implements ActionListener
+    //{
+	public void translateGibToEng(){
 	    String phrase;
 	    EnglishToGibberish word1 = new EnglishToGibberish();
 	    phrase = t1.getText();
@@ -285,16 +310,16 @@ public class WindowSetUp extends JApplet{
 		    t1.selectAll();
 		}
 	}
-    }
+   // }
     
 
     /** 
 	inner class for when English to Gibberish is selected
     */
     
-     public class EngToGibListener implements ActionListener
-    {
-	public void actionPerformed(ActionEvent e){
+     //public class EngToGibListener implements ActionListener
+    //{
+	public void translateEngToGib(){
 	    String phrase;
 	    EnglishToGibberish word1 = new EnglishToGibberish();
 	    phrase = t1.getText();
@@ -306,7 +331,7 @@ public class WindowSetUp extends JApplet{
 		    t1.selectAll();
 		}
 	}
-    }
+    //}
     
     /**
        inner class for when JComboBox is updated
