@@ -65,7 +65,7 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	Scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 	Scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 	
-	helpButton = new JButton("Help");
+	helpButton = new JButton("   Help   "); //spaces to make buttons the same size
 	fontButton = new JButton("Font Style");
 	fColorButton = new JButton("Font Color");
 	welcomePhrase = new JTextField ("Please enter a word or phrase of 8 words or less:", 30);
@@ -80,9 +80,13 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	
 	/* Location */
 	Panel.setLayout(new BoxLayout(Panel, BoxLayout.Y_AXIS));
-  Panel.add(helpButton);
-	Panel.add(fontButton);
-	Panel.add(fColorButton);
+  JPanel crossPane = new JPanel();
+	
+	crossPane.setLayout(new BoxLayout(crossPane, BoxLayout.X_AXIS));
+	crossPane.add(helpButton);
+	crossPane.add(fontButton);
+	crossPane.add(fColorButton);
+	Panel.add(crossPane);
 	Panel.add(welcomePhrase);
 	welcomePhrase.setEditable(false);
 	Panel.add(t1);  
