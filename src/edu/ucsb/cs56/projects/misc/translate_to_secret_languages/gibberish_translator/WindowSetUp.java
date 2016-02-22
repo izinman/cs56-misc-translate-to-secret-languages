@@ -42,18 +42,31 @@ public class WindowSetUp extends JApplet implements ActionListener {
 
     public WindowSetUp() {
 	/* Instantiation */
+	int opacity = (int)(255*.8);
+  Color myOrange = new Color(255,116,0,opacity);
+  Color myBlue = new Color(18,64,171,opacity);
+  Color myYellow = new Color(255,211,0,opacity);
+  Color myGray = new Color(60,59,56);
+
 	Panel = getContentPane ();
+	Panel.setBackground(myBlue);
 	Output = new JTextArea (30, 10);
 	Scroller = new JScrollPane(Output);
 	Output.setLineWrap(true);
 	Scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 	Scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 	helpButton = new JButton("Help/Instructions");
+	helpButton.setBackground(myYellow);
 	welcomePhrase = new JTextField ("Please enter a word or phrase and then press enter:", 30);
+	welcomePhrase.setBackground(myYellow);
 	resultPhrase = new JTextField("Result:", 30);
+	resultPhrase.setBackground(myYellow);
 	/* Location */
 	Panel.setLayout(new BoxLayout(Panel, BoxLayout.Y_AXIS));
-  Panel.add(helpButton);
+	JPanel crossPane = new JPanel();
+	crossPane.setLayout(new BoxLayout(crossPane, BoxLayout.X_AXIS));
+	crossPane.add(helpButton);
+  Panel.add(crossPane);
 	Panel.add(welcomePhrase);
 	welcomePhrase.setEditable(false);
 	Panel.add(t1);

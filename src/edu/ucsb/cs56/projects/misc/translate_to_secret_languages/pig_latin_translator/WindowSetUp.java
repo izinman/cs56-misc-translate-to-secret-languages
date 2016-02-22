@@ -43,8 +43,6 @@ public class WindowSetUp extends JApplet implements ActionListener{
 
     private JTextArea helpText;
 
-    //private  JButton engToPig;
-    //private  JButton pigToEng;
     String[] types = {"English to Pig Latin", "Pig Latin to English"};
     public JComboBox<String> choose = new JComboBox<String>(types);
     int direction = 1;
@@ -59,8 +57,14 @@ public class WindowSetUp extends JApplet implements ActionListener{
 
     public WindowSetUp() {
 	/* Instantiation */
-	Panel = getContentPane ();
-	
+	int opacity = (int)(255*.8);
+  Color myOrange = new Color(255,116,0,opacity);
+  Color myBlue = new Color(18,64,171,opacity);
+  Color myYellow = new Color(255,211,0,opacity);
+  Color myGray = new Color(60,59,56);
+
+	Panel = getContentPane();
+	Panel.setBackground(myBlue);	
 	Output = new JTextArea (30, 10);
 	Scroller = new JScrollPane(Output);
 	Output.setLineWrap(true);
@@ -68,17 +72,21 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	Scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 	
 	helpButton = new JButton("Help/Instructions");
+	helpButton.setBackground(myYellow);
 	welcomePhrase = new JTextField ("Please enter a word or phrase of 8 words or less:", 30);
-	//engToPig = new JButton("English To Pig Latin");
-  //pigToEng = new JButton("Pig Latin To English");
+	welcomePhrase.setBackground(myYellow);
 	resultPhrase = new JTextField("Result:", 30);
+	resultPhrase.setBackground(myYellow);
 	wordBoxesPhrase = new JTextField("Select the correct English translation from each box when using Pig Latin To English;", 30);
 	boxPanel = new JPanel();
 	wordBoxes = new ArrayList<JComboBox<String>>();
 	
 	/* Location */
 	Panel.setLayout(new BoxLayout(Panel, BoxLayout.Y_AXIS));
-	Panel.add(helpButton);
+	JPanel crossPane = new JPanel();
+	crossPane.setLayout(new BoxLayout(crossPane, BoxLayout.X_AXIS));
+	crossPane.add(helpButton);
+	Panel.add(crossPane);
 	Panel.add(welcomePhrase);
 	welcomePhrase.setEditable(false);
 	Panel.add(t1);
@@ -95,11 +103,10 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	for(int i = 0; i < 8; i++)
 	    {
 		wordBoxes.add(i, new JComboBox<String>());
+		wordBoxes.get(i).setBackground(myYellow);
 		boxPanel.add(wordBoxes.get(i));
 		wordBoxes.get(i).addActionListener(new BoxListener());
 	    }
-
-    
   
 	/* Configuration */
 	
@@ -113,14 +120,8 @@ public class WindowSetUp extends JApplet implements ActionListener{
     */
 
   public void actionPerformed(ActionEvent e) {
-    //String action;
-    //EnglishToPigLatin word1 = new EnglishToPigLatin();
-    //action = e.getActionCommand ();
-    if (direction ==1) translateEngToPig();//Output.setText(word1.toPigLatin(action));
+    if (direction ==1) translateEngToPig();
     if (direction ==2) translatePigToEng();
-
-
- //Output.setText(word1.arrayToString(word1.toEnglish(action)));
     t1.selectAll();
   }
 
@@ -157,8 +158,6 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	    f2.setVisible(true);
 	}
     }
-	    
-      
 
     /**
     	method to translate piglatin to english 
@@ -219,9 +218,6 @@ public class WindowSetUp extends JApplet implements ActionListener{
 		    JOptionPane.showMessageDialog(null, "Amount of words greater than 8. Please try again.", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
-    
-  
     
     /**
        inner class for when JComboBox is updated
@@ -248,6 +244,4 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	    }
 	Output.setText(pigLatinOutput);
     }       
-    
-    
 }

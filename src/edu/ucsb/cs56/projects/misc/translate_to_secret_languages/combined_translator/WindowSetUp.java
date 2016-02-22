@@ -42,10 +42,6 @@ public class WindowSetUp extends JApplet implements ActionListener{
     private JButton helpButton;
     private JButton fontButton;
     private JButton fColorButton;
-    //private  JButton engToPig;
-    //private  JButton pigToEng;
-    //private  JButton engToGib;
-    //private  JButton gibToEng;
     private ArrayList<JComboBox<String>> wordBoxes;
     String[] types = {"English to Pig Latin", "Pig Latin to English", "English to Gibberish", "Gibberish to English"};
     public JComboBox<String> choose = new JComboBox<String>(types);
@@ -57,8 +53,14 @@ public class WindowSetUp extends JApplet implements ActionListener{
 
     public WindowSetUp() {
 	/* Instantiation */
-	Panel = getContentPane ();
+	int opacity = (int)(255*.8);
+	Color myOrange = new Color(255,116,0,opacity);
+	Color myBlue = new Color(18,64,171,opacity);
+	Color myYellow = new Color(255,211,0,opacity);
+	Color myGray = new Color(60,59,56);	
 
+	Panel = getContentPane ();
+	Panel.setBackground(myBlue);
 	Output = new JTextArea (30, 10);
 	Scroller = new JScrollPane(Output);
 	Output.setLineWrap(true);
@@ -68,16 +70,19 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	helpButton = new JButton("   Help   "); //spaces to make buttons the same size
 	fontButton = new JButton("Font Style");
 	fColorButton = new JButton("Font Color");
+	helpButton.setBackground(myYellow);
+	fontButton.setBackground(myYellow);
+	fColorButton.setBackground(myYellow);
+
 	welcomePhrase = new JTextField ("Please enter a word or phrase of 8 words or less:", 30);
-	//engToPig = new JButton("English To Pig Latin");
-  //pigToEng = new JButton("Pig Latin To English");
-	//engToGib = new JButton("English to Gibberish");
-	//gibToEng = new JButton("Gibberish to English");
+	welcomePhrase.setBackground(myYellow);
 	resultPhrase = new JTextField("Result:", 30);
+	resultPhrase.setBackground(myYellow);
 	wordBoxesPhrase = new JTextField("Select the correct English translation from each box when using Pig Latin To English;", 30);
 	boxPanel = new JPanel();
 	wordBoxes = new ArrayList<JComboBox<String>>();
-	
+
+
 	/* Location */
 	Panel.setLayout(new BoxLayout(Panel, BoxLayout.Y_AXIS));
   JPanel crossPane = new JPanel();
@@ -92,10 +97,6 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	Panel.add(t1);  
   Panel.add(choose);
   choose.addActionListener(new ChooseListener());
-	//Panel.add(engToPig);
-	//Panel.add(pigToEng);
-	//Panel.add(engToGib);
-	//Panel.add(gibToEng);
 	Panel.add(resultPhrase);
 	resultPhrase.setEditable(false);
 	Panel.add(Scroller);
@@ -105,15 +106,12 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	for(int i = 0; i < 8; i++)
 	    {
 		wordBoxes.add(i, new JComboBox<String>());
+		wordBoxes.get(i).setBackground(myYellow);
 		boxPanel.add(wordBoxes.get(i));
 		wordBoxes.get(i).addActionListener(new BoxListener());
 	    }
     
 	/* Configuration */
-	//engToPig.addActionListener(new EngToPigListener());
-	//pigToEng.addActionListener(new PigToEngListener());
-	//engToGib.addActionListener(new EngToGibListener());
-	//gibToEng.addActionListener(new GibToEngListener());
 	helpButton.addActionListener(new HelpListener());
 	fontButton.addActionListener(new FontListener());
 	fColorButton.addActionListener(new fColorListener());
