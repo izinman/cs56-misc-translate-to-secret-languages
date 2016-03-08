@@ -160,6 +160,14 @@ private static String listToString(ArrayList<Character> list)
     return result;
 }
 
+public static String arrayToString(String[] array){
+	String result = "";
+	for (int i=0;i<array.length;i++){
+		result=result+array[i];
+	}
+	return result;
+}
+
 private static String[] listToStringArray(ArrayList<String> list)
 {
     return Arrays.copyOf(list.toArray(), list.size(), String[].class);

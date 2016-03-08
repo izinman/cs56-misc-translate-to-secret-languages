@@ -21,11 +21,15 @@ import java.util.ArrayList;
  @author Christian Rivera Cruz                                                                                                                               
  @author Adam Kazberuk                                                                                                                                       
  @author Ian Vernon                                                                                                                                          
- @author Evan Moelter                                                                                                                                        
- @version 05/17/2013 for lab05, cs56, S13         
+ @author Evan Moelter
+
+ @author Nicholas Frey
+
+ @author John Mangel                                                                                                                                        
+ @version 02/XX/2016 for lab07, cs56, W16         
  */
 
-public class WindowSetUp extends JApplet{
+public class WindowSetUp extends JApplet implements ActionListener{
     /* Declaration */
     private Container Panel;
     private JTextArea Output;
@@ -39,8 +43,10 @@ public class WindowSetUp extends JApplet{
 
     private JTextArea helpText;
 
-    private  JButton engToPig;
-    private  JButton pigToEng;
+    String[] types = {"English to Pig Latin", "Pig Latin to English"};
+    public JComboBox<String> choose = new JComboBox<String>(types);
+    int direction = 1;
+
       private JButton helpButton;
     private ArrayList<JComboBox<String>> wordBoxes;
 
@@ -51,8 +57,14 @@ public class WindowSetUp extends JApplet{
 
     public WindowSetUp() {
 	/* Instantiation */
-	Panel = getContentPane ();
-	
+	int opacity = (int)(255*.8);
+  Color myOrange = new Color(255,116,0,opacity);
+  Color myBlue = new Color(18,64,171,opacity);
+  Color myYellow = new Color(255,211,0,opacity);
+  Color myGray = new Color(60,59,56);
+
+	Panel = getContentPane();
+	Panel.setBackground(myBlue);	
 	Output = new JTextArea (30, 10);
 	Scroller = new JScrollPane(Output);
 	Output.setLineWrap(true);
@@ -60,23 +72,28 @@ public class WindowSetUp extends JApplet{
 	Scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 	
 	helpButton = new JButton("Help/Instructions");
+	helpButton.setBackground(myYellow);
 	welcomePhrase = new JTextField ("Please enter a word or phrase of 8 words or less:", 30);
-	engToPig = new JButton("English To Pig Latin");
-        pigToEng = new JButton("Pig Latin To English");
+	welcomePhrase.setBackground(myYellow);
 	resultPhrase = new JTextField("Result:", 30);
+	resultPhrase.setBackground(myYellow);
 	wordBoxesPhrase = new JTextField("Select the correct English translation from each box when using Pig Latin To English;", 30);
 	boxPanel = new JPanel();
 	wordBoxes = new ArrayList<JComboBox<String>>();
 	
 	/* Location */
 	Panel.setLayout(new BoxLayout(Panel, BoxLayout.Y_AXIS));
-	Panel.add(helpButton);
+	JPanel crossPane = new JPanel();
+	crossPane.setLayout(new BoxLayout(crossPane, BoxLayout.X_AXIS));
+	crossPane.add(helpButton);
+	Panel.add(crossPane);
 	Panel.add(welcomePhrase);
 	welcomePhrase.setEditable(false);
 	Panel.add(t1);
-	//Panel.add(pickt);       Implement this so the translation options are in a box, not just buttons      
-	Panel.add(engToPig);
-	Panel.add(pigToEng);
+  Panel.add(choose);
+
+  choose.addActionListener(new ChooseListener());
+
 	Panel.add(resultPhrase);
 	resultPhrase.setEditable(false);
 	Panel.add(Scroller);
@@ -86,16 +103,39 @@ public class WindowSetUp extends JApplet{
 	for(int i = 0; i < 8; i++)
 	    {
 		wordBoxes.add(i, new JComboBox<String>());
+		wordBoxes.get(i).setBackground(myYellow);
 		boxPanel.add(wordBoxes.get(i));
 		wordBoxes.get(i).addActionListener(new BoxListener());
 	    }
-    
+  
 	/* Configuration */
-	engToPig.addActionListener(new EngToPigListener());
-	pigToEng.addActionListener(new PigToEngListener());
+	
+  t1.addActionListener(this);
+
 	helpButton.addActionListener(new HelpListener());
 	Output.setEditable (false);
     }
+
+    /** actionPerformed is where the translation happens in our code, where the toPigLatin method is invoked
+    */
+
+  public void actionPerformed(ActionEvent e) {
+    if (direction ==1) translateEngToPig();
+    if (direction ==2) translatePigToEng();
+    t1.selectAll();
+  }
+
+		/**
+ 				inner class for when choose box is changed
+		*/
+
+		public class ChooseListener implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+				String type = (String)choose.getSelectedItem();
+				if(type.equals("English to Pig Latin")) direction =1;
+				if (type.equals("Pig Latin to English")) direction =2;
+			}
+		}
 
     /**
        inner class for when Help button is selected
@@ -110,7 +150,7 @@ public class WindowSetUp extends JApplet{
 
 	    helpText = new JTextArea (20, 20);
 	    helpText.setLineWrap(true);
-	    helpText.setText("The usual rules for changing standard English into Pig Latin are as follows: \n  For words that begin with consonant sounds, the initial consonant or consonant cluster is      moved to the end of the word, and 'ay' is added \n      For example: 'glove' → 'oveglay' 'happy'→'appyhay'  \n  For words that begin with vowel sounds or silent letter, 'way' is added at the end of the word.\n      For example: 'egg' → 'eggway' 'inbox' → 'inboxway' \n   In some variants, though, just add an 'ay' at the end. 'egg' → 'eggay'\n   Another variant is to add the ending 'yay'. 'egg' → 'eggyay' \n\n\n\n\n The rules used for changing English into Gibberish in this program:\n   The string 'uvug' is randomly placed into the word to be translated, possibly many times.\n      For example: 'hi i am prof conrad' -> 'huvugi uvugi uvugam pruvugof cuvugonruvugad'\n\n\nType in the words you wish to translate, then click on the correct option\nPlease only enter words or phrases of less than 8 words ");
+	    helpText.setText("The usual rules for changing standard English into Pig Latin are as follows: \nFor words that begin with consonant sounds, the initial consonant or consonant cluster is\nmoved to the end of the word, and 'ay' is added \n    For example: 'glove' → 'oveglay' 'happy'→'appyhay'  \nFor words that begin with vowel sounds or silent letter, 'way' is added at the end of the word.\n    For example: 'egg' → 'eggway' 'inbox' → 'inboxway' \nIn some variants, though, just add an 'ay' at the end. 'egg' → 'eggay'\nAnother variant is to add the ending 'yay'. 'egg' → 'eggyay' \n\nType in the words you wish to translate, then click on the correct option.\nPlease only enter words or phrases of less than 8 words ");
 	    Panel2.add(helpText);
 	    helpText.setEditable(false);
       
@@ -118,18 +158,14 @@ public class WindowSetUp extends JApplet{
 	    f2.setVisible(true);
 	}
     }
-	    
-      
 
     /**
-       inner class for when Pig Latin to English button is selected
+    	method to translate piglatin to english 
     */
 
-    public class PigToEngListener implements ActionListener
-    {
-	public void actionPerformed(ActionEvent e){
+		public void translatePigToEng(){
 	    EnglishToPigLatin word1 = new EnglishToPigLatin();
-	    //split wonrds inputted by user into array of strings so each word can be analzyed / translated
+	    //split words inputted by user into array of strings so each word can be analzyed / translated
 	    String[] words = t1.getText().split(" ");
 	    //check to see if phrase length is less than or equal to number of boxes to fill with word options
 	    if(words.length <= 8)
@@ -160,14 +196,12 @@ public class WindowSetUp extends JApplet{
 		}
 	}
 	
-    }
 
     /** 
-	inner class for when English to Pig Latin is selected
+			method to translate english to piglatin
     */
-    public class EngToPigListener implements ActionListener
-    {
-	public void actionPerformed(ActionEvent e){
+		
+		public void translateEngToPig(){
 	    String phrase;
 	    EnglishToPigLatin word1 = new EnglishToPigLatin();
 	    phrase = t1.getText();
@@ -184,10 +218,6 @@ public class WindowSetUp extends JApplet{
 		    JOptionPane.showMessageDialog(null, "Amount of words greater than 8. Please try again.", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
-    }
-    
-  
     
     /**
        inner class for when JComboBox is updated
@@ -214,6 +244,4 @@ public class WindowSetUp extends JApplet{
 	    }
 	Output.setText(pigLatinOutput);
     }       
-    
-    
 }

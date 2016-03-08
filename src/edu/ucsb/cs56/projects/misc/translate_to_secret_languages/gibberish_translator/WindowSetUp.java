@@ -29,6 +29,8 @@ public class WindowSetUp extends JApplet implements ActionListener {
 
     private JTextField welcomePhrase;
     private JTextField resultPhrase;
+    private JTextArea helpText;
+    private JButton helpButton;
     public TextField t1 = new TextField(20);
     String[] types = {"English to Gibberish", 
 		      "Gibberish to English"};
@@ -40,17 +42,31 @@ public class WindowSetUp extends JApplet implements ActionListener {
 
     public WindowSetUp() {
 	/* Instantiation */
+	int opacity = (int)(255*.8);
+  Color myOrange = new Color(255,116,0,opacity);
+  Color myBlue = new Color(18,64,171,opacity);
+  Color myYellow = new Color(255,211,0,opacity);
+  Color myGray = new Color(60,59,56);
+
 	Panel = getContentPane ();
+	Panel.setBackground(myBlue);
 	Output = new JTextArea (30, 10);
 	Scroller = new JScrollPane(Output);
 	Output.setLineWrap(true);
 	Scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 	Scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-	
+	helpButton = new JButton("Help/Instructions");
+	helpButton.setBackground(myYellow);
 	welcomePhrase = new JTextField ("Please enter a word or phrase and then press enter:", 30);
+	welcomePhrase.setBackground(myYellow);
 	resultPhrase = new JTextField("Result:", 30);
+	resultPhrase.setBackground(myYellow);
 	/* Location */
 	Panel.setLayout(new BoxLayout(Panel, BoxLayout.Y_AXIS));
+	JPanel crossPane = new JPanel();
+	crossPane.setLayout(new BoxLayout(crossPane, BoxLayout.X_AXIS));
+	crossPane.add(helpButton);
+  Panel.add(crossPane);
 	Panel.add(welcomePhrase);
 	welcomePhrase.setEditable(false);
 	Panel.add(t1);
@@ -68,9 +84,31 @@ public class WindowSetUp extends JApplet implements ActionListener {
 	}});
 
 	/* Configuration */
+  helpButton.addActionListener(new HelpListener());
 	t1.addActionListener(this);
 	Output.setEditable (false);
     }
+
+    /** HelpListener is the function for the added help button on Gibberish Translator*/
+
+    public class HelpListener implements ActionListener
+    {
+  public void actionPerformed(ActionEvent e){
+      JFrame f2 = new JFrame("Help/Instructions");
+      f2.setSize(600,400);
+      Container Panel2 = f2.getContentPane();
+
+      helpText = new JTextArea (20, 20);
+      helpText.setLineWrap(true);
+      helpText.setText("INSTRUCTIONS: \nType your text into the input box and press return to translate it. Make sure the correct translation direction is selected in the drop down menu. \nThe rules for this gibberish translator is to randomly place the string 'uvug' into the word. To translate back, the translator simply removes all occurances of 'uvug'.");
+      Panel2.add(helpText);
+      helpText.setEditable(false);
+
+      f2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+      f2.setVisible(true);
+  }
+    }
+
 
     /**
        actionPerformed is where the translations happen in our code, where the toGibberish method is invoked
