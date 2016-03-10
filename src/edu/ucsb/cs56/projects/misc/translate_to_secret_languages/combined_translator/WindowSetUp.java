@@ -21,7 +21,11 @@ import java.util.ArrayList;
  @author Christian Rivera Cruz                                                                                                                               
  @author Adam Kazberuk                                                                                                                                       
  @author Ian Vernon                                                                                                                                          
- @author Evan Moelter                                                                                                                                        
+ @author Evan Moelter
+
+ @author Nicholas Frey
+
+ @author John Mangel                                                                                                                                        
  @version 05/17/2013 for lab05, cs56, S13         
  */
 
@@ -47,6 +51,8 @@ public class WindowSetUp extends JApplet implements ActionListener{
     public JComboBox<String> choose = new JComboBox<String>(types);
     int direction = 1;
 
+    private JFrame f3 = new JFrame("Change Font Style");
+    private JFrame f4 = new JFrame("Change Font Color");
     /**
      * windowSetUp creates the JPanels that we use for the GUI, which include JTextArea, JTextField, JButton, JComboBox
      */
@@ -121,6 +127,48 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	Output.setFont(DefFont);
 
 	Output.setEditable (false);
+
+  /* instantiate color window */
+  f4.setSize(200,200);
+  Container Panel4 = f4.getContentPane();
+  Panel4.setLayout(new BoxLayout(Panel4, BoxLayout.Y_AXIS));
+  
+  //JPanel Panel4 = new JPanel(new GridLayout(4,1));
+  JButton Red = new JButton("Red");
+  JButton Green = new JButton("Green");
+  JButton Blue = new JButton("Blue");
+  JButton Black = new JButton("Black");
+  //Red.setSize(new Dimension(100, 40));
+  Panel4.add(Red, BorderLayout.NORTH);
+  Panel4.add(Green);
+  Panel4.add(Blue);
+  Panel4.add(Black);
+  Red.addActionListener(new RedListener());
+  Green.addActionListener(new GreenListener());
+  Blue.addActionListener(new BlueListener());
+  Black.addActionListener(new BlackListener());
+
+  /* instantiate font window */
+  f3.setSize(200,200);
+  Container Panel3 = f3.getContentPane();
+  Panel3.setLayout(new BoxLayout(Panel3, BoxLayout.Y_AXIS));
+
+  JButton Default = new JButton("Default");
+  JButton Bold = new JButton("Bold");
+  JButton Italics = new JButton("Italics");
+  JButton Courier = new JButton("Courier");
+  JButton Serif = new JButton("Serif");
+  Panel3.add(Default);
+  Panel3.add(Bold);
+  Panel3.add(Italics);
+  Panel3.add(Courier);
+  Panel3.add(Serif);
+  Default.addActionListener(new DefListener());
+  Bold.addActionListener(new BoldListener());
+  Italics.addActionListener(new ItalListener());
+  Courier.addActionListener(new CourListener());
+  Serif.addActionListener(new SerifListener());  
+
     }
 
   public void actionPerformed(ActionEvent e) {
@@ -172,27 +220,6 @@ public class WindowSetUp extends JApplet implements ActionListener{
     public class FontListener implements ActionListener
     {
 	public void actionPerformed(ActionEvent e){
-	    JFrame f3 = new JFrame("Change Font Style");
-	    f3.setSize(200,200);
-	    Container Panel3 = f3.getContentPane();
-	    Panel3.setLayout(new BoxLayout(Panel3, BoxLayout.Y_AXIS));
-
-	    JButton Default = new JButton("Default");
-	    JButton Bold = new JButton("Bold");
-	    JButton Italics = new JButton("Italics");
-	    JButton Courier = new JButton("Courier");
-	    JButton Serif = new JButton("Serif");
-	    Panel3.add(Default);
-	    Panel3.add(Bold);
-	    Panel3.add(Italics);
-	    Panel3.add(Courier);
-	    Panel3.add(Serif);
-	    Default.addActionListener(new DefListener());
-	    Bold.addActionListener(new BoldListener());
-	    Italics.addActionListener(new ItalListener());
-	    Courier.addActionListener(new CourListener());
-	    Serif.addActionListener(new SerifListener());
-	    
 	    f3.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    f3.setVisible(true);
 	}
@@ -205,24 +232,6 @@ public class WindowSetUp extends JApplet implements ActionListener{
   public class fColorListener implements ActionListener
     {
 	public void actionPerformed(ActionEvent e){
-	    JFrame f4 = new JFrame("Change Font Color");
-	    f4.setSize(200,200);
-	    Container Panel4 = f4.getContentPane();
-	    Panel4.setLayout(new BoxLayout(Panel4, BoxLayout.Y_AXIS));
-
-	    JButton Red = new JButton("Red");
-	    JButton Green = new JButton("Green");
-	    JButton Blue = new JButton("Blue");
-	    JButton Black = new JButton("Black");
-	    Panel4.add(Red);
-	    Panel4.add(Green);
-	    Panel4.add(Blue);
-	    Panel4.add(Black);
-	    Red.addActionListener(new RedListener());
-	    Green.addActionListener(new GreenListener());
-	    Blue.addActionListener(new BlueListener());
-	    Black.addActionListener(new BlackListener());
-
 	    f4.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    f4.setVisible(true);
 	}
@@ -368,6 +377,7 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	    Font DefFont = new Font("Times New Roman",Font.PLAIN,15);
 	    t1.setFont(DefFont);
 	    Output.setFont(DefFont);
+      f3.dispose();
 	}
     }
 
@@ -383,6 +393,7 @@ public class WindowSetUp extends JApplet implements ActionListener{
 		Output.setFont(Output.getFont().deriveFont(Font.PLAIN));
 		
 	    }
+    f3.dispose();
 	}
 	
     }
@@ -397,16 +408,17 @@ public class WindowSetUp extends JApplet implements ActionListener{
 		t1.setFont(t1.getFont().deriveFont(Font.PLAIN));
 		Output.setFont(Output.getFont().deriveFont(Font.PLAIN));
 	    }
+    f3.dispose();
 	}
     }
 	    
     public class CourListener implements ActionListener
     {
 	public void actionPerformed(ActionEvent e){
-	    // t1.setFont(t1.getFont().deriveFont("Courier");         //attempt to change font style, but keep bold/italic/size
 	    Font courierFont = new Font("Courier",Font.PLAIN,15);
 	    t1.setFont(courierFont);
 	    Output.setFont(courierFont);
+      f3.dispose();
 	}
     }
     
@@ -416,6 +428,7 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	    Font SerifFont = new Font("Serif",Font.PLAIN,15);
 	    t1.setFont(SerifFont);
 	    Output.setFont(SerifFont);
+      f3.dispose();
 	}
     }
 
@@ -424,6 +437,7 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 	    t1.setForeground(Color.RED);
 	    Output.setForeground(Color.RED);
+      f4.dispose();
 	}
     }
     
@@ -432,7 +446,8 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 	    t1.setForeground(Color.GREEN);
 	    Output.setForeground(Color.GREEN);
-	}
+	    f4.dispose();
+  }
     }
 
     public class BlueListener implements ActionListener
@@ -440,7 +455,8 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 	    t1.setForeground(Color.BLUE);
 	    Output.setForeground(Color.BLUE);
-	}
+	    f4.dispose();
+  }
     }
 
     public class BlackListener implements ActionListener
@@ -448,6 +464,7 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 	    t1.setForeground(Color.BLACK);
 	    Output.setForeground(Color.BLACK);
-	}
+	    f4.dispose();
+  }
     }
 }
