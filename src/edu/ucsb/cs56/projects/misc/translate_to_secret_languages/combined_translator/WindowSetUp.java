@@ -16,6 +16,8 @@ import javax.swing.UIManager;
 
 import java.util.ArrayList;
 
+import java.io.*;
+
 /**
  * The class that sets up the GUI to use the EnglishToPigLatin class
  @author Christian Rivera Cruz                                                                                                                               
@@ -50,6 +52,9 @@ public class WindowSetUp extends JApplet implements ActionListener{
     String[] types = {"English to Pig Latin", "Pig Latin to English", "English to Gibberish", "Gibberish to English"};
     public JComboBox<String> choose = new JComboBox<String>(types);
     int direction = 1;
+
+		private ArrayList<Tuple> wordBoxSelections = new ArrayList<Tuple>();
+		private boolean resettingBoxes=false;		
 
     private JFrame f3 = new JFrame("Change Font Style");
     private JFrame f4 = new JFrame("Change Font Color");
@@ -116,7 +121,21 @@ public class WindowSetUp extends JApplet implements ActionListener{
 		boxPanel.add(wordBoxes.get(i));
 		wordBoxes.get(i).addActionListener(new BoxListener());
 	    }
-    
+  
+	/* Read PigLatin to English Selections from file */
+	try{
+		FileInputStream fis = new FileInputStream(new File("src/edu/ucsb/cs56/projects/misc/translate_to_secret_languages/PigLatinSelections.txt"));
+    BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+    String line = null;
+    while ((line = br.readLine()) != null) {
+      String[] tupleArgs = line.split(" ");
+      wordBoxSelections.add(new Tuple(tupleArgs[0],Integer.parseInt(tupleArgs[1])));
+    }
+    br.close();
+  } catch (Exception ex){
+    System.err.println("Error reading from file. Ignore this warning if you haven't yet used PigLatin to English, because the file doesn't not yet exist.");
+  }
+  
 	/* Configuration */
 	helpButton.addActionListener(new HelpListener());
 	fontButton.addActionListener(new FontListener());
@@ -244,27 +263,34 @@ public class WindowSetUp extends JApplet implements ActionListener{
     //public class PigToEngListener implements ActionListener
     //{
 	public void translatePigToEng(){
-	    EnglishToPigLatin word1 = new EnglishToPigLatin();
+	    resettingBoxes=true;
+			EnglishToPigLatin word1 = new EnglishToPigLatin();
 	    //split words inputted by user into array of strings so each word can be analzyed / translated
 	    String[] words = t1.getText().split(" ");
 	    //check to see if phrase length is less than or equal to number of boxes to fill with word options
-	    if(words.length <= 8)
-		{
+	    if(words.length <= 8){
 		    resultPhrase.setText("Result In English:");
 		    //iterate through each JComboBox
-		    for(int boxNum = 0; boxNum < 8 && boxNum < words.length; boxNum++)
-			{
-			    String currentWord = words[boxNum];
-			    /*convert each word to English and give options in a String array. done so since
-			      impossible to tell when  English word starts and ends after translated into Pig Latin*/
-			    String[] pigLatinTrans = word1.toEnglish(currentWord);
+		    for(int boxNum = 0; boxNum < 8; boxNum++){
+					//clear each JComboBox
+					wordBoxes.get(boxNum).removeAllItems();
+
+					if (boxNum < words.length){
+				    String currentWord = words[boxNum];
+				    /*convert each word to English and give options in a String array. done so since
+				      impossible to tell when  English word starts and ends after translated into Pig Latin*/
+				    String[] pigLatinTrans = word1.toEnglish(currentWord);
 			    /*refresh each JComboBox with 5 options / selectable words  for word in English */
-    			    wordBoxes.get(boxNum).removeAllItems();
-			    for(int optionNum = 0; optionNum < pigLatinTrans.length && optionNum < 5; optionNum++)
-				{
-				    wordBoxes.get(boxNum).addItem(pigLatinTrans[optionNum]);
+						wordBoxes.get(boxNum).removeAllItems();
+						wordBoxes.get(boxNum).addItem("");
+			    	for(int optionNum = 0; optionNum < pigLatinTrans.length && optionNum < 5; optionNum++)
+						{
+				    	wordBoxes.get(boxNum).addItem(pigLatinTrans[optionNum]);
+						}
+						wordBoxes.get(boxNum).setSelectedIndex(0);
+					}
 				}
-			}
+				resettingBoxes=false;
 		    // updates each JComboBox
 		    updateOutput();
 		    t1.selectAll();
@@ -359,17 +385,52 @@ public class WindowSetUp extends JApplet implements ActionListener{
     /**
        Updates the output box with phrase in each text box
      */
-    private void updateOutput() {
-	String pigLatinOutput = "";
-	for(int boxNum = 0; boxNum < 8; boxNum++)
-	    {
-		String t = (String)wordBoxes.get(boxNum).getSelectedItem();
-		if (t != null) 
-		    pigLatinOutput += t + " ";
+		private void updateOutput() {
+			if (resettingBoxes) return;
+			String pigLatinOutput = "";
+			boolean wordFound = false;
+			boolean listChanged = false;
+			String[] words = t1.getText().split(" ");
+			for(int boxNum = 0; boxNum < 8 && boxNum < words.length; boxNum++){
+				wordFound = false;
+				JComboBox currentBox = wordBoxes.get(boxNum);
+				int selectedIndex = currentBox.getSelectedIndex();
+				for (Tuple tuple: wordBoxSelections){
+					if (tuple.input.equals(words[boxNum])){
+						wordFound = true;
+						if (selectedIndex <= 0 && currentBox.getItemCount()>0)
+						{
+							currentBox.setSelectedIndex(tuple.translation);
+						}
+						else if (selectedIndex > 0 && tuple.translation != selectedIndex){
+							tuple.translation = selectedIndex;
+							listChanged = true;
+						}
+					}
+				}
+				if (!wordFound && selectedIndex > 0){
+					Tuple newEntry = new Tuple(words[boxNum], selectedIndex);
+					wordBoxSelections.add(newEntry);
+					listChanged = true;
+				}
+				String t = (String)wordBoxes.get(boxNum).getSelectedItem();
+				if (t != null) pigLatinOutput += t + " ";
 	    }
-	Output.setText(pigLatinOutput);
-    }       
-    
+			Output.setText(pigLatinOutput);
+				if (listChanged){
+					try{
+						PrintStream writer = new PrintStream(new File("src/edu/ucsb/cs56/projects/misc/translate_to_secret_languages/PigLatinSelections.txt"));
+          for (Tuple tuple: wordBoxSelections){
+            writer.println(tuple.input + " " + tuple.translation);
+          }
+          writer.close();
+          System.err.println("Wrote to file");
+        } catch(Exception ex){
+          System.err.println("Error in writing to file");
+          ex.printStackTrace();
+        }
+			}
+    }
 
     public class DefListener implements ActionListener
     {
@@ -467,4 +528,13 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	    f4.dispose();
   }
     }
+
+	public class Tuple{
+		public final String input;
+		public int translation;
+		public Tuple(String input, int translation){
+			this.input = input;
+			this.translation = translation;
+		}
+	}
 }
