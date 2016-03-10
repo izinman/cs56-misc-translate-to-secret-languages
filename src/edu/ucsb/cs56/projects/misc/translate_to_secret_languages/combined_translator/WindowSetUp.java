@@ -172,22 +172,27 @@ public class WindowSetUp extends JApplet implements ActionListener{
   Container Panel3 = f3.getContentPane();
   Panel3.setLayout(new BoxLayout(Panel3, BoxLayout.Y_AXIS));
 
-  JButton Default = new JButton("Default");
-  JButton Bold = new JButton("Bold");
-  JButton Italics = new JButton("Italics");
-  JButton Courier = new JButton("Courier");
-  JButton Serif = new JButton("Serif");
+  JButton Default = new JButton("    Default    ");
+  JButton Bold = new JButton("      Bold     ");
+  JButton Italics = new JButton("    Italics    ");
+  JButton Courier = new JButton("    Courier    ");
+  JButton Serif = new JButton("     Serif     ");
+	JButton Times = new JButton("Times New Roman");
+	JButton Close = new JButton("     Apply     ");
   Panel3.add(Default);
   Panel3.add(Bold);
   Panel3.add(Italics);
   Panel3.add(Courier);
   Panel3.add(Serif);
+	Panel3.add(Times);
+	Panel3.add(Close); //TODO: move to a different panel than the others
   Default.addActionListener(new DefListener());
   Bold.addActionListener(new BoldListener());
   Italics.addActionListener(new ItalListener());
   Courier.addActionListener(new CourListener());
   Serif.addActionListener(new SerifListener());  
-
+	Times.addActionListener(new TimesListener());
+	Close.addActionListener(new CloseListener());
     }
 
   public void actionPerformed(ActionEvent e) {
@@ -438,7 +443,7 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	    Font DefFont = new Font("Times New Roman",Font.PLAIN,15);
 	    t1.setFont(DefFont);
 	    Output.setFont(DefFont);
-      f3.dispose();
+      //f3.dispose();
 	}
     }
 
@@ -461,7 +466,7 @@ public class WindowSetUp extends JApplet implements ActionListener{
 					t1.setFont(t1.getFont().deriveFont(Font.PLAIN));
 					Output.setFont(Output.getFont().deriveFont(Font.PLAIN));
 		    }
-    		f3.dispose();
+    		//f3.dispose();
 			}
     }
  		
@@ -484,7 +489,7 @@ public class WindowSetUp extends JApplet implements ActionListener{
 					t1.setFont(t1.getFont().deriveFont(Font.PLAIN));
 					Output.setFont(Output.getFont().deriveFont(Font.PLAIN));
 	    	}
-    		f3.dispose();
+    		//f3.dispose();
 			}
     }
 	    
@@ -502,7 +507,7 @@ public class WindowSetUp extends JApplet implements ActionListener{
 
 			t1.setFont(courierFont);
 	    Output.setFont(courierFont);
-      f3.dispose();
+      //f3.dispose();
 	}
     }
     
@@ -520,9 +525,33 @@ public class WindowSetUp extends JApplet implements ActionListener{
 
 	    t1.setFont(serifFont);
 	    Output.setFont(serifFont);
-      f3.dispose();
+      //f3.dispose();
 	}
     }
+		
+		public class TimesListener implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e){
+      	Font font;
+      	if (t1.getFont().isItalic() == false && t1.getFont().isBold() == false)
+       		font = new Font("Times New Roman",Font.PLAIN,15);
+      	else if (t1.getFont().isItalic() == false)
+      	  font = new Font("Times New Roman",Font.BOLD,15);
+    	  else if (t1.getFont().isBold() == false)
+    	    font = new Font("Times New Roman",Font.ITALIC,15);
+   	   else font = new Font("Times New Roman",Font.ITALIC + Font.BOLD,15);
+
+    	  t1.setFont(font);
+  	    Output.setFont(font);
+	      //f3.dispose();
+	  	}
+    }
+		
+		public class CloseListener implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+				f3.dispose();
+			}
+		}
 
     public class RedListener implements ActionListener
     {
