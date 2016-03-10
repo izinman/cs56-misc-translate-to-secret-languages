@@ -1,4 +1,5 @@
 package edu.ucsb.cs56.projects.misc.translate_to_secret_languages.pig_latin_translator;
+	    //check to see if phrase length is less than or equal to number of boxes to fill with word options
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -50,7 +51,8 @@ public class WindowSetUp extends JApplet implements ActionListener{
       private JButton helpButton;
     private ArrayList<JComboBox<String>> wordBoxes;
 
-    
+		private ArrayList<Tuple> wordBoxSelections = new ArrayList<Tuple>();
+    private boolean resettingBoxes=false;
     /**
      * windowSetUp creates the JPanels that we use for the GUI, which include JTextArea, JTextField, JButton, JComboBox
      */
@@ -164,27 +166,31 @@ public class WindowSetUp extends JApplet implements ActionListener{
     */
 
 		public void translatePigToEng(){
-	    EnglishToPigLatin word1 = new EnglishToPigLatin();
+	    resettingBoxes=true;
+			EnglishToPigLatin word1 = new EnglishToPigLatin();
 	    //split words inputted by user into array of strings so each word can be analzyed / translated
 	    String[] words = t1.getText().split(" ");
 	    //check to see if phrase length is less than or equal to number of boxes to fill with word options
 	    if(words.length <= 8)
-		{
+			{
 		    resultPhrase.setText("Result In English:");
 		    //iterate through each JComboBox
 		    for(int boxNum = 0; boxNum < 8 && boxNum < words.length; boxNum++)
-			{
-			    String currentWord = words[boxNum];
+				{
+					String currentWord = words[boxNum];
 			    /*convert each word to English and give options in a String array. done so since
 			      impossible to tell when  English word starts and ends after translated into Pig Latin*/
 			    String[] pigLatinTrans = word1.toEnglish(currentWord);
 			    /*refresh each JComboBox with 5 options / selectable words  for word in English */
-    			    wordBoxes.get(boxNum).removeAllItems();
+    			wordBoxes.get(boxNum).removeAllItems();
+					wordBoxes.get(boxNum).addItem(""); //index=0?
 			    for(int optionNum = 0; optionNum < pigLatinTrans.length && optionNum < 5; optionNum++)
-				{
+					{
 				    wordBoxes.get(boxNum).addItem(pigLatinTrans[optionNum]);
+					}
+					wordBoxes.get(boxNum).setSelectedIndex(0);
 				}
-			}
+				resettingBoxes=false;
 		    // updates each JComboBox
 		    updateOutput();
 		    t1.selectAll();
@@ -227,21 +233,51 @@ public class WindowSetUp extends JApplet implements ActionListener{
     {
 	public void actionPerformed(ActionEvent e)
 	{
-	    updateOutput();
+	    updateOutput();			
 	}
     }
     
     /**
        Updates the output box with phrase in each text box
      */
-    private void updateOutput() {
-	String pigLatinOutput = "";
-	for(int boxNum = 0; boxNum < 8; boxNum++)
-	    {
-		String t = (String)wordBoxes.get(boxNum).getSelectedItem();
-		if (t != null) 
-		    pigLatinOutput += t + " ";
-	    }
-	Output.setText(pigLatinOutput);
-    }       
+		private void updateOutput() {
+			if (resettingBoxes) return;
+			String pigLatinOutput = "";
+			boolean wordFound = false;
+			String[] words = t1.getText().split(" ");
+			for(int boxNum = 0; boxNum < 8 && boxNum < words.length; boxNum++){
+				wordFound = false;
+				for (Tuple tuple: wordBoxSelections){
+					if (tuple.input.equals(words[boxNum])){ // && t!= null && t!="") {
+						wordFound = true;
+						if (wordBoxes.get(boxNum).getSelectedIndex()<=0 && wordBoxes.get(boxNum).getItemCount()>0){
+							//they haven't chosen yet, set choice to tuple.translation
+							wordBoxes.get(boxNum).setSelectedIndex(tuple.translation);
+						}
+						else if (wordBoxes.get(boxNum).getSelectedIndex()>0 && tuple.translation!=wordBoxes.get(boxNum).getSelectedIndex()) { //selection has been made, save it in ArrayList
+							tuple.translation = wordBoxes.get(boxNum).getSelectedIndex();
+						//this is called when the dropdown is selected
+						//so we want to save the choice when it's selected 
+						}
+					}
+				}
+				if (!wordFound && wordBoxes.get(boxNum).getSelectedIndex()>0) {
+					int index = wordBoxes.get(boxNum).getSelectedIndex();
+					Tuple newEntry = new Tuple(words[boxNum], index);
+					wordBoxSelections.add(newEntry);
+				}
+				String t = (String)wordBoxes.get(boxNum).getSelectedItem();
+				if (t != null) pigLatinOutput += t + " ";
+	  	}
+			Output.setText(pigLatinOutput);
+		}
+
+	public class Tuple{ 
+  	public final String input; 
+  	public int translation; 
+  	public Tuple(String input, int translation) { 
+    	this.input = input; 
+    	this.translation = translation; 
+  	} 
+	}        
 }
