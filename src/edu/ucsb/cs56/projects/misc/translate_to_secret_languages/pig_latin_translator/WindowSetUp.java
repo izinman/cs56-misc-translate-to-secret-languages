@@ -17,6 +17,12 @@ import javax.swing.UIManager;
 
 import java.util.ArrayList;
 
+import java.io.*;
+/*
+import java.io.PrintStream;
+import java.io.File;
+*/
+
 /**
  * The class that sets up the GUI to use the EnglishToPigLatin class
  @author Christian Rivera Cruz                                                                                                                               
@@ -109,7 +115,20 @@ public class WindowSetUp extends JApplet implements ActionListener{
 		boxPanel.add(wordBoxes.get(i));
 		wordBoxes.get(i).addActionListener(new BoxListener());
 	    }
-  
+
+  /* Read PigLatin to English Selection from file */
+	try{
+		FileInputStream fis = new FileInputStream(new File("src/edu/ucsb/cs56/projects/misc/translate_to_secret_languages/PigLatinSelections.txt"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+		String line = null;
+		while ((line = br.readLine()) != null) {
+			String[] tupleArgs = line.split(" ");
+			wordBoxSelections.add(new Tuple(tupleArgs[0],Integer.parseInt(tupleArgs[1])));
+		}
+		br.close();
+	} catch (Exception ex){
+		System.err.println("Error reading from file. Ignore this warning if you haven't yet used PigLatin to English, because the file doesn't not yet exist.");
+	}
 	/* Configuration */
 	
   t1.addActionListener(this);
@@ -244,6 +263,7 @@ public class WindowSetUp extends JApplet implements ActionListener{
 			if (resettingBoxes) return;
 			String pigLatinOutput = "";
 			boolean wordFound = false;
+			boolean listChanged = false;
 			String[] words = t1.getText().split(" ");
 			for(int boxNum = 0; boxNum < 8 && boxNum < words.length; boxNum++){
 				wordFound = false;
@@ -256,6 +276,7 @@ public class WindowSetUp extends JApplet implements ActionListener{
 						}
 						else if (wordBoxes.get(boxNum).getSelectedIndex()>0 && tuple.translation!=wordBoxes.get(boxNum).getSelectedIndex()) { //selection has been made, save it in ArrayList
 							tuple.translation = wordBoxes.get(boxNum).getSelectedIndex();
+							listChanged = true;
 						//this is called when the dropdown is selected
 						//so we want to save the choice when it's selected 
 						}
@@ -265,11 +286,27 @@ public class WindowSetUp extends JApplet implements ActionListener{
 					int index = wordBoxes.get(boxNum).getSelectedIndex();
 					Tuple newEntry = new Tuple(words[boxNum], index);
 					wordBoxSelections.add(newEntry);
+					listChanged = true;
 				}
 				String t = (String)wordBoxes.get(boxNum).getSelectedItem();
 				if (t != null) pigLatinOutput += t + " ";
 	  	}
 			Output.setText(pigLatinOutput);
+			
+			if (listChanged){
+				//write to file
+				try{
+					PrintStream writer = new PrintStream(new File("src/edu/ucsb/cs56/projects/misc/translate_to_secret_languages/PigLatinSelections.txt"));
+					for (Tuple tuple: wordBoxSelections){
+						writer.println(tuple.input + " " + tuple.translation);
+					}
+					writer.close();
+					System.err.println("Wrote to file");
+				} catch(Exception ex){
+					System.err.println("Error in writing to file");
+					ex.printStackTrace();
+				}
+			}
 		}
 
 	public class Tuple{ 
