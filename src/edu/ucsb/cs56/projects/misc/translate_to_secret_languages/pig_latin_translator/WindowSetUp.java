@@ -194,20 +194,24 @@ public class WindowSetUp extends JApplet implements ActionListener{
 			{
 		    resultPhrase.setText("Result In English:");
 		    //iterate through each JComboBox
-		    for(int boxNum = 0; boxNum < 8 && boxNum < words.length; boxNum++)
+		    for(int boxNum = 0; boxNum < 8/* && boxNum < words.length*/; boxNum++)
 				{
-					String currentWord = words[boxNum];
-			    /*convert each word to English and give options in a String array. done so since
-			      impossible to tell when  English word starts and ends after translated into Pig Latin*/
-			    String[] pigLatinTrans = word1.toEnglish(currentWord);
-			    /*refresh each JComboBox with 5 options / selectable words  for word in English */
-    			wordBoxes.get(boxNum).removeAllItems();
-					wordBoxes.get(boxNum).addItem(""); //index=0?
-			    for(int optionNum = 0; optionNum < pigLatinTrans.length && optionNum < 5; optionNum++)
-					{
-				    wordBoxes.get(boxNum).addItem(pigLatinTrans[optionNum]);
+					/*clear each JComboBox*/
+					wordBoxes.get(boxNum).removeAllItems();
+					if (boxNum < words.length){
+						String currentWord = words[boxNum];
+			    	/*convert each word to English and give options in a String array. done so since
+			    	  impossible to tell when  English word starts and ends after translated into Pig Latin*/
+						String[] pigLatinTrans = word1.toEnglish(currentWord);
+			    	/*refresh each JComboBox with 5 options / selectable words  for word in English */
+    				wordBoxes.get(boxNum).removeAllItems();
+						wordBoxes.get(boxNum).addItem(""); //index=0?
+			    	for(int optionNum = 0; optionNum < pigLatinTrans.length && optionNum < 5; optionNum++)
+						{
+				  	  wordBoxes.get(boxNum).addItem(pigLatinTrans[optionNum]);
+						}
+						wordBoxes.get(boxNum).setSelectedIndex(0);
 					}
-					wordBoxes.get(boxNum).setSelectedIndex(0);
 				}
 				resettingBoxes=false;
 		    // updates each JComboBox
