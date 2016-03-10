@@ -444,40 +444,63 @@ public class WindowSetUp extends JApplet implements ActionListener{
 
     public class BoldListener implements ActionListener
     {
-	public void actionPerformed(ActionEvent e){
-	    if(t1.getFont().isBold() == false){
-		t1.setFont(t1.getFont().deriveFont(Font.BOLD));
-		Output.setFont(Output.getFont().deriveFont(Font.BOLD));
-	    }
-	    else{
-		t1.setFont(t1.getFont().deriveFont(Font.PLAIN));
-		Output.setFont(Output.getFont().deriveFont(Font.PLAIN));
-		
-	    }
-    f3.dispose();
-	}
-	
+			public void actionPerformed(ActionEvent e){
+				if (t1.getFont().isItalic() && t1.getFont().isBold() == false){
+					t1.setFont(t1.getFont().deriveFont(Font.BOLD + Font.ITALIC));
+					Output.setFont(Output.getFont().deriveFont(Font.BOLD + Font.ITALIC));
+				}
+	    	else if (t1.getFont().isBold() == false){
+					t1.setFont(t1.getFont().deriveFont(Font.BOLD));
+					Output.setFont(Output.getFont().deriveFont(Font.BOLD));
+	    	}
+				else if (t1.getFont().isItalic()){
+					t1.setFont(t1.getFont().deriveFont(Font.ITALIC));
+					Output.setFont(Output.getFont().deriveFont(Font.ITALIC));
+	    	}
+				else{
+					t1.setFont(t1.getFont().deriveFont(Font.PLAIN));
+					Output.setFont(Output.getFont().deriveFont(Font.PLAIN));
+		    }
+    		f3.dispose();
+			}
     }
- public class ItalListener implements ActionListener
+ 		
+		public class ItalListener implements ActionListener
     {
-	public void actionPerformed(ActionEvent e){
-	    if(t1.getFont().isItalic() == false){
-		t1.setFont(t1.getFont().deriveFont(Font.ITALIC));
-		Output.setFont(Output.getFont().deriveFont(Font.ITALIC));
-	    }
-	    else{
-		t1.setFont(t1.getFont().deriveFont(Font.PLAIN));
-		Output.setFont(Output.getFont().deriveFont(Font.PLAIN));
-	    }
-    f3.dispose();
-	}
+			public void actionPerformed(ActionEvent e){
+	    	if(t1.getFont().isItalic() == false && t1.getFont().isBold()){
+					t1.setFont(t1.getFont().deriveFont(Font.ITALIC + Font.BOLD));
+					Output.setFont(Output.getFont().deriveFont(Font.ITALIC + Font.BOLD));
+	   		}
+				else if (t1.getFont().isItalic() == false){
+					t1.setFont(t1.getFont().deriveFont(Font.ITALIC));
+					Output.setFont(Output.getFont().deriveFont(Font.ITALIC));
+				}
+				else if (t1.getFont().isBold()){
+					t1.setFont(t1.getFont().deriveFont(Font.BOLD));
+					Output.setFont(Output.getFont().deriveFont(Font.BOLD));
+	    	}
+				else{
+					t1.setFont(t1.getFont().deriveFont(Font.PLAIN));
+					Output.setFont(Output.getFont().deriveFont(Font.PLAIN));
+	    	}
+    		f3.dispose();
+			}
     }
 	    
     public class CourListener implements ActionListener
     {
 	public void actionPerformed(ActionEvent e){
-	    Font courierFont = new Font("Courier",Font.PLAIN,15);
-	    t1.setFont(courierFont);
+	    Font courierFont;
+			if (t1.getFont().isItalic() == false && t1.getFont().isBold() == false)
+				courierFont = new Font("Courier",Font.PLAIN,15);
+	    else if (t1.getFont().isItalic() == false) 
+				courierFont = new Font("Courier",Font.BOLD,15);
+			else if (t1.getFont().isBold() == false)
+				courierFont = new Font("Courier",Font.ITALIC,15);
+			else courierFont = new Font("Courier",Font.ITALIC + Font.BOLD,15);
+
+			t1.setFont(courierFont);
 	    Output.setFont(courierFont);
       f3.dispose();
 	}
@@ -486,9 +509,17 @@ public class WindowSetUp extends JApplet implements ActionListener{
     public class SerifListener implements ActionListener
     {
 	public void actionPerformed(ActionEvent e){
-	    Font SerifFont = new Font("Serif",Font.PLAIN,15);
-	    t1.setFont(SerifFont);
-	    Output.setFont(SerifFont);
+			Font serifFont;
+	    if (t1.getFont().isItalic() == false && t1.getFont().isBold() == false) 
+				serifFont = new Font("Serif",Font.PLAIN,15);
+			else if (t1.getFont().isItalic() == false)
+        serifFont = new Font("Serif",Font.BOLD,15);
+      else if (t1.getFont().isBold() == false)
+        serifFont = new Font("Serif",Font.ITALIC,15);
+      else serifFont = new Font("Serif",Font.ITALIC + Font.BOLD,15);
+
+	    t1.setFont(serifFont);
+	    Output.setFont(serifFont);
       f3.dispose();
 	}
     }
