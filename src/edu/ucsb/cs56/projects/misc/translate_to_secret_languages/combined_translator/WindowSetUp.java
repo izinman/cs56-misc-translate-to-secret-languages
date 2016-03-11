@@ -56,6 +56,7 @@ public class WindowSetUp extends JApplet implements ActionListener{
 		private ArrayList<Tuple> wordBoxSelections = new ArrayList<Tuple>();
 		private boolean resettingBoxes=false;		
 
+		private JFrame f2 = new JFrame("Help/Instructions");
     private JFrame f3 = new JFrame("Change Font Style");
     private JFrame f4 = new JFrame("Change Font Color");
     /**
@@ -222,16 +223,19 @@ public class WindowSetUp extends JApplet implements ActionListener{
     public class HelpListener implements ActionListener
     {
 	public void actionPerformed(ActionEvent e){
-	    JFrame f2 = new JFrame("Help/Instructions");
 	    f2.setSize(600,400);
 	    Container Panel2 = f2.getContentPane();
-
+			Panel2.setLayout(new BoxLayout(Panel2, BoxLayout.Y_AXIS));
 	    helpText = new JTextArea (20, 20);
 	    helpText.setLineWrap(true);
 	    helpText.setText("The usual rules for changing standard English into Pig Latin are as follows: \nFor words that begin with consonant sounds, the initial consonant or consonant cluster is\nmoved to the end of the word, and 'ay' is added \n    For example: 'glove' → 'oveglay' 'happy'→'appyhay'  \nFor words that begin with vowel sounds or silent letter, 'way' is added at the end of the word.\n    For example: 'egg' → 'eggway' 'inbox' → 'inboxway' \nIn some variants, though, just add an 'ay' at the end. 'egg' → 'eggay'\nAnother variant is to add the ending 'yay'. 'egg' → 'eggyay' \n\nThe rules used for changing English into Gibberish in this program:\nThe string 'uvug' is randomly placed into the word to be translated, possibly many times.\n    For example: 'hi i am prof conrad' -> 'huvugi uvugi uvugam pruvugof cuvugonruvugad'\n\nType in the words you wish to translate, then click on the correct option\nPlease only enter words or phrases of less than 8 words ");
 	    Panel2.add(helpText);
 	    helpText.setEditable(false);
       
+			JButton CloseHelp = new JButton("Close");
+			Panel2.add(CloseHelp);
+			CloseHelp.addActionListener(new CloseHelpListener());
+			
 	    f2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    f2.setVisible(true);
 	}
@@ -277,8 +281,9 @@ public class WindowSetUp extends JApplet implements ActionListener{
 		    resultPhrase.setText("Result In English:");
 		    //iterate through each JComboBox
 		    for(int boxNum = 0; boxNum < 8; boxNum++){
+					JComboBox currentBox = wordBoxes.get(boxNum);
 					//clear each JComboBox
-					wordBoxes.get(boxNum).removeAllItems();
+					currentBox.removeAllItems();
 
 					if (boxNum < words.length){
 				    String currentWord = words[boxNum];
@@ -286,13 +291,14 @@ public class WindowSetUp extends JApplet implements ActionListener{
 				      impossible to tell when  English word starts and ends after translated into Pig Latin*/
 				    String[] pigLatinTrans = word1.toEnglish(currentWord);
 			    /*refresh each JComboBox with 5 options / selectable words  for word in English */
-						wordBoxes.get(boxNum).removeAllItems();
-						wordBoxes.get(boxNum).addItem("");
+						currentBox.removeAllItems();
+						currentBox.addItem("");
 			    	for(int optionNum = 0; optionNum < pigLatinTrans.length && optionNum < 5; optionNum++)
 						{
-				    	wordBoxes.get(boxNum).addItem(pigLatinTrans[optionNum]);
+				    	currentBox.addItem(pigLatinTrans[optionNum]);
 						}
-						wordBoxes.get(boxNum).setSelectedIndex(0);
+						if (currentBox.getItemCount() == 2) currentBox.setSelectedIndex(1);
+						else currentBox.setSelectedIndex(0);
 					}
 				}
 				resettingBoxes=false;
@@ -547,12 +553,6 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	  	}
     }
 		
-		public class CloseListener implements ActionListener{
-			public void actionPerformed(ActionEvent e){
-				f3.dispose();
-			}
-		}
-
     public class RedListener implements ActionListener
     {
 	public void actionPerformed(ActionEvent e){
@@ -588,6 +588,18 @@ public class WindowSetUp extends JApplet implements ActionListener{
 	    f4.dispose();
   }
     }
+
+		public class CloseListener implements ActionListener{
+      public void actionPerformed(ActionEvent e){
+        f3.dispose();
+      }
+    }
+
+		public class CloseHelpListener implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+				f2.dispose();
+			}
+		}		
 
 	public class Tuple{
 		public final String input;
