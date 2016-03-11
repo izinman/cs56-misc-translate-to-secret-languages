@@ -46,3 +46,6 @@ The rules of our gibberish program:
  
  Some extra instructions: The combined translator contains both the Gibberish and PigLatin translators. It contains a help function detailing the procedure and rules of the languages. There are also new buttons for changing the font. To change the font, simply press the button you wish and select a font or color.
 
+W16 Final Remarks - Nicholas Frey and John Mangel
+The project at its current state has 3 GUI's, one for Pig Latin, one for Gibberish, and a combined translator. There arent really any bugs but there are a lot of features that we think could be added! See the issues tab on the github or in . One large issue we never got to was fixing the indentation across all files. We reccomend fixing this as you go through and try to understand the code. Enjoy!
+Make sure you familiarize yourself with the code before you start working! 
