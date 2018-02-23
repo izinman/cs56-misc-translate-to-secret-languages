@@ -1,22 +1,20 @@
 project history
 ===============
 ```
- NO | mastergberry | Make a program that takes an English word or small sentence and translate it into Pig Latin and Gibberish 
+ NO | mastergberry | Make a program that takes an English word or
+ small sentence and translate it into Pig Latin and Gibberish 
 ```
 
 A simple GUI program to translate between pig latin/english, and also between gibberish/english. 
 
 ![Alt text](https://raw.githubusercontent.com/isaacstaugaard/cs56-misc-translate-to-secret-languages/master/ScreenshotsForReadme/anttargets.png?raw=true)
-To run the combined translator: Use the command 'ant Run'
-To run the pig latin/english translator: Use the command: 'ant PigLatin'
-To run the gibberish/english translator: Use the command: 'ant Gibberish'
 
-Once run, simply type the words you wish to be translated into the empty box under "Please enter a word or phrase of 8 words or less:" and perss the conversion you want. The result will be displayed in the box under "Result". 
+To run the combined translator: Use the command **ant Run**. Once run, simply type the words you wish to be translated into the empty box under "Please enter a word or phrase of 8 words or less:" and perss the conversion you want. The result will be displayed in the box under "Result". 
 You press the "Font Style" button or the "Font Color" button to change the font. 
 To view the rules in the GUI, press the Help button.
 
 
-The rules of pig latin (from wikipedia):
+The rules of pig latin ([from wikipedia](https://en.wikipedia.org/wiki/Pig_Latin)):
 
 The usual rules for changing standard English into Pig Latin are as follows:
 For words that begin with consonant sounds, the initial consonant or consonant cluster is moved to the end of the word, and "ay" is added, as in the following examples:
