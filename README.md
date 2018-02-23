@@ -1,7 +1,4 @@
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This will appear with six space characters in front of it
-
-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This will appear with 6 spaces in front of it
 ##**Translate to Secret Languages**
 
 A simple GUI program to translate between pig latin/english, and also between gibberish/english. 
