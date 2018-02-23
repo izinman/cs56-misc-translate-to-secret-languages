@@ -1,3 +1,10 @@
+
+p.a {
+    font-family: "Times New Roman", Times, serif;
+}
+
+<p class="a">This is a paragraph, shown in the Times New Roman font.</p>
+
 ```HTML
  <span style="color: #f2cf4a; font-family: Babas; font-size: 2em;">INSPIRATION DAY</span>
 ```
