@@ -1,6 +1,6 @@
-
+```
  <span style="color: #f2cf4a; font-family: Babas; font-size: 2em;">INSPIRATION DAY</span>
-
+```
 ##**Translate to Secret Languages**
 
 A simple GUI program to translate between pig latin/english, and also between gibberish/english. 
