@@ -1,5 +1,6 @@
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This will appear with 6 spaces in front of it
-##**Translate to Secret Languages**
+
+**Translate to Secret Languages**
+=================================
 
 A simple GUI program to translate between pig latin/english, and also between gibberish/english. 
 
@@ -14,7 +15,7 @@ The rules of pig latin ([from wikipedia](https://en.wikipedia.org/wiki/Pig_Latin
 
 The usual rules for changing standard English into Pig Latin are as follows:
 For words that begin with consonant sounds, the initial consonant or consonant cluster is moved to the end of the word, and "ay" is added, as in the following examples:
-![Alt text](https://raw.githubusercontent.com/isaacstaugaard/cs56-misc-translate-to-secret-languages/master/ScreenshotsForReadme/piglatinex.png?raw=true)
+![Alt text](https://raw.githubusercontent.com/isaacstaugaard/cs56-misc-translate-to-secret-languages/master/ScreenshotsForReadme/piglatinex.png?raw=true)  
     "happy" → "appyhay"
     "duck" → "uckday"
     "glove" → "oveglay"
@@ -29,14 +30,14 @@ Yet another acceptable variant is to add the ending "yay" to words that begin wi
 
 
 
-The rules of our gibberish program:
+The rules of our gibberish program ([from wikipedia](https://en.wikipedia.org/wiki/Gibberish_(language_game)):
 
- The conversion for changing standard English into gibberish are as follows: 
- The string 'uvug' is randomly placed into the word to be translated, possibly many times. 
- For example:
- ![Alt text](https://raw.githubusercontent.com/isaacstaugaard/cs56-misc-translate-to-secret-languages/master/ScreenshotsForReadme/gibberishex.png?raw=true)
-    "hello" -> "huvugelluvugo"
-    "hi my name is conrad" -> "huvugi my nuvugamuvuge uvugis cuvugonruvugad"
+ The conversion for changing standard English into gibberish are as follows(in our program, not officially): 
+ The string 'uvug' is placed into the word to be translated, before each vowel, not including 'y'. That could be added for future functionality for words that don't have another vowel like "my" → "muvugy"  
+ For example:  
+ ![Alt text](https://raw.githubusercontent.com/isaacstaugaard/cs56-misc-translate-to-secret-languages/master/ScreenshotsForReadme/gibberishex.png?raw=true)  
+    "hello" → "huvugelluvugo"  
+    "hi my name is conrad" → "huvugi my nuvugamuvuge uvugis cuvugonruvugad"
  
  Some extra instructions: The combined translator contains both the Gibberish and PigLatin translators. It contains a help function detailing the procedure and rules of the languages. There are also new buttons for changing the font. To change the font, simply press the button you wish and select a font or color.
 
