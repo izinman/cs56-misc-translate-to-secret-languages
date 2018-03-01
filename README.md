@@ -2,18 +2,15 @@
 **Translate to Secret Languages**
 =================================
 
-A simple GUI program to translate between pig latin/english, and also between gibberish/english. 
-
-![Alt text](https://raw.githubusercontent.com/isaacstaugaard/cs56-misc-translate-to-secret-languages/master/ScreenshotsForReadme/anttargets.png?raw=true)
-
-***Main targets***:  
+A simple GUI program to translate between pig latin/english, and also between gibberish/english.  
+**Main targets**:  
  **run**: run the combined PigLatin/Gibberish Translator program  
  **clean**: delete unnecessary files and directories  
  **compile**: compile the java files  
  **test**: test EnglishToPigLatin  
 Default target: compile
 
-To run the combined translator: Use the command **ant Run**. Once run, simply type the words you wish to be translated into the empty box under "Please enter a word or phrase of 8 words or less:" and perss the conversion you want. The result will be displayed in the box under "Result". 
+To run the combined translator: Use the command **ant run**. Once run, simply type the words you wish to be translated into the empty box under "Please enter a word or phrase of 8 words or less:" and press the conversion you want. The result will be displayed in the box under "Result". 
 You press the "Font Style" button or the "Font Color" button to change the font. 
 To view the rules in the GUI, press the Help button.
 
