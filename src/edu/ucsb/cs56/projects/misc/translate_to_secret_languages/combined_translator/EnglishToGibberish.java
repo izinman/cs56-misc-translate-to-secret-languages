@@ -12,7 +12,7 @@ public class EnglishToGibberish {
 	/** The method that checks to see if the first character passed
 	 * to it is a vowel or a consonant
 	 * @param input the first letter of a word
-	 * @return result which is true when the first letter is a vowel
+	 * @return return true if input is a vowel, false otherwise
 	 */
 
 
@@ -29,7 +29,7 @@ public class EnglishToGibberish {
 	 * If it is a vowel, then "uvug" is added in front of it
 	 *
 	 * @param  input the input is the string typed into the box
-	 * @return String is returned, and it is reprinted into the text box below the input
+	 * @return result is returned, and it is reprinted into the text box below the input
 	 */
 	public static String toGibberish(String input) {
 		String result = "";
@@ -75,7 +75,7 @@ public class EnglishToGibberish {
 	 * The method takes a string input, and removes all occurences of "uvug" and "Uvug"
 	 *
 	 * @param  input the input is the string typed into the box
-	 * @return String is returned, and it is reprinted into the text box below the input
+	 * @return newstr is returned, and it is reprinted into the text box below the input
 	 */
 	public static String fromGibberish(String input) {
 		String newstr = input.replaceAll("uvug", "");
