@@ -1,5 +1,3 @@
-package edu.ucsb.cs56.projects.misc.translate_to_secret_languages.combined_translator;
-
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
@@ -7,7 +5,7 @@ import java.awt.*;
 /**
  * this is a class that helps translate a phrase to / from English to /from
  * PigLatin
- * 
+ *
  * @author Christian Rivera Cruz
  * @author Adam Kazberuk
  * @author Ian Vernon
@@ -17,23 +15,6 @@ import java.awt.*;
  */
 
 public class EnglishToPigLatin {
-	/**
-	 * The method that checks to see if the first character passed to it is a
-	 * vowel or a consonant
-	 * 
-	 * @param input
-	 *            the first letter of a word
-	 * @return result which is true when the first letter is a vowel
-	 */
-
-	public static boolean isVowel(char input) {
-		boolean result = false;
-		if (input == 'a' || input == 'A' || input == 'e' || input == 'E' || input == 'i' || input == 'I' || input == 'o'
-				|| input == 'O' || input == 'u' || input == 'U') {
-			result = true;
-		}
-		return result;
-	}
 
 	/**
 	 * The method that converts the string from english to pig latin
@@ -55,28 +36,27 @@ public class EnglishToPigLatin {
 		String result = "";
 		String words = "";
 		int posFirstVowel = 0;
-		if (input.equals("")) {
+		if (input.equals(""))
 			return result;
-		}
 
 		StringTokenizer token = new StringTokenizer(input);
 		while (token.hasMoreTokens()) {
 			words = token.nextToken();
 			words.toLowerCase();
-			char[] chararray = words.toCharArray();
+			char[] charArray = words.toCharArray();
 			// the part that enforces the rules of pig latin
-			if (isVowel(chararray[0])) {
+			if (EnglishToGibberish.isVowel(charArray[0])) {
 				result += words + "way ";
 			}
 			// else adapted from code found at
 			// http://technotip.com/216/position-left-most-vowel-javascript/
 			else {
 				posFirstVowel = posFirstVowel(words);
-				for (int j = posFirstVowel; j < chararray.length; j++) {
-					result += chararray[j];
+				for (int j = posFirstVowel; j < charArray.length; j++) {
+					result += charArray[j];
 				}
 				for (int j = 0; j < posFirstVowel; j++) {
-					result += chararray[j];
+					result += charArray[j];
 				}
 				result += "ay ";
 			}
@@ -139,7 +119,7 @@ public class EnglishToPigLatin {
 			list.add(listToString(c));
 			c.add(temp);
 		}
-		while (!isVowel(c.get(l - 1))) {
+		while (!EnglishToGibberish.isVowel(c.get(l - 1))) {
 			// move consonant to front of string
 			c.add(0, c.remove(l - 1));
 			// add to the list
@@ -153,8 +133,8 @@ public class EnglishToPigLatin {
 
 	private static String listToString(ArrayList<Character> list) {
 		String result = "";
-		for (int i = 0; i < list.size(); i++) {
-			result += list.get(i);
+		for (Character ch : list) {
+			result += ch;
 		}
 		return result;
 	}
@@ -176,25 +156,23 @@ public class EnglishToPigLatin {
 		content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
 		content.add(new WindowSetUp());
 		mainWindow.setBackground(new Color(0, 255, 0));
-
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 		mainWindow.setVisible(true);
 	}
 
 	public static int posFirstVowel(String input) {
 		int count = 0;
 		int length = input.length();
-		char[] chararray;
-		chararray = new char[length];
+		char[] charArray;
+		charArray = new char[length];
 		while (count < input.length()) {
-			chararray[count] = input.charAt(count);
+			charArray[count] = input.charAt(count);
 			count++;
 		}
 		int i = 0;
 		char chr;
-		for (i = 0; i < chararray.length; i++) {
-			chr = chararray[i];
+		for (i = 0; i < charArray.length; i++) {
+			chr = charArray[i];
 			if (chr == 'a' || chr == 'e' || chr == 'i' || chr == 'o' || chr == 'u')
 				break;
 		}
