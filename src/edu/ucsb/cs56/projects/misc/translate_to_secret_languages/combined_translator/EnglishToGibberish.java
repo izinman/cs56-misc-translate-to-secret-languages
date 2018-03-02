@@ -72,7 +72,7 @@ public class EnglishToGibberish {
 	/**
 	 * The method that converts the string from Gibberish to English
 	 *
-	 * The method takes a string input, and removes all occurences of "uvug" and "Uvug"
+	 * The method takes a string input, and removes all occurrences of "uvug" and "Uvug"
 	 *
 	 * @param  input the input is the string typed into the box
 	 * @return String is returned, and it is reprinted into the text box below the input

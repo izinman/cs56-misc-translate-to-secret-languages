@@ -22,6 +22,11 @@ import java.io.*;
 @SuppressWarnings("serial")
 public class WindowSetUp extends JApplet implements ActionListener {
 	/* Declaration */
+	
+	//TODO: FINISH IMPORTING GUI CODE FROM ENGLISHTOGIBBERISH
+	private JFrame mainWindow;
+	private JApplet windowContent;
+	private Container mainWindowContentPane;
 	private Container contentPane;
 	private JTextArea outputField;
 	private JPanel boxPanel;
@@ -57,6 +62,7 @@ public class WindowSetUp extends JApplet implements ActionListener {
 
 	public WindowSetUp() {
 		/* Instantiation */
+		
 		int opacity = (int) (255 * .8);
 		Color myBlue = new Color(18, 64, 171, opacity);
 		Color myYellow = new Color(255, 211, 0, opacity);
