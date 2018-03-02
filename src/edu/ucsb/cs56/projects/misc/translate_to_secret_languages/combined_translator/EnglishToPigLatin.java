@@ -129,7 +129,6 @@ public class EnglishToPigLatin {
 
 		// return the list as an array
 		return listToStringArray(list);
-
 	}
 
 	private static String listToString(ArrayList<Character> list) {
@@ -139,7 +138,6 @@ public class EnglishToPigLatin {
 		}
 		return result;
 	}
-
 	private static String[] listToStringArray(ArrayList<String> list) {
 		return Arrays.copyOf(list.toArray(), list.size(), String[].class);
 	}
@@ -166,7 +164,6 @@ public class EnglishToPigLatin {
      * @param input String whole user input
      * @return i position of first vowel in input
      */
-
 	public static int posFirstVowel(String input) {
 		int count = 0;
 		int length = input.length();
