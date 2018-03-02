@@ -16,7 +16,8 @@ import java.io.*;
  *
  * @author John Mangel
  * @author Isaac Zinman
- * @version 02/22/18 for legacy project, cs56, W18 - fully refactored by IZ
+ * @author Ty Still
+ * @version 02/28/18 for legacy project, cs56, W18 - fully refactored by IZ, javadoc descriptions changed by TS
  */
 
 @SuppressWarnings("serial")
@@ -185,6 +186,11 @@ public class WindowSetUp extends JApplet implements ActionListener {
 		Times.addActionListener(new FontListener("Times New Roman"));
 		Close.addActionListener(new CloseListener());
 	}
+        /**
+         * Determines what language to translate to and from
+	 *
+	 * @param e the actionEvent for translating
+         */
 
 	public void actionPerformed(ActionEvent e) {
 		if (direction == translationDirection.ENG_TO_PIG)
@@ -201,6 +207,11 @@ public class WindowSetUp extends JApplet implements ActionListener {
 	/** inner class for when chooseTranslationDirection is selected */
 
 	public class ChooseListener implements ActionListener {
+	        /**
+	         * changes direction to correct translation direction
+		 * 
+		 * @param e ActionEvent for chooseTranslationDirection
+	         */
 		public void actionPerformed(ActionEvent e) {
 			String type = (String) chooseTranslationDirection.getSelectedItem();
 			if (type.equals("English to Pig Latin"))
@@ -219,6 +230,11 @@ public class WindowSetUp extends JApplet implements ActionListener {
 	 */
 
 	public class HelpListener implements ActionListener {
+	        /**
+	         * sets and displays helptext
+	         * 
+		 * @param e ActionEvent for Help button
+	         */
 		public void actionPerformed(ActionEvent e) {
 			helpFrame.setSize(600, 400);
 			Container helpContentPane = helpFrame.getContentPane();
@@ -256,6 +272,11 @@ public class WindowSetUp extends JApplet implements ActionListener {
 	 */
 
 	public class FontButtonListener implements ActionListener {
+   	        /**
+	         * displays font list
+	         *
+	         * @param e ActionEvent for Font button press
+	         */
 		public void actionPerformed(ActionEvent e) {
 			fontFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			fontFrame.setVisible(true);
@@ -267,6 +288,11 @@ public class WindowSetUp extends JApplet implements ActionListener {
 	 */
 
 	public class FontColorListener implements ActionListener {
+	        /**
+	         * displays font colors list
+	         *
+	         * @param e ActionEvent for fColor button press
+	         */
 		public void actionPerformed(ActionEvent e) {
 			fontColorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			fontColorFrame.setVisible(true);
@@ -274,7 +300,7 @@ public class WindowSetUp extends JApplet implements ActionListener {
 	}
 
 	/**
-	 * inner class for when Pig Latin to English button is selected
+	 * inner method for when Pig Latin to English button is selected
 	 */
 
 	// TODO: Consolidate logic to EnglishToPigLatin class
@@ -331,7 +357,7 @@ public class WindowSetUp extends JApplet implements ActionListener {
 	// }
 
 	/**
-	 * inner class for when English to Pig Latin is selected
+	 * inner method for when English to Pig Latin is selected
 	 */
 	// public class EngToPigListener implements ActionListener
 	// {
@@ -354,7 +380,7 @@ public class WindowSetUp extends JApplet implements ActionListener {
 	// }
 
 	/**
-	 * inner class for when Gibberish to English is selected
+	 * inner method for when Gibberish to English is selected
 	 */
 
 
@@ -371,7 +397,7 @@ public class WindowSetUp extends JApplet implements ActionListener {
 
 
 	/**
-	 * inner class for when English to Gibberish is selected
+	 * inner method for when English to Gibberish is selected
 	 */
 
 
@@ -392,6 +418,11 @@ public class WindowSetUp extends JApplet implements ActionListener {
 	 */
 
 	public class BoxListener implements ActionListener {
+	        /**
+	         * updates output when text is updated
+	         *
+	         * @param e Actionevent when JComboBox is updated
+	         */
 		public void actionPerformed(ActionEvent e) {
 			updateOutput();
 		}
@@ -448,20 +479,42 @@ public class WindowSetUp extends JApplet implements ActionListener {
 		}
 	}
 
+        /**
+         * inner class for updating font to times new roman
+         */
 	public class DefListener implements ActionListener {
+	        /**
+	         * updates font to times new roman when asked
+	         *
+	         * @param e ActionEvent for when times new roman is selected for font choice
+	         */
 		public void actionPerformed(ActionEvent e) {
 			Font DefFont = new Font("Times New Roman", Font.PLAIN, 15);
 			inputTextField.setFont(DefFont);
 			outputField.setFont(DefFont);
 		}
 	}
+
+        /**
+         * inner class for toggling bold or italics
+         */
 	// Either used for toggling bold, or toggling italics
 	// Boolean passed in decides which it is, to reduce code duplication
 	public class FontStyleListener implements ActionListener {
 		boolean intendedForBold;
+	    /**
+	     * inner method to determine whether it is changing bold or italics
+	     *
+	     * @param intendedForBold boolean that determines what to toggle
+	     */
 		public FontStyleListener(boolean intendedForBold) {
 			this.intendedForBold = intendedForBold;
 		}
+	    /**
+	     * determines and toggles either italics or bold
+	     *
+	     * @param e ActionEvent for when user selects or deselects bold or italics buttons
+	     */
 		public void actionPerformed(ActionEvent e) {
 			Font oldFont = inputTextField.getFont();
 			if (intendedForBold) {
@@ -485,7 +538,9 @@ public class WindowSetUp extends JApplet implements ActionListener {
 		}
 	}
 
-
+    /**
+     * inner class for selecting font
+     */
 	public class FontListener implements ActionListener {
 		String fontName;
 
@@ -506,18 +561,25 @@ public class WindowSetUp extends JApplet implements ActionListener {
 			outputField.setFont(newFont);
 		}
 	}
-
+    /**
+     * inner class for closing
+     */
 	public class CloseListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			fontFrame.dispose();
 		}
 	}
-
+    /**
+     * inner class for closing help
+     */
 	public class CloseHelpListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			helpFrame.dispose();
 		}
 	}
+    /**
+     * inner class for changing color
+     */
 	public class ColorListener implements ActionListener {
 		Color color;
 		public ColorListener(Color color) {
@@ -528,7 +590,9 @@ public class WindowSetUp extends JApplet implements ActionListener {
 			outputField.setForeground(color);
 		}
 	}
-
+    /**
+     * inner class for holding and changing input and output strings
+     */
 	public class Tuple {
 		public final String input;
 		public int translation;

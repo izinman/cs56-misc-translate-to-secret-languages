@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 public class EnglishToGibberishTester
 {
     /**
-     test method that translates to English from Pig Latin
+     test method that translates to English from Gibberish, using one word that starts with a consonant
      @see EnglishToGibberish
      */
 
@@ -22,7 +22,7 @@ public class EnglishToGibberishTester
     }
 
     /**
-     test toGibberish for a word that begins with a consonant
+     test toGibberish for one word that begins with a consonant
      @see EnglishToGibberish
      */
 
@@ -33,7 +33,7 @@ public class EnglishToGibberishTester
     }
 
     /**
-     test toGibberish for a word that begins with a vowel
+     test toGibberish for one word that begins with a vowel
      @see EnglishToGibberish
      */
 
@@ -44,7 +44,7 @@ public class EnglishToGibberishTester
     }
 
     /**
-     test toGibberish for a word that begins with a vowel and word that begins with a consonant
+     test toGibberish for a word that begins with a vowel then a word that begins with a consonant
      @see EnglishToGibberish
      */
 

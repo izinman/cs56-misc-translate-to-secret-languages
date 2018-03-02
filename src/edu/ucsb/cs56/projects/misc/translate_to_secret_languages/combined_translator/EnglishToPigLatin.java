@@ -11,7 +11,8 @@ import java.awt.*;
  * @author Ian Vernon
  * @author Evan Moelter
  * @author Isaac Zinman
- * @version 2/22/18 for legacy project, cs56, W18 - fully refactored by IZ
+ * @author Ty Still
+ * @version 2/28/18 for legacy project, cs56, W18 - fully refactored by IZ, updated javadoc descriptions by TS
  */
 
 public class EnglishToPigLatin {
@@ -128,7 +129,6 @@ public class EnglishToPigLatin {
 
 		// return the list as an array
 		return listToStringArray(list);
-
 	}
 
 	private static String listToString(ArrayList<Character> list) {
@@ -138,7 +138,6 @@ public class EnglishToPigLatin {
 		}
 		return result;
 	}
-
 	private static String[] listToStringArray(ArrayList<String> list) {
 		return Arrays.copyOf(list.toArray(), list.size(), String[].class);
 	}
@@ -159,7 +158,12 @@ public class EnglishToPigLatin {
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainWindow.setVisible(true);
 	}
-
+    /**
+     * determines position of the first vowel
+     *
+     * @param input String whole user input
+     * @return i position of first vowel in input
+     */
 	public static int posFirstVowel(String input) {
 		int count = 0;
 		int length = input.length();
@@ -178,7 +182,9 @@ public class EnglishToPigLatin {
 		}
 		return i;
 	}
-
+    /**
+     * method for making it start
+     */
 	public static void main(String[] args) {
 		go();
 	}

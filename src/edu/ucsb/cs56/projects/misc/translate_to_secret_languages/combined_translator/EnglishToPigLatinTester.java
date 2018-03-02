@@ -87,21 +87,21 @@ public class EnglishToPigLatinTester
 	//this will test a consonant word, followed by a vowel word
 	assertEquals("oldcay asway entuckykay", EnglishToPigLatin.toPigLatin("cold as kentucky"));
     }   
-  /** The method that tests a vowel in the third letter of the word
+  /** The method that tests to see if the  vowel is in the third letter of the word
      *  @see EnglishToPigLatin#posFirstVowel
      */
     @Test public void test_posFirstVowelThis()
     {
         assertEquals(2,EnglishToPigLatin.posFirstVowel("this"));
     }
-     /** The method that tests a vowel in the fourth letter of the word
+     /** The method that tests to see if a vowel is in the fourth letter of the word
      *  @see EnglishToPigLatin#posFirstVowel
      */
     @Test public void test_posFirstVowelstreet()
     {
         assertEquals(3,EnglishToPigLatin.posFirstVowel("street"));
     }
-     /** The method that tests a vowel in the first letter of the word
+     /** The method that tests to see if a vowel is in the first letter of the word
      *  @see EnglishToPigLatin#posFirstVowel
      */
     @Test public void test_posFirstVowelaway()
