@@ -1,4 +1,3 @@
-package edu.ucsb.cs56.projects.misc.translate_to_secret_languages.combined_translator;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
@@ -12,47 +11,47 @@ import static org.junit.Assert.assertEquals;
 public class EnglishToGibberishTester
 {
     /**
-    test method that translates to English from Pig Latin
-       @see EnglishToGibberish
+     test method that translates to English from Pig Latin
+     @see EnglishToGibberish
      */
-   
+
     @Test public void testFromGibberish()
     {
-	// should return stub. This method is from another issue
+        // should return stub. This method is from another issue
         assertEquals("dog",EnglishToGibberish.fromGibberish("duvugog"));
     }
-    
+
     /**
-    test toGibberish for a word that begins with a consonant
-       @see EnglishToGibberish
+     test toGibberish for a word that begins with a consonant
+     @see EnglishToGibberish
      */
-   
+
     @Test public void testToGibberishConsonant()
     {
-	// should return dog with "uvug" inserted after the d
+        // should return dog with "uvug" inserted after the d
         assertEquals("duvugog",EnglishToGibberish.toGibberish("dog"));
     }
 
     /**
-    test toGibberish for a word that begins with a vowel
-       @see EnglishToGibberish
+     test toGibberish for a word that begins with a vowel
+     @see EnglishToGibberish
      */
-   
+
     @Test public void testToGibberishVowel()
     {
-	// should return dog with "uvug" inserted after the d
+        // should return dog with "uvug" inserted after the d
         assertEquals("uvugat",EnglishToGibberish.toGibberish("at"));
     }
 
     /**
-    test toGibberish for a word that begins with a vowel and word that begins with a consonant
-       @see EnglishToGibberish
+     test toGibberish for a word that begins with a vowel and word that begins with a consonant
+     @see EnglishToGibberish
      */
-   
+
     @Test public void testToGibberishVowelConsonant()
     {
-	// should return dog with "uvug" inserted after the d
+        // should return dog with "uvug" inserted after the d
         assertEquals("uvugat duvugog",EnglishToGibberish.toGibberish("at dog"));
     }
-    
+
 }

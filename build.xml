@@ -1,12 +1,13 @@
 <project default="compile">
 
-  <!-- build.xml for project 1, S13, CS56
-       name: Alex Molina, Ian Vernon, Evan Moelter -->
+  <!-- build.xml for project 1, W18, CS56
+       name: Alex Molina, Ian Vernon, Evan Moelter
+       updated for refactor by: Isaac Zinman     -->
   <property environment="env"/> <!-- load the environment variables --> 
   <property name="webRoot" value="${env.HOME}/public_html/cs56/13S/${env.USER}" />
-<property name="fullPkg" value="edu.ucsb.cs56.projects.misc.translate_to_secret_languages" />
-<property name="course" value="cs56"/>
-<property name="quarter" value="13S"/>
+  <property name="fullPkg" value="edu.ucsb.cs56.projects.misc.translate_to_secret_languages" />
+  <property name="course" value="cs56"/>
+  <property name="quarter" value="13S"/>
   <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/${course}/${quarter}/${env.USER}" /> 
   <property name="projectName" value="cs56_translator_to_secret_languages" /> 
   <property name="javadocDest" value="${webRoot}/${projectName}/javadoc" /> 
@@ -16,8 +17,7 @@
 
   <target name="compile" description="compile the java files" > 
     <mkdir dir = "build" />
-    <javac srcdir="src" destdir="build" debug="true" debuglevel="lines,vars,source" includeantruntime="false">
-      
+    <javac srcdir="src" destdir="build" debug="true" debuglevel="lines,vars,source" includeantruntime="false">      
       <classpath>
 	<pathelement location="build"/> 
 	<pathelement location="lib/junit-4.8.2.jar"/>
@@ -25,16 +25,9 @@
     </javac> 
   </target>
 
-  <target name="Gibberish" depends="compile" description="run the English to Gibberish Translator program"> 
-    <java classname="${fullPkg}.gibberish_translator.EnglishToGibberish" classpath="build" fork="true"/>
+  <target name="run" depends="compile" description="run the combined PigLatin/Gibberish translator program">
+    <java classname="${fullPkg}.combined_translator.EnglishToPigLatin" classpath="build" fork="true"/>
   </target>
-<target name="PigLatin" depends="compile" description="run the English to PigLatin Translator program"> 
-    <java classname="${fullPkg}.pig_latin_translator.EnglishToPigLatin" classpath="build" fork="true"/>
-  </target>
-
-<target name="Run" depends="compile" description="run the combined PigLatin/Gibberish Translator program">
-  <java classname="${fullPkg}.combined_translator.EnglishToPigLatin" classpath="build" fork="true"/>
-</target>
 
   <target name="clean" description="delete unnecessary files and directories">
     <delete dir="build" quiet="true" />    
@@ -74,7 +67,7 @@
   </target> 
 
 
-  <target name="test" depends="compile" description="test EnglishToPigLatin">
+  <target name="test" depends="compile" description="test Translator classes">
 
     <junit haltonerror="no" haltonfailure="no">
       <classpath>
