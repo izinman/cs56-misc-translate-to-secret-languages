@@ -1,3 +1,5 @@
+package src.edu.ucsb.cs56.projects.misc.translate_to_secret_languages.combined_translator;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -16,18 +18,17 @@ import java.io.*;
  *
  * @author John Mangel
  * @author Isaac Zinman
- * @version 02/22/18 for legacy project, cs56, W18 - fully refactored by IZ
+ * @version 03/07/18 for legacy project, cs56, W18 - fully refactored by IZ
  */
 
 @SuppressWarnings("serial")
-public class WindowSetUp extends JApplet implements ActionListener {
+public class WindowSetUp extends JFrame implements ActionListener {
 	/* Declaration */
 	
 	//TODO: FINISH IMPORTING GUI CODE FROM ENGLISHTOGIBBERISH
-	private JFrame mainWindow;
 	private JApplet windowContent;
 	private Container mainWindowContentPane;
-	private Container contentPane;
+	private Container appletContentPane;
 	private JTextArea outputField;
 	private JPanel boxPanel;
 	private JScrollPane scroller;
@@ -59,15 +60,24 @@ public class WindowSetUp extends JApplet implements ActionListener {
 	 * windowSetUp creates the JPanels that we use for the GUI, which include
 	 * JTextArea, JTextField, JButton, JComboBox
 	 */
-
+	
 	public WindowSetUp() {
 		/* Instantiation */
+		this.setName("Translate to Secret Languages");
+		this.setSize(400, 200);
+		mainWindowContentPane = this.getContentPane();
+		mainWindowContentPane.setBackground(Color.white);
+		mainWindowContentPane.setLayout(new BoxLayout(mainWindowContentPane, BoxLayout.Y_AXIS));
+		this.setBackground(new Color(0,255,0));
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		windowContent = new JApplet();
+		mainWindowContentPane.add(windowContent);
 		
 		int opacity = (int) (255 * .8);
 		Color myBlue = new Color(18, 64, 171, opacity);
 		Color myYellow = new Color(255, 211, 0, opacity);
-		contentPane = getContentPane();
-		contentPane.setBackground(myBlue);
+		appletContentPane = windowContent.getContentPane();
+		appletContentPane.setBackground(myBlue);
 		outputField = new JTextArea(30, 10);
 		scroller = new JScrollPane(outputField);
 		outputField.setLineWrap(true);
@@ -92,25 +102,25 @@ public class WindowSetUp extends JApplet implements ActionListener {
 		wordBoxes = new ArrayList<JComboBox<String>>();
 
 		/* Location */
-		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+		appletContentPane.setLayout(new BoxLayout(appletContentPane, BoxLayout.Y_AXIS));
 		JPanel crossPane = new JPanel();
 
 		crossPane.setLayout(new BoxLayout(crossPane, BoxLayout.X_AXIS));
 		crossPane.add(helpButton);
 		crossPane.add(fontButton);
 		crossPane.add(fontColorButton);
-		contentPane.add(crossPane);
-		contentPane.add(welcomePhrase);
+		appletContentPane.add(crossPane);
+		appletContentPane.add(welcomePhrase);
 		welcomePhrase.setEditable(false);
-		contentPane.add(inputTextField);
-		contentPane.add(chooseTranslationDirection);
+		appletContentPane.add(inputTextField);
+		appletContentPane.add(chooseTranslationDirection);
 		chooseTranslationDirection.addActionListener(new ChooseListener());
-		contentPane.add(resultPhrase);
+		appletContentPane.add(resultPhrase);
 		resultPhrase.setEditable(false);
-		contentPane.add(scroller);
-		contentPane.add(translationSelectorInstruction);
+		appletContentPane.add(scroller);
+		appletContentPane.add(translationSelectorInstruction);
 		translationSelectorInstruction.setEditable(false);
-		contentPane.add(boxPanel);
+		appletContentPane.add(boxPanel);
 		for (int i = 0; i < 8; i++) {
 			wordBoxes.add(i, new JComboBox<String>());
 			wordBoxes.get(i).setBackground(myYellow);
@@ -129,9 +139,11 @@ public class WindowSetUp extends JApplet implements ActionListener {
 				wordBoxSelections.add(new Tuple(tupleArgs[0], Integer.parseInt(tupleArgs[1])));
 			}
 			br.close();
-		} catch (Exception ex) {
-			System.err.println(
-					"Error reading from file. Ignore this warning if you haven't yet used PigLatin to English, because the file doesn't not yet exist.");
+		} catch (FileNotFoundException ex) {
+			// first time running program, file does not exist yet; no action need be taken
+		} catch (Exception e) {
+			System.err.println("An unexpected error occurred in reading selections file. See below:");
+			e.printStackTrace();
 		}
 
 		/* Configuration */
@@ -190,6 +202,7 @@ public class WindowSetUp extends JApplet implements ActionListener {
 		Serif.addActionListener(new FontListener("Serif"));
 		Times.addActionListener(new FontListener("Times New Roman"));
 		Close.addActionListener(new CloseListener());
+		this.setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -454,13 +467,6 @@ public class WindowSetUp extends JApplet implements ActionListener {
 		}
 	}
 
-	public class DefListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			Font DefFont = new Font("Times New Roman", Font.PLAIN, 15);
-			inputTextField.setFont(DefFont);
-			outputField.setFont(DefFont);
-		}
-	}
 	// Either used for toggling bold, or toggling italics
 	// Boolean passed in decides which it is, to reduce code duplication
 	public class FontStyleListener implements ActionListener {
@@ -500,9 +506,9 @@ public class WindowSetUp extends JApplet implements ActionListener {
 		}
 		public void actionPerformed(ActionEvent e) {
 			if (fontName.equals("Default")) {
-				Font DefFont = new Font("Times New Roman", Font.PLAIN, 15);
-				inputTextField.setFont(DefFont);
-				outputField.setFont(DefFont);
+				Font defFont = new Font("Times New Roman", Font.PLAIN, 15);
+				inputTextField.setFont(defFont);
+				outputField.setFont(defFont);
 				return;
 			}
 			int style = inputTextField.getFont().isItalic() ? Font.ITALIC : Font.PLAIN;

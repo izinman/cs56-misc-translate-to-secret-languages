@@ -1,3 +1,5 @@
+package src.edu.ucsb.cs56.projects.misc.translate_to_secret_languages.combined_translator;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.StringTokenizer;
@@ -87,22 +89,5 @@ public class EnglishToGibberish {
 		newstr = newerstr.substring(0, 1).toUpperCase() + newerstr.substring(1);
 		return newstr;
 	}
-	/**
-	 This function makes our GUI for toPigLatin work, setup and other processes are handled in windowSetUp
-	 */
-	public static void go() {
-		JFrame f = new JFrame("Pig Latin and Gibberish Translator");
-		f.setSize(400, 200);
-		Container content = f.getContentPane();
-		content.setBackground(Color.white);
-		content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
-		content.add(new WindowSetUp());
-		f.setBackground(new Color(0,255,0));
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setVisible(true);
-	}
-
-	public static void main(String [] args){
-		go();
-	}
+	
 }
