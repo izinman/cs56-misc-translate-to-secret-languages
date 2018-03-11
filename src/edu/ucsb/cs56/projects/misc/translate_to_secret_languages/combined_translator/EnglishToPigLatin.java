@@ -146,43 +146,15 @@ public class EnglishToPigLatin {
 		return Arrays.copyOf(list.toArray(), list.size(), String[].class);
 	}
 
-	/**
-	 * This function makes our GUI for toPigLatin work, setup and other
-	 * processes are handled in windowSetUp
-	 */
-
-	public static void go() {
-		JFrame mainWindow = new JFrame("Pig Latin and Gibberish Translator");
-		mainWindow.setSize(600, 400);
-		Container content = mainWindow.getContentPane();
-		content.setBackground(Color.white);
-		content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
-		content.add(new WindowSetUp());
-		mainWindow.setBackground(new Color(0, 255, 0));
-		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainWindow.setVisible(true);
-	}
-
 	public static int posFirstVowel(String input) {
-		int count = 0;
-		int length = input.length();
-		char[] charArray;
-		charArray = new char[length];
-		while (count < input.length()) {
-			charArray[count] = input.charAt(count);
-			count++;
-		}
-		int i = 0;
 		char chr;
-		for (i = 0; i < charArray.length; i++) {
-			chr = charArray[i];
+		int i = 0;
+		for (; i < input.length(); i++) {
+			chr = input.charAt(i);
 			if (chr == 'a' || chr == 'e' || chr == 'i' || chr == 'o' || chr == 'u')
 				break;
 		}
 		return i;
 	}
 
-	public static void main(String[] args) {
-		go();
-	}
 }

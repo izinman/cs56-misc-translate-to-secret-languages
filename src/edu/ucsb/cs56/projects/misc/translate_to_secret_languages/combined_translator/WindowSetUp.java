@@ -347,13 +347,9 @@ public class WindowSetUp extends JFrame implements ActionListener {
 		}
 	}
 
-	// }
-
 	/**
 	 * inner class for when English to Pig Latin is selected
 	 */
-	// public class EngToPigListener implements ActionListener
-	// {
 	public void translateEngToPig() {
 		String phrase;
 		phrase = inputTextField.getText();
@@ -370,13 +366,6 @@ public class WindowSetUp extends JFrame implements ActionListener {
 		}
 	}
 
-	// }
-
-	/**
-	 * inner class for when Gibberish to English is selected
-	 */
-
-
 	public void translateGibToEng() {
 		String phrase;
 		phrase = inputTextField.getText();
@@ -387,12 +376,6 @@ public class WindowSetUp extends JFrame implements ActionListener {
 			inputTextField.selectAll();
 		}
 	}
-
-
-	/**
-	 * inner class for when English to Gibberish is selected
-	 */
-
 
 	public void translateEngToGib() {
 		String phrase;
@@ -409,7 +392,6 @@ public class WindowSetUp extends JFrame implements ActionListener {
 	/**
 	 * inner class for when JComboBox is updated
 	 */
-
 	public class BoxListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			updateOutput();
@@ -530,6 +512,7 @@ public class WindowSetUp extends JFrame implements ActionListener {
 			helpFrame.dispose();
 		}
 	}
+
 	public class ColorListener implements ActionListener {
 		Color color;
 		public ColorListener(Color color) {
