@@ -46,7 +46,7 @@ public class EnglishToPigLatin {
 			words.toLowerCase();
 			char[] charArray = words.toCharArray();
 			// the part that enforces the rules of pig latin
-			if (EnglishToGibberish.isVowel(charArray[0])) {
+			if (EnglishToInsertionLang.isVowel(charArray[0])) {
 				result += words + "way ";
 			}
 			// else adapted from code found at
@@ -120,7 +120,7 @@ public class EnglishToPigLatin {
 			list.add(listToString(c));
 			c.add(temp);
 		}
-		while (!EnglishToGibberish.isVowel(c.get(l - 1))) {
+		while (!EnglishToInsertionLang.isVowel(c.get(l - 1))) {
 			// move consonant to front of string
 			c.add(0, c.remove(l - 1));
 			// add to the list
