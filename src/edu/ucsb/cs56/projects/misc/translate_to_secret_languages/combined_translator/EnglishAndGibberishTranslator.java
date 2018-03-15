@@ -1,3 +1,5 @@
+package src.edu.ucsb.cs56.projects.misc.translate_to_secret_languages.combined_translator;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.StringTokenizer;
@@ -9,10 +11,11 @@ import java.util.StringTokenizer;
 
 public class EnglishAndGibberishTranslator extends EnglishToInsertionLang {
     
-    private String replacement;
-    
     
     public EnglishAndGibberishTranslator(){
 	replacement="uvug";
+    }
+    public static String toGibberish(String input) {
+        return toLanguage(input);
     }
 }

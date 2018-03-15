@@ -1,3 +1,5 @@
+package src.edu.ucsb.cs56.projects.misc.translate_to_secret_languages.combined_translator;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.StringTokenizer;
@@ -10,6 +12,7 @@ import java.util.StringTokenizer;
  */
 
 public abstract class EnglishToInsertionLang {
+	protected static String replacement;
     /** The method that checks to see if the first character passed
      * to it is a vowel or a consonant
      * @param input the first letter of a word
@@ -31,7 +34,7 @@ public abstract class EnglishToInsertionLang {
      * @param replacement is the string that is inserted into the word
      * @return result is returned, and it is reprinted into the text box below the input
      */
-    public static String toLanguage(String input, String replacement) {
+    public static String toLanguage(String input) {
 	String result = "";
 	String words = "";
 	if (input.equals(""))
@@ -78,7 +81,7 @@ public abstract class EnglishToInsertionLang {
      * @param replacement is the string that will be removed from words, depending on the language
      * @return newstr is returned, and it is reprinted into the text box below the input
      */
-    public static String toEnglish(String input, String replacement) {
+    public static String toEnglish(String input) {
 	String newstr = input.replaceAll(replacement, "");
 	String newerstr, newReplacement;
 	newReplacement = replacement.substring(0,1).toUpperCase() + replacement.substring(1);

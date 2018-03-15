@@ -1,3 +1,5 @@
+package src.edu.ucsb.cs56.projects.misc.translate_to_secret_languages.combined_translator;
+
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
@@ -20,7 +22,7 @@ public class EnglishAndGibberishTester
     @Test public void testFromGibberish()
     {
         // should return stub. This method is from another issue
-        assertEquals("dog",EnglishAndGibberishTranslator.toEnglish("duvugog","uvug"));
+        assertEquals("dog",EnglishAndGibberishTranslator.toEnglish("duvugog"));
     }
     
     /**
@@ -31,7 +33,7 @@ public class EnglishAndGibberishTester
     @Test public void testToGibberishConsonant()
     {
         // should return dog with "uvug" inserted after the d
-        assertEquals("duvugog",EnglishAndGibberishTranslator.toLanguage("dog","uvug"));
+        assertEquals("duvugog",EnglishAndGibberishTranslator.toLanguage("dog"));
     }
     
     /**
@@ -42,7 +44,7 @@ public class EnglishAndGibberishTester
     @Test public void testToGibberishVowel()
     {
         // should return at with "uvug" inserted before the a
-        assertEquals("uvugat",EnglishAndGibberishTranslator.toLanguage("at","uvug"));
+        assertEquals("uvugat",EnglishAndGibberishTranslator.toLanguage("at"));
     }
     
     /**
@@ -53,7 +55,7 @@ public class EnglishAndGibberishTester
     @Test public void testToGibberishVowelConsonant()
     {
         // should return at dog with "uvug" inserted before the a and after the d
-        assertEquals("uvugat duvugog",EnglishAndGibberishTranslator.toLanguage("at dog","uvug"));
+        assertEquals("uvugat duvugog",EnglishAndGibberishTranslator.toLanguage("at dog"));
     }
     
 }

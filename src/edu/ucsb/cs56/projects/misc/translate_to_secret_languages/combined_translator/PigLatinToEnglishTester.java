@@ -1,9 +1,11 @@
+package src.edu.ucsb.cs56.projects.misc.translate_to_secret_languages.combined_translator;
+
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 
 /**
-   The test class EnglishToPigLatinTester, to test the EnglishToPigLatin class
+   The test class EnglishAndPigLatinTranslatorTester, to test the EnglishAndPigLatinTranslator class
    @author Christian Rivera Cruz                                                                                                                            
    @author Adam Kazberuk                                                                                                                                    
    @author Ian Vernon                                                                                                                                        
@@ -15,26 +17,26 @@ public class PigLatinToEnglishTester
 {
     /**
        test empty string
-       @see EnglishToPigLatin
+       @see EnglishAndPigLatinTranslator
      */
    
     @Test public void testNullString()
     {
 	// default conversion should be blank
-        assertEquals(new String[]{""},EnglishToPigLatin.toEnglish(""));
+        assertEquals(new String[]{""},EnglishAndPigLatinTranslator.toEnglish(""));
     }
     /** The method that tests one word that starts with a consonant
-     *  @see EnglishToPigLatin#toEnglish
+     *  @see EnglishAndPigLatinTranslator#toEnglish
      */
     @Test public void test1WordConsonant()
     {
-        assertEquals(new String[]{"hist", "this", "sthi"}, EnglishToPigLatin.toEnglish("isthay"));
+        assertEquals(new String[]{"hist", "this", "sthi"}, EnglishAndPigLatinTranslator.toEnglish("isthay"));
     }
         /** The method that tests one word that starts with a vowel
-     *  @see EnglishToPigLatin#toEnglish
+     *  @see EnglishAndPigLatinTranslator#toEnglish
      */
     @Test public void test1WordVowel()
     {
-        assertEquals(new String[]{"endgame", "wendgame"},EnglishToPigLatin.toEnglish("endgameway"));
+        assertEquals(new String[]{"endgame", "wendgame"},EnglishAndPigLatinTranslator.toEnglish("endgameway"));
     }
 }

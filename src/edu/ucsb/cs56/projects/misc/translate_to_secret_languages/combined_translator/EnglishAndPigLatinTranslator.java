@@ -1,3 +1,5 @@
+package src.edu.ucsb.cs56.projects.misc.translate_to_secret_languages.combined_translator;
+
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +17,7 @@ import java.awt.*;
  * @version 2/28/18 for legacy project, cs56, W18 - fully refactored by IZ, updated javadoc descriptions by TS
  */
 
-public class EnglishToPigLatin {
+public class EnglishAndPigLatinTranslator {
 
 	/**
 	 * The method that converts the string from english to pig latin
