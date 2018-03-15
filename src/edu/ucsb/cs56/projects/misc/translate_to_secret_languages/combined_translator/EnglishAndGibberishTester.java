@@ -33,7 +33,7 @@ public class EnglishAndGibberishTester
     @Test public void testToGibberishConsonant()
     {
         // should return dog with "uvug" inserted after the d
-        assertEquals("duvugog",EnglishAndGibberishTranslator.toLanguage("dog"));
+        assertEquals("duvugog",EnglishAndGibberishTranslator.toGibberish("dog"));
     }
     
     /**
@@ -44,7 +44,7 @@ public class EnglishAndGibberishTester
     @Test public void testToGibberishVowel()
     {
         // should return at with "uvug" inserted before the a
-        assertEquals("uvugat",EnglishAndGibberishTranslator.toLanguage("at"));
+        assertEquals("uvugat",EnglishAndGibberishTranslator.toGibberish("at"));
     }
     
     /**
@@ -55,7 +55,7 @@ public class EnglishAndGibberishTester
     @Test public void testToGibberishVowelConsonant()
     {
         // should return at dog with "uvug" inserted before the a and after the d
-        assertEquals("uvugat duvugog",EnglishAndGibberishTranslator.toLanguage("at dog"));
+        assertEquals("uvugat duvugog",EnglishAndGibberishTranslator.toGibberish("at dog"));
     }
     
 }
