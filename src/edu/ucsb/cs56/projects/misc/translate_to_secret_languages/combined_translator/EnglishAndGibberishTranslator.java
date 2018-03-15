@@ -11,11 +11,9 @@ import java.util.StringTokenizer;
 
 public class EnglishAndGibberishTranslator extends EnglishToInsertionLang {
     
-    
-    public EnglishAndGibberishTranslator(){
-	replacement="uvug";
-    }
+    private static String replacement = "uvug";
     public static String toGibberish(String input) {
-        return toLanguage(input);
+        return toLanguage(input, replacement);
     }
+    public static String toEnglish(String input) { return toEnglish(input, replacement);}
 }

@@ -13,14 +13,12 @@ import java.util.StringTokenizer;
  * @version 3/14/18, for Proj02 CS56 W18
  */
 public class EnglishAndObishTranslator extends EnglishToInsertionLang{
-
-    
-    public EnglishAndObishTranslator(){
-	replacement="ob";
-    }
+    private static String replacement = "ob";
     public static String toObish(String input) {
-        return toLanguage(input);
+        return toLanguage(input, replacement);
     }
+
+    public static String toEnglish(String input) { return toEnglish(input, replacement); }
     
     
 }

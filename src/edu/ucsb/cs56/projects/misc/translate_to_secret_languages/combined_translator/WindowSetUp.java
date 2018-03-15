@@ -41,7 +41,7 @@ public class WindowSetUp extends JApplet implements ActionListener {
 	private JButton fontButton;
 	private JButton fontColorButton;
 	private ArrayList<JComboBox<String>> wordBoxes;
-	String[] types = { "English to Pig Latin", "Pig Latin to English", "English to Gibberish", "Gibberish to English" };
+	String[] types = { "English to Pig Latin", "Pig Latin to English", "English to Gibberish", "Gibberish to English", "English to Obish", "Obish to English" };
 	public JComboBox<String> chooseTranslationDirection = new JComboBox<String>(types);
 
 	translationDirection direction = translationDirection.ENG_TO_PIG;
@@ -203,7 +203,38 @@ public class WindowSetUp extends JApplet implements ActionListener {
 			translateEngToGib();
 		if (direction == translationDirection.GIB_TO_ENG)
 			translateGibToEng();
+		if (direction == translationDirection.OB_TO_ENG)
+			translateObToEng();
+		if (direction == translationDirection.ENG_TO_OB)
+			translateEngToOb();
 		inputTextField.selectAll();
+	}
+	public void translateObToEng() {
+		String phrase;
+		phrase = inputTextField.getText();
+		if (phrase.split(" ").length <= 8) {
+			resultPhrase.setText("Result in English");
+			// converts to English
+			outputField.setText(EnglishAndObishTranslator.toEnglish(phrase));
+			inputTextField.selectAll();
+		}
+	}
+
+
+	/**
+	 * inner method for when English to Gibberish is selected
+	 */
+
+
+	public void translateEngToOb() {
+		String phrase;
+		phrase = inputTextField.getText();
+		if (phrase.split(" ").length <= 8) {
+			resultPhrase.setText("Result in Obish");
+			// converts to Gibberish
+			outputField.setText(EnglishAndObishTranslator.toObish(phrase));
+			inputTextField.selectAll();
+		}
 	}
 
 	/** inner class for when chooseTranslationDirection is selected */
@@ -224,6 +255,10 @@ public class WindowSetUp extends JApplet implements ActionListener {
 				direction = translationDirection.ENG_TO_GIB;
 			if (type.equals("Gibberish to English"))
 				direction = translationDirection.GIB_TO_ENG;
+			if (type.equals("English to Obish"))
+				direction = translationDirection.ENG_TO_OB;
+			if (type.equals("Obish to English"))
+				direction = translationDirection.OB_TO_ENG;
 		}
 	}
 
@@ -605,6 +640,6 @@ public class WindowSetUp extends JApplet implements ActionListener {
 		}
 	}
 	public enum translationDirection {
-		ENG_TO_PIG, PIG_TO_ENG, ENG_TO_GIB, GIB_TO_ENG
+		ENG_TO_PIG, PIG_TO_ENG, ENG_TO_GIB, GIB_TO_ENG, ENG_TO_OB, OB_TO_ENG;
 	}
 }
