@@ -26,7 +26,7 @@
   </target>
 
   <target name="run" depends="compile" description="run the combined PigLatin/Gibberish translator program">
-    <java classname="${fullPkg}.combined_translator.EnglishToPigLatin" classpath="build" fork="true"/>
+    <java classname="${fullPkg}.combined_translator.EnglishAndGibberishTranslator" classpath="build" fork="true"/>
   </target>
 
   <target name="clean" description="delete unnecessary files and directories">
