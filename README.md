@@ -50,6 +50,6 @@ The project at its current state has 3 GUI's, one for Pig Latin, one for Gibberi
 Make sure you familiarize yourself with the code before you start working! 
 
 
-W18 Final Remarks:
--Isaac Zinman and Ty Still
+W18 Final Remarks:  
+-Isaac Zinman and Ty Still  
 We made major behind the scene changes to previous versions of this project, cleaning up much of the code to be more OOP friendly and just logical in its entirety, and as such didn't make many outward changes. We did add another language to the translator, and since we abstracted the insertion language class, it will allow you to add more of those with less effort, or even possibly let the user "make" an insertion language.  The GUI needs updating and cleaning up as there are a few visual bugs in it, and there are a variety of other issues that could be fixed, just look at the Issues page to see most of those. Good luck with this project!
