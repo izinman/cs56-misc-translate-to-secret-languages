@@ -1,3 +1,5 @@
+package src.edu.ucsb.cs56.projects.misc.translate_to_secret_languages.combined_translator;
+
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +17,7 @@ import java.awt.*;
  * @version 2/28/18 for legacy project, cs56, W18 - fully refactored by IZ, updated javadoc descriptions by TS
  */
 
-public class EnglishToPigLatin {
+public class EnglishAndPigLatinTranslator {
 
 	/**
 	 * The method that converts the string from english to pig latin
@@ -46,7 +48,7 @@ public class EnglishToPigLatin {
 			words.toLowerCase();
 			char[] charArray = words.toCharArray();
 			// the part that enforces the rules of pig latin
-			if (EnglishToGibberish.isVowel(charArray[0])) {
+			if (EnglishToInsertionLang.isVowel(charArray[0])) {
 				result += words + "way ";
 			}
 			// else adapted from code found at
@@ -120,7 +122,7 @@ public class EnglishToPigLatin {
 			list.add(listToString(c));
 			c.add(temp);
 		}
-		while (!EnglishToGibberish.isVowel(c.get(l - 1))) {
+		while (!EnglishToInsertionLang.isVowel(c.get(l - 1))) {
 			// move consonant to front of string
 			c.add(0, c.remove(l - 1));
 			// add to the list

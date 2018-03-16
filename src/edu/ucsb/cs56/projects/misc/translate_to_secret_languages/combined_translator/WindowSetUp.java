@@ -1,3 +1,5 @@
+package src.edu.ucsb.cs56.projects.misc.translate_to_secret_languages.combined_translator;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -5,7 +7,7 @@ import java.util.ArrayList;
 import java.io.*;
 
 /**
- * The class that sets up the GUI to use the EnglishToPigLatin class
+ * The class that sets up the GUI to use the EnglishAndPigLatinTranslator class
  *
  * @author Christian Rivera Cruz
  * @author Adam Kazberuk
@@ -39,7 +41,7 @@ public class WindowSetUp extends JApplet implements ActionListener {
 	private JButton fontButton;
 	private JButton fontColorButton;
 	private ArrayList<JComboBox<String>> wordBoxes;
-	String[] types = { "English to Pig Latin", "Pig Latin to English", "English to Gibberish", "Gibberish to English" };
+	String[] types = { "English to Pig Latin", "Pig Latin to English", "English to Gibberish", "Gibberish to English", "English to Obish", "Obish to English" };
 	public JComboBox<String> chooseTranslationDirection = new JComboBox<String>(types);
 
 	translationDirection direction = translationDirection.ENG_TO_PIG;
@@ -201,7 +203,38 @@ public class WindowSetUp extends JApplet implements ActionListener {
 			translateEngToGib();
 		if (direction == translationDirection.GIB_TO_ENG)
 			translateGibToEng();
+		if (direction == translationDirection.OB_TO_ENG)
+			translateObToEng();
+		if (direction == translationDirection.ENG_TO_OB)
+			translateEngToOb();
 		inputTextField.selectAll();
+	}
+	public void translateObToEng() {
+		String phrase;
+		phrase = inputTextField.getText();
+		if (phrase.split(" ").length <= 8) {
+			resultPhrase.setText("Result in English");
+			// converts to English
+			outputField.setText(EnglishAndObishTranslator.toEnglish(phrase));
+			inputTextField.selectAll();
+		}
+	}
+
+
+	/**
+	 * inner method for when English to Gibberish is selected
+	 */
+
+
+	public void translateEngToOb() {
+		String phrase;
+		phrase = inputTextField.getText();
+		if (phrase.split(" ").length <= 8) {
+			resultPhrase.setText("Result in Obish");
+			// converts to Gibberish
+			outputField.setText(EnglishAndObishTranslator.toObish(phrase));
+			inputTextField.selectAll();
+		}
 	}
 
 	/** inner class for when chooseTranslationDirection is selected */
@@ -222,6 +255,10 @@ public class WindowSetUp extends JApplet implements ActionListener {
 				direction = translationDirection.ENG_TO_GIB;
 			if (type.equals("Gibberish to English"))
 				direction = translationDirection.GIB_TO_ENG;
+			if (type.equals("English to Obish"))
+				direction = translationDirection.ENG_TO_OB;
+			if (type.equals("Obish to English"))
+				direction = translationDirection.OB_TO_ENG;
 		}
 	}
 
@@ -303,7 +340,7 @@ public class WindowSetUp extends JApplet implements ActionListener {
 	 * inner method for when Pig Latin to English button is selected
 	 */
 
-	// TODO: Consolidate logic to EnglishToPigLatin class
+	// TODO: Consolidate logic to EnglishAndPigLatinTranslator class
 	public void translatePigToEng() {
 		resettingBoxes = true;
 		// split words inputted by user into array of strings so each word can
@@ -326,7 +363,7 @@ public class WindowSetUp extends JApplet implements ActionListener {
 					 * array. done so since impossible to tell when English word
 					 * starts and ends after translated into Pig Latin
 					 */
-					String[] pigLatinTrans = EnglishToPigLatin.toEnglish(currentWord);
+					String[] pigLatinTrans = EnglishAndPigLatinTranslator.toEnglish(currentWord);
 					/*
 					 * refresh each JComboBox with 5 options / selectable words
 					 * for word in English
@@ -367,7 +404,7 @@ public class WindowSetUp extends JApplet implements ActionListener {
 		if (phrase.split(" ").length <= 8) {
 			resultPhrase.setText("Result In Pig Latin:");
 			// converts to Pig latin
-			outputField.setText(EnglishToPigLatin.toPigLatin(phrase));
+			outputField.setText(EnglishAndPigLatinTranslator.toPigLatin(phrase));
 			inputTextField.selectAll();
 		}
 		// output error if more than 8 words inputted
@@ -390,7 +427,7 @@ public class WindowSetUp extends JApplet implements ActionListener {
 		if (phrase.split(" ").length <= 8) {
 			resultPhrase.setText("Result in English");
 			// converts to English
-			outputField.setText(EnglishToGibberish.fromGibberish(phrase));
+			outputField.setText(EnglishAndGibberishTranslator.toEnglish(phrase));
 			inputTextField.selectAll();
 		}
 	}
@@ -407,7 +444,7 @@ public class WindowSetUp extends JApplet implements ActionListener {
 		if (phrase.split(" ").length <= 8) {
 			resultPhrase.setText("Result in Gibberish");
 			// converts to Gibberish
-			outputField.setText(EnglishToGibberish.toGibberish(phrase));
+			outputField.setText(EnglishAndGibberishTranslator.toGibberish(phrase));
 			inputTextField.selectAll();
 		}
 	}
@@ -603,6 +640,6 @@ public class WindowSetUp extends JApplet implements ActionListener {
 		}
 	}
 	public enum translationDirection {
-		ENG_TO_PIG, PIG_TO_ENG, ENG_TO_GIB, GIB_TO_ENG
+		ENG_TO_PIG, PIG_TO_ENG, ENG_TO_GIB, GIB_TO_ENG, ENG_TO_OB, OB_TO_ENG;
 	}
 }

@@ -1,21 +1,22 @@
+package src.edu.ucsb.cs56.projects.misc.translate_to_secret_languages.combined_translator;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.StringTokenizer;
 
-/** englishToPigLatin
- @author Christian Rivera Cruz and Adam Kazberuk
- @author Alex Molina
- @version 05/15/2013 for lab05, cs56, S13
+/** EnglishToInserionLang
+ * generic abstraction that can be implemented in any insertion language
+ *
+ * @author Ty Still
+ * @version 03/14/2018 for lab05, cs56, S13
  */
 
-public class EnglishToGibberish {
+public abstract class EnglishToInsertionLang {
 	/** The method that checks to see if the first character passed
 	 * to it is a vowel or a consonant
 	 * @param input the first letter of a word
 	 * @return return true if input is a vowel, false otherwise
 	 */
-
-
 	public static boolean isVowel(char input) {
 		return	(input=='a'||input=='A'||input=='e'||input=='E'
 				||input=='i'||input=='I'||input=='o'
@@ -23,15 +24,16 @@ public class EnglishToGibberish {
 	}
 
 	/**
-	 * The method that converts the string from English to Gibberish
+	 * The method that converts the string from English to whichever InsertionLang you want
 	 *
 	 * The method takes a string input, and checks the first letter in the string
-	 * If it is a vowel, then "uvug" is added in front of it
+	 * If it is a vowel, then replacement is added in front of it
 	 *
-	 * @param  input the input is the string typed into the box
+	 * @param input the input is the string typed into the box
+	 * @param replacement is the string that is inserted into the word
 	 * @return result is returned, and it is reprinted into the text box below the input
 	 */
-	public static String toGibberish(String input) {
+	public static String toLanguage(String input, String specificReplacement) {
 		String result = "";
 		String words = "";
 		if (input.equals(""))
@@ -44,13 +46,13 @@ public class EnglishToGibberish {
 			for (int j = 0; j < charArray.length; j++) {
 				if (isVowel(charArray[j])) {
 					if (j + 1 < charArray.length && isVowel(charArray[j+1])) {
-						result += "uvug";
+						result += specificReplacement;
 						result += charArray[j];
 						result += charArray[j+1];
 						j++;
 					}
 					else {
-						result += "uvug";
+						result += specificReplacement;
 						result += charArray[j];}
 
 				}
@@ -70,39 +72,23 @@ public class EnglishToGibberish {
 			return result;
 	}
 	/**
-	 * The method that converts the string from Gibberish to English
+	 * The method that converts the string from a replacement language to English
 	 *
-	 * The method takes a string input, and removes all occurences of "uvug" and "Uvug"
+	 * The method takes a string input, and removes all occurences of the replacement string
 	 *
 	 * @param  input the input is the string typed into the box
+	 * @param replacement is the string that will be removed from words, depending on the language
 	 * @return newstr is returned, and it is reprinted into the text box below the input
 	 */
-	public static String fromGibberish(String input) {
-		String newstr = input.replaceAll("uvug", "");
-		String newerstr;
-		if (newstr.charAt(0) == 'U')
-			newerstr = newstr.replaceAll("Uvug", "");
+	public static String toEnglish(String input, String replacement) {
+		String newstr = input.replaceAll(replacement, "");
+		String newerstr, newReplacement;
+		newReplacement = replacement.substring(0,1).toUpperCase() + replacement.substring(1);
+		if (newstr.substring(0,1) == newReplacement.substring(0,1))
+			newerstr = newstr.replaceAll(newReplacement, "");
 		else
 			return newstr;
-		newstr = newerstr.substring(0, 1).toUpperCase() + newerstr.substring(1);
+		newstr = newerstr.substring(0,1).toUpperCase() + newerstr.substring(1);
 		return newstr;
-	}
-	/**
-	 This function makes our GUI for toPigLatin work, setup and other processes are handled in windowSetUp
-	 */
-	public static void go() {
-		JFrame f = new JFrame("Pig Latin and Gibberish Translator");
-		f.setSize(400, 200);
-		Container content = f.getContentPane();
-		content.setBackground(Color.white);
-		content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
-		content.add(new WindowSetUp());
-		f.setBackground(new Color(0,255,0));
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setVisible(true);
-	}
-
-	public static void main(String [] args){
-		go();
 	}
 }
